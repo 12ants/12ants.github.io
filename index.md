@@ -110,12 +110,13 @@ body {
 background-color: lightblue
 }
 }
-body{text-align:center;}
+body{background: #FFFFFF; 
+	text-align:center;}
 </style>
 </head>
 
 	<body>
-		<a href="osmik.se">
+		<a href="https://osmik.se">
 			<img class="lolo" src="logo1.png"></a><h1> </h1>
 		<a href="https://github.com/symbolen"><h1>github.com/symbolen</h1></a>
 
