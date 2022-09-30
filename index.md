@@ -1,6 +1,4 @@
-<!DOCTYPE html>
 <html lang="se">
-
 <head>
 <link href="favicon.ico" rel="shortcut icon">
 <link href="icon-iphone.png" rel="apple-touch-icon">
@@ -115,7 +113,8 @@ background-color: lightblue
 </head>
 
 	<body>
-<img class="lolo" src="logo1.png">
+		<a href="osmik.se">
+			<img class="lolo" src="logo1.png"></a>
 		<h1>h1 - hej</h1>
 
 </body>
