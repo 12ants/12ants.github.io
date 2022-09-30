@@ -94,6 +94,7 @@ overflow: visible
 }
 
 .lolo {
+	backgrund:transparent;
 opacity:
 }
 
@@ -114,8 +115,8 @@ background-color: lightblue
 
 	<body>
 		<a href="osmik.se">
-			<img class="lolo" src="logo1.png"></a>
-		<h1>h1 - hej</h1>
+			<img class="lolo" src="logo1.png"></a><h1> </h1>
+		<a href="github.com/symbolen"><h1>github.com/symbolen</h1></a>
 
 </body>
 	
