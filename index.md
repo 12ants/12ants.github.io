@@ -119,6 +119,33 @@ body{background: #FFFFFF;
 		<a href="https://osmik.se">
 			<img class="lolo" src="logo1.png"></a><h1> </h1>
 		<a href="https://github.com/symbolen"><h1>github.com/symbolen</h1></a>
+		<html lang="en">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="skeleton.css">
+ <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+    <main>
+<div class="divider"></div>
+ <div class="skal1">
+  <div class="box1">
+   <h1>Leon Ljunghorn</h1>
+   <h2>css/js-kodare, webbutvecklare</h2>
+   <h2>0790372242</h2>
+   <h2>
+    <a href="#">leon@164.one</a>
+   </h2>
+  </div>
+  <div class="box1"> <img src="https://faroutmagazine.co.uk/static/uploads/2020/02/Iggy-Pop-1977-2.jpg"></div>
+  <div class="box1"> <img src="logo.jpg"></div>
+ </div>
+<a href="#menu1"><h3>osmik.se</h3></a>
+</main>
+<div id="menu1"><h4>hh</h4><h4>hh</h4><h4>hh</h4></div>
+</body>
+</html>
 
 </body>
 	
