@@ -1,4 +1,4 @@
-<html lang="se">
+<!-- <html lang="se">
 <head>
 <link href="favicon.ico" rel="shortcut icon">
 <link href="icon-iphone.png" rel="apple-touch-icon">
@@ -152,3 +152,4 @@ body{background: #FFFFFF;
 	
 	
 </html>
+ -->
