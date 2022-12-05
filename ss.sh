@@ -1,24 +1,8 @@
 #/bin/bash
-
-export bold=$(tput bold) dim=$(tput dim) so=$(tput smso) noso=$(tput rmso) rev=$(tput rev) re=$(tput sgr0) normal=$(tput sgr0) \
-redb=$(tput setab 1) greenb=$(tput setab 2) yellowb=$(tput setab 3) blueb=$(tput setab 4) purpleb=$(tput setab 5) cyanb=$(tput setab 6) grayb=$(tput setab 7) \
-red=$(tput setaf 1)  green=$(tput setaf 2)  yellow=$(tput setaf 3)  blue=$(tput setaf 4)  purple=$(tput setaf 5)  cyan=$(tput setaf 6)  gray=$(tput setaf 7) \
-white=$(tput setaf 7 bold)  pink=$(tput setaf 5 bold) darkblue=$(tput setab 5 bold) \
-left2=$(tput cub 2) up1=$(tput cuu1)
-c75="  ---------------------------------------------------------------------------"
-
-# 
-#    ${red}    ${green}    ${yellow}     ${blue}     ${purple}     ${cyan}     ${gray}     ${re}     ${dim}
-#
-##################################
-#### -- LOADING ANIMATION -- ####
-####
-green="tput setaf 2"
-red="tput setaf 1"
-def="tput sgr0"
-dim="tput dim"
+#### SS by leon.osmik.se
+green="tput setaf 2"; red="tput setaf 1"; def="tput sgr0"; dim="tput dim";
 clear;
-BLA_metro=( 1 '   o0' "   0o" '   o0' '   0o' )
+BLA_metro=( 1 '   o 0 ' "   0 o " '   o 0 ' '   0 o ' )
 declare -a BLA_active_loading_animation
 BLA::play_loading_animation_loop() {
 while true ; do
@@ -56,13 +40,15 @@ ${green}; echo -e "\v\t\v done! \v\v"
 BLA::stop_loading_animation&> /dev/null
 sleep 1;
 
-## HARDWARE-INFO
-echo; echo; echo $c75; $green; echo -e " -- HARDWARE-INFO -- " $re; echo $c75; inxi
-## NETWORK-IP
-echo $c75; $green; echo -e " -- NETWORK-IP -- " $re; echo $c75;  hostname -I
-## PUBLIC-IP
-echo $c75; $green; echo -e " -- PUBLIC-IP -- " $re; echo $c75; dig +short myip.opendns.com @resolver1.opendns.com
-echo $c75; echo; echo; 
+
+export bold=$(tput bold) dim=$(tput dim) so=$(tput smso) noso=$(tput rmso) rev=$(tput rev) re=$(tput sgr0) normal=$(tput sgr0) \
+redb=$(tput setab 1) greenb=$(tput setab 2) yellowb=$(tput setab 3) blueb=$(tput setab 4) purpleb=$(tput setab 5) cyanb=$(tput setab 6) grayb=$(tput setab 7) \
+red=$(tput setaf 1)  green=$(tput setaf 2)  yellow=$(tput setaf 3)  blue=$(tput setaf 4)  purple=$(tput setaf 5)  cyan=$(tput setaf 6)  gray=$(tput setaf 7) \
+white=$(tput setaf 7 bold)  pink=$(tput setaf 5 bold) darkblue=$(tput setab 5 bold) \
+left2=$(tput cub 2) up1=$(tput cuu1) c75="$(echo ---------------------------------------------------------------------------)"
+
+
+
 ###################################
 ####-UBUNTU-AUTOINSTALLER-#########
 ###################################
@@ -73,8 +59,6 @@ echo ${blue}${dim}"    *********************************************************
 echo ${cyan}${dim}"    ******${re}${bold} Install some useful commands and tweaks for ubuntu / bash ${cyan}${dim}******" ${re}
 echo ${blue}${dim}"    ***********************************************************************"
 echo ${re}
-#### DONE #########################
-###################################
 
 
 ###################################
@@ -105,7 +89,6 @@ fi
 " >> /root/.bashrc;
 ## COLOR-ALIAS
 echo "PS1='\[\e[34m\]\u\[\e[36m\]@\[\e[2m\]\h\[\e[34m\]\[\e[96m\]\w:\[\e[m\]'
-
 ###############################################
 #### DISPLAY IP - NET & PUB (TO THE RIGHT) ####
 ## NETWORK-IP
@@ -128,4 +111,51 @@ echo "${re}${green}${bold}     DONE ${re}";echo;echo;echo;echo;sleep 1;
 fi
 #### DONE #########################
 ###################################
+clear;
+
+
+####################################
+#### INSTALL CUSTOM GRUB ###########
+####################################
+####
+echo ${cyan};echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";
+tput cuu 4;
+read -p ${cyan}"  ----------${re} Install tard-grub? [Y/n]   ${left2}" yn;
+tput cuf 52 cuu 1;
+if [ "$yn" != "${yn#[Nn]}" ];
+then 
+#### DONT
+echo "${re} nope ";echo;echo;echo;echo;sleep 1;
+else
+#### DO
+#### -Create folder--###############
+####################################
+mkdir -p -m 775 /boot/grub/ ; 
+cd /boot/grub/ ;
+####################################
+#### -Download Picture--############
+####################################
+wget https://github.com/0smik/ss/raw/main/tard.jpg ;
+####################################
+#### -Write GRUB config file--######
+####################################
+echo '
+GRUB_BACKGROUND="/boot/grub/tard.jpg"
+GRUB_DEFAULT=saved
+GRUB_SAVEDEFAULT=false
+GRUB_TIMEOUT_STYLE=menu
+GRUB_TIMEOUT=12
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
+GRUB_DISABLE_OS_PROBER=false
+GRUB_GFXMODE="800x600"
+GRUB_HIDDEN_TIMEOUT=0
+' > /etc/default/grub ; 
+sleep 0.4 ; 
+update-grub ; 
+echo "GRUB INSTALLED SUCCESSFULLY"
+####################################
+#### -All done!--###################
+####################################
+
+
 
