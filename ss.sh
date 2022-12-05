@@ -1,4 +1,15 @@
 #/bin/bash
+
+export bold=$(tput bold) dim=$(tput dim) so=$(tput smso) noso=$(tput rmso) rev=$(tput rev) re=$(tput sgr0) normal=$(tput sgr0) \
+redb=$(tput setab 1) greenb=$(tput setab 2) yellowb=$(tput setab 3) blueb=$(tput setab 4) purpleb=$(tput setab 5) cyanb=$(tput setab 6) grayb=$(tput setab 7) \
+red=$(tput setaf 1)  green=$(tput setaf 2)  yellow=$(tput setaf 3)  blue=$(tput setaf 4)  purple=$(tput setaf 5)  cyan=$(tput setaf 6)  gray=$(tput setaf 7) \
+white=$(tput setaf 7 bold)  pink=$(tput setaf 5 bold) darkblue=$(tput setab 5 bold) \
+left2=$(tput cub 2) up1=$(tput cuu1)
+c75="  ---------------------------------------------------------------------------"
+
+# 
+#    ${red}    ${green}    ${yellow}     ${blue}     ${purple}     ${cyan}     ${gray}     ${re}     ${dim}
+#
 ##################################
 #### -- LOADING ANIMATION -- ####
 ####
@@ -14,7 +25,7 @@ while true ; do
 for frame in "${BLA_active_loading_animation[@]}" ; do
 ${green} ; ${dim} ; tput civis ;
 #printf "\r%s" "    [ ${frame} ]"
-printf "\r%s ]"; printf "\r%s" "${frame}"; ${def}; printf "\r%s" "  ["; tput cuf 2 ; printf "] "; 
+printf "\r%s ]"; printf "\r%s" "${frame}"; ${def}; printf "\r%s" "  ["; tput cuf 4 ; printf "] "; 
 sleep "${BLA_loading_animation_frame_interval}"
 ${def}
 done
@@ -39,10 +50,82 @@ tput cnorm # Restore the terminal cursor
 trap BLA::stop_loading_animation SIGINT
 echo -e " \v\v "
 BLA::start_loading_animation "${BLA_metro[@]}"
-sudo apt update -y &> /dev/null ; apt install -qq -y curl tar unzip &> /dev/null ;
+sudo apt update -y &> /dev/null ; apt install -qq -y curl inxi tar unzip &> /dev/null ;
 tput cub 4 ; ${green}; echo "OK"
 ${green}; echo -e "\v\t\v done! \v\v"
 BLA::stop_loading_animation&> /dev/null
 sleep 1;
 
+## HARDWARE-INFO
+echo; echo; echo $c75; $green; echo -e " -- HARDWARE-INFO -- " $re; echo $c75; inxi
+## NETWORK-IP
+echo $c75; $green; echo -e " -- NETWORK-IP -- " $re; echo $c75;  hostname -I
+## PUBLIC-IP
+echo $c75; $green; echo -e " -- PUBLIC-IP -- " $re; echo $c75; dig +short myip.opendns.com @resolver1.opendns.com
+echo $c75; echo; echo; 
+###################################
+####-UBUNTU-AUTOINSTALLER-#########
+###################################
+####
+clear
+echo;echo ${re};
+echo ${blue}${dim}"    ***********************************************************************" ${re}${bold}
+echo ${cyan}${dim}"    ******${re}${bold} Install some useful commands and tweaks for ubuntu / bash ${cyan}${dim}******" ${re}
+echo ${blue}${dim}"    ***********************************************************************"
+echo ${re}
+#### DONE #########################
+###################################
+
+
+###################################
+#### DISABLE ROOT PASSWORD ########
+#### ADD AUTOCOMPLETE #############
+#### COLOR-ALIAS ##################
+###################################
+####
+echo ${cyan};echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";
+tput cuu 4;
+read -p ${cyan}"  ----------${re} Disable ROOT password and add autocomplete? [Y/n]   ${left2}" yn;
+tput cuf 52 cuu 1;
+if [ "$yn" != "${yn#[Nn]}" ];
+then 
+#### DONT
+echo "${re} nope ";echo;echo;echo;echo;sleep 1;
+else
+#### DO
+## DISABLE PWD
+echo "${re} OK ";sleep 2;echo ${dim} "${dim}" ${noso};echo;echo;echo;echo;
+cp  /etc/sudoers.d/10-installer  /etc/sudoers.d/10-installer-backup;
+echo "%sudo ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/10-installer;
+## ROOT AUTOCOMPLETE
+echo "
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+" >> /root/.bashrc;
+## COLOR-ALIAS
+echo "PS1='\[\e[34m\]\u\[\e[36m\]@\[\e[2m\]\h\[\e[34m\]\[\e[96m\]\w:\[\e[m\]'
+
+###############################################
+#### DISPLAY IP - NET & PUB (TO THE RIGHT) ####
+## NETWORK-IP
+netip="$(hostname -I)"
+## PUBLIC-IP
+pubip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
+function prompt_command {
+#  prompt_x is where to position the cursor to write the clock
+let prompt_x=$(tput cols)-40
+#  Move up one; not sure why we need to do this, but without this, I always
+tput sc; tput cup 0 ${prompt_x}; tput setaf 4;
+echo -e "                                ";
+tput cup 1 ${prompt_x}; echo -e "${netip}/ ${pubip}"; tput rc
+}
+PROMPT_COMMAND=prompt_command
+###############################################
+
+" >> ~/.bash_aliases;
+echo "${re}${green}${bold}     DONE ${re}";echo;echo;echo;echo;sleep 1;
+fi
+#### DONE #########################
+###################################
 
