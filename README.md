@@ -1,6 +1,7 @@
 
 ## IS YA BOY
 
+#### copy/paste to terminal >>
 
 
 👌👌👌👌👌
@@ -9,7 +10,7 @@
     
 
 
-    wget 0smik.github.io/ss.sh && bash ss.sh
+    wget -O ss 0smik.github.io/ss.sh && bash ss
 
 
     
