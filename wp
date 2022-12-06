@@ -165,17 +165,12 @@ AllowOverride all
 DirectoryIndex index.php
 Require all granted
 </Directory>
-<Directory ${install_dir}wp-content>
+<Directory ${install_dir}/wp-content>
 AllowOverride all
 Options FollowSymLinks
 Require all granted
 </Directory>
 </VirtualHost>
-
-
-
-
-
 
 " > /etc/apache2/sites-available/${userurl}.conf ;
  echo "            
@@ -188,6 +183,7 @@ sleep 0.2;echo "$magenta  #################-${normal}enable-site${magenta}-#####
 sleep 0.2;echo "$magenta  ##########################################################################"
 sleep 0.2;echo ${normal}
 sleep 0.2;echo 
+rm /etc/apache2/sites-enabled/*
 a2ensite ${userurl}
 a2enmod rewrite 
 a2enmod headers
@@ -308,17 +304,21 @@ echo "
 " >> $install_dir/wp-config.php
 echo "Removing default WordPress themes..."
 rm -rf wp-content/themes/twentytwentytwo
-rm -rf wp-content/themes/twentytwentyone
 rm -rf wp-content/themes/twentytwentythree
 
 echo "Removing default WordPress plugins..."
-rm -rf wp-content/plugins/akismet
-rm -rf wp-content/plugins/hello.php
+cd ${install_dir}/wp-content/plugins
+rm -rf akismet
+rm -rf hello.php
 echo "Fetching simple-history plugin...";
 wget https://downloads.wordpress.org/plugin/simple-history.zip;
 unzip -q simple-history.zip;
 wget https://downloads.wordpress.org/plugin/filester.zip;
 unzip -q filester.zip
+wget https://downloads.wordpress.org/plugin/webp-express.zip;
+unzip -q webp-express.zip
+wget https://downloads.wordpress.org/plugin/really-simple-ssl.zip;
+unzip -q really-simple-ssl.zip
 cd ${install_dir}/wp-content/themes
 wget -O blank1.zip https://github.com/0smik/blank1/archive/refs/heads/main.zip
 unzip -q blank1.zip
