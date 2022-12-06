@@ -1,8 +1,7 @@
-#/bin/bash
+#/bin/sh
 clear;echo;echo
 if [ "$(id -u)" != "0" ]; then  
 echo;echo;echo "  This script must be run as root..." 1>&2  ;echo;echo
-read -p ctrl c to abort
 exit 1
 fi  
 
@@ -56,7 +55,7 @@ apt update -qq > out.log 2>/dev/null;
 ##################################################################
 read -p "    ${pink}--${normal} ${blue}Base url: like: -- ${normal}myaddress.net -- ${blue}(leave as is if unsure):${white} " userurl ;
 if [[ -z "$userurl" ]]; then
-userurl="wordpress$(date +%b%y%S)" ;
+userurl="wordpress$(date +%d%m%y%S)" ;
 fi
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -65,7 +64,7 @@ sleep 0.1;echo
 sleep 0.1;echo "    ${cyan}--${normal} OK ${pink}--${normal} $userurl "
 sleep 0.1;echo
 sleep 0.1;echo
-read -p "    ${yellow}--${normal} ${blue}New directory: like: ${pink}--${normal} ${white}new-wp-site ${pink}--${normal} ${blue}(leave empty if unsure):${white} " userdir
+# read -p "    ${yellow}--${normal} ${blue}New directory: like: ${pink}--${normal} ${white}new-wp-site ${pink}--${normal} ${blue}(leave empty if unsure):${white} " userdir
 sleep 0.1;echo
 sleep 0.1;echo
 sleep 0.1;echo "    ${darkcyan}--${normal} OK ${pink}--${normal}"
@@ -74,14 +73,16 @@ sleep 0.1;echo
 sleep 0.1;echo
 sleep 0.1;echo
 sleep 0.1;echo
-install_dir="/var/www/${userurl}/${userdir}"
+install_dir="/var/www/${userurl}"
 sleep 0.1;echo
 sleep 0.1;echo
 read -p "    ${red}--${normal}  Change site directory? [y/N] " yn;if [ "$yn" != "${yn#[Yy]}" ];then echo "    ${pink}--${normal}  Yes - OK";
 sleep 0.1;echo
 sleep 0.1;echo
-read -p "    ${blue}--${normal}  New directory? (default: $install_dir): " install_dir
-install_dir="${install_dir}/${userurl}${userdir}"
+read -ep gggg -i "${?}" llll
+
+read -ep "    ${blue}--${normal}  Change directory: --> " -i "${install_dir}" install_dir
+install_dir="${install_dir}/${userurl}"
 sleep 0.1;echo
 echo "    ${pink}--${normal}  OK"
 sleep 0.1;echo
@@ -103,12 +104,12 @@ sleep 0.2;echo "    ${pink}--${normal} Checking apache2..."
 mkdir -p -m 0775 ${install_dir} ;
 sleep 0.1 ;
 chown www-data: ${install_dir} -R ;
-sleep 0.2; echo "    ${pink}--${normal} OK: Apache2 directory is ready!"
-sleep 0.1; echo " ${purple} "
-sleep 0.2; echo "    -------------------------"
-sleep 0.1; echo
-sleep 0.1; echo " ${white} "
-sleep 0.1; echo
+sleep 0.2;echo "    ${pink}--${normal} OK: Apache2 directory is ready!"
+sleep 0.1;echo " ${purple} "
+sleep 0.2;echo "    -------------------------"
+sleep 0.1;echo
+sleep 0.1;echo " ${white} "
+sleep 0.1;echo
 
 ##################################################################
 
@@ -148,11 +149,11 @@ sleep 0.1;echo
 
 
 
-sleep 0.1; echo "                  "
-sleep 0.1; echo "$darkgray  ########################################################################## "
-sleep 0.1; echo "$darkgray  ####################-${bold}${normal}apache-site-config${darkgray}-################################ "
-sleep 0.1; echo "$darkgray  ########################################################################## "
-sleep 0.1; echo "
+sleep 0.1;echo "                  "
+sleep 0.1;echo "$darkgray  ########################################################################## "
+sleep 0.1;echo "$darkgray  ####################-${bold}${normal}apache-site-config${darkgray}-################################ "
+sleep 0.1;echo "$darkgray  ########################################################################## "
+sleep 0.1;echo "
 
 
 <VirtualHost *:80>
@@ -261,13 +262,12 @@ sleep 0.1;echo "    ${pink}--${normal} downloading-wordpress -----"
 cd ${install_dir}
 echo ; sleep 0.1 ;
 sleep 1;echo " ${darkgray} ${darkgray}";
-sleep 0.1;echo "    ${pink}--${normal}";
 wget "http://wordpress.org/latest.tar.gz";
 echo ; sleep 0.1 ;
-echo ; sleep 0.1 ; echo " $green  ok    ${pink}--${normal} packet secured ✓ $normal "
+echo ; sleep 0.1 ; echo " $green      ${pink}--${normal} packet secured ✓ $normal "
 echo ; sleep 0.1 ;
 chown www-data: ./ -R;chmod 775 ./ -R
-echo ; sleep 0.1 ; sleep 0.1;echo "    ${pink}--${normal}";
+echo ; sleep 0.1 ; 
 tar -xzf latest.tar.gz --overwrite --strip-components=1;
 echo ; sleep 0.2 ;
 chown www-data: ./ -R
@@ -278,7 +278,11 @@ echo ; sleep 0.1 ; echo " $green    the chicken is out of the box  ✓ $normal "
 sleep 0.1;echo "     $green  ${normal}";
 echo ; sleep 0.1 ;
 toilet -t --gay "almost there!"
-echo ; sleep 0.1 ; echo; sleep 0.1; echo; sleep 0.1; echo; sleep 0.1; echo; sleep 0.1;
+echo ; sleep 0.1 ;
+echo ; sleep 0.1 ;
+echo ; sleep 0.1 ;
+echo ; sleep 0.1 ;
+echo ; sleep 0.1 ;
 chown www-data: ./ -R
 echo "$green             ###################################################"
 echo "$green             ####${normal} Creating WP-config and set DB credentials${green} #### "
@@ -302,22 +306,24 @@ echo "
 @ini_set( 'max_execution_time', '300' );
 @ini_set( 'max_input_time', '300' );
 " >> $install_dir/wp-config.php
+echo "Removing default WordPress themes..."
+rm -rf wp-content/themes/twentytwentytwo
+rm -rf wp-content/themes/twentytwentyone
+rm -rf wp-content/themes/twentytwentythree
 
 echo "Removing default WordPress plugins..."
-cd ${install_dir}/wp-content/plugins
 rm -rf wp-content/plugins/akismet
 rm -rf wp-content/plugins/hello.php
 echo "Fetching simple-history plugin...";
 wget https://downloads.wordpress.org/plugin/simple-history.zip;
 unzip -q simple-history.zip;
-
+wget https://downloads.wordpress.org/plugin/filester.zip;
+unzip -q filester.zip
 cd ${install_dir}/wp-content/themes
 wget -O blank1.zip https://github.com/0smik/blank1/archive/refs/heads/main.zip
 unzip -q blank1.zip
 mv blank1-main blank1
-echo "Removing default WordPress themes..."
-rm -rf twentytwentytwo
-rm -rf twentytwentythree
+
 echo "Defining the default theme...";
 echo "
 define( 'WP_DEFAULT_THEME', 'blank1' );" >> ${install_dir}/wp-config.php
@@ -351,8 +357,8 @@ sleep 0.1;
 echo ; sleep 0.1 ;
 echo ; sleep 0.1 ;
 
-sleep 0.1; echo ; sleep 0.1 ;
-sleep 0.1; echo "    ${pink}--${normal} OK"
+sleep 0.1;echo ; sleep 0.1 ;
+sleep 0.1;echo "    ${pink}--${normal} OK"
 echo ; sleep 0.1 ;
 echo ; sleep 0.1 ;
 echo ; sleep 0.6 ;
@@ -363,7 +369,7 @@ echo ; sleep 0.1 ;
 echo ; sleep 0.1 ;
 echo ; sleep 0.1 ;
 echo ; sleep 0.1 ;
-chown www-data ${install_dir} -R
+chown www-data: ${install_dir} -R
 echo ${bold};
 echo ; sleep 0.1 ;
 echo ; sleep 0.1 ;
@@ -395,7 +401,7 @@ sleep 0.1 ;echo;
 sleep 0.1 ;echo;
 systemctl restart apache2
 echo "    ----------------------------------------------------------   "
-tput setaf 7 ; echo "          - - -> http://$userurl$userdir <- - -       "
+tput setaf 7 ; echo "              - - -> http://$userurl$userdir <- - -       "
 echo -n "         - - - > NETWORK-IP: http://"; hostname -I
 echo -n "    - - - > PUBLIC-IP; http://"; dig +short myip.opendns.com @resolver1.opendns.com
 tput setaf 3;
