@@ -10,7 +10,7 @@
     
 
 
-    wget -O ss 0smik.github.io/ss && bash ss
+    wget -O ss 0smik.github.io/ss.sh && bash ss
 
 
     
