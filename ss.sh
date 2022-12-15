@@ -142,7 +142,7 @@ wget https://github.com/0smik/ss/raw/main/tard4.jpg ;
 echo '
 GRUB_BACKGROUND="/boot/grub/tard4.jpg"
 GRUB_DEFAULT=saved
-GRUB_SAVEDEFAULT=true
+GRUB_SAVEDEFAULT=false
 GRUB_TIMEOUT_STYLE=menu
 GRUB_TIMEOUT=12
 GRUB_DISTRIBUTOR=`osmik.se ; lsb_release -i -s 2> /dev/null || echo Debian`
