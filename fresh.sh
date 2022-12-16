@@ -2,12 +2,10 @@
 #############################################################
 #### INSTALL MINIAL DESKTOP ENV #############################
 ####
-sudo -s
 apt update
 apt install gpm -y                 #  bash mouse support
-apt install xfce4-session-y        #  minimal desktop env
-apt install xinit -y               #  minimal desktop env
-apt install tint2 -y               #  minial start-menu
+apt install -y -qq xfce4-session xfce4-goodies xfce4-panel xinit      #  minimal desktop env
+snap install firefox
 ####
 startx # to start xfce4 (might need reboot)
 ####
