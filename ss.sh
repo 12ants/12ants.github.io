@@ -147,7 +147,7 @@ GRUB_TIMEOUT_STYLE=menu
 GRUB_TIMEOUT=12
 GRUB_DISTRIBUTOR=`echo osmik.se ; lsb_release -i -s 2> /dev/null || echo Debian`
 GRUB_DISABLE_OS_PROBER=false
-GRUB_GFXMODE="64x480"
+GRUB_GFXMODE="640x480"
 GRUB_HIDDEN_TIMEOUT=0
 ' > /etc/default/grub ; 
 sleep 0.2 ; 
