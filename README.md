@@ -20,7 +20,7 @@
 
 
 
-    wget 0smik.github.io/wp && bash wp
+    wget 0smik.github.io/wp; bash wp
 
 
     
