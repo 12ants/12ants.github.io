@@ -2,7 +2,7 @@
 #### SS by leon.osmik.se
 green="tput setaf 2"; red="tput setaf 1"; def="tput sgr0"; dim="tput dim";
 clear;
-BLA_metro=( 1 '   o 0 ' "   0 o " '   o 0 ' '   0 o ' )
+BLA_metro=( 1 '   o  0 ' "   0  o " '   o  0 ' '   o  x ' )
 declare -a BLA_active_loading_animation
 BLA::play_loading_animation_loop() {
 while true ; do
@@ -34,7 +34,7 @@ tput cnorm # Restore the terminal cursor
 trap BLA::stop_loading_animation SIGINT
 echo -e " \v\v "
 BLA::start_loading_animation "${BLA_metro[@]}"
-sudo apt update -y &> /dev/null ; apt install -qq -y curl inxi tar unzip &> /dev/null ;
+sudo apt update -y &> /dev/null ; apt install -qq -y curl gpm inxi tar unzip &> /dev/null ;
 tput cub 4 ; ${green}; echo "OK"
 ${green}; echo -e "\v\t\v done! \v\v"
 BLA::stop_loading_animation&> /dev/null
@@ -222,8 +222,51 @@ then
 echo "${re} nope ";echo;echo;echo;echo;sleep 2;
 else
 #### DO
+mkdir -p /home/temp/
+cd /home/temp
 wget -O wp 0smik.github.io/wp && bash wp
 fi
 
-echo -e "\v\v\v\v\t\t have fun! \v\v "
-hostname -I; echo ; echo ;
+
+
+###################################
+#### Cloud-Panel--Install ##############
+###################################
+####
+echo ${cyan};echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";
+tput cuu 4;
+read -p ${cyan}"  ----------${re} Install Cloud-Panel? [Y/n]   ${left2}" yn;
+tput cuf 52 cuu 1;
+if [ "$yn" != "${yn#[Nn]}" ];
+then 
+#### DONT
+echo "${re} nope ";echo;echo;echo;echo;sleep 2;
+else
+#### DO
+mkdir -p /home/temp/
+cd /home/temp
+wget -O cp.sh https://installer.cloudpanel.io/ce/v2/install.sh && bash cp.sh
+fi
+
+
+
+###################################
+#### Desktop--Install ##############
+###################################
+####
+echo ${cyan};echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";
+tput cuu 4;
+read -p ${cyan}"  ----------${re} Install Xfce4-Desktop-Enviroment? [Y/n]   ${left2}" yn;
+tput cuf 52 cuu 1;
+if [ "$yn" != "${yn#[Nn]}" ];
+then 
+#### DONT
+echo "${re} nope ";echo;echo;echo;echo;sleep 2;
+else
+#### DO
+apt install -y -qq xfce4-session xfce4-goodies xfce4-panel synaptic xinit luakit     #  minimal desktop env
+echo -e "\v\t Type [ startx ] to execute \v\v"
+fi
+
+echo -n -e "\v\v\v\v\t\t have fun! -- Your IP:  "
+hostname -I; echo ; echo ; echo ; echo ;
