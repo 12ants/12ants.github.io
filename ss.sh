@@ -9,25 +9,18 @@
 #############################
 #### Loading animation ######
 #############################
-
-
-export bold=$(tput bold) dim=$(tput dim) so=$(tput smso) noso=$(tput rmso) rev=$(tput rev) re=$(tput sgr0) normal=$(tput sgr0) \
-redb=$(tput setab 1) greenb=$(tput setab 2) yellowb=$(tput setab 3) blueb=$(tput setab 4) purpleb=$(tput setab 5) cyanb=$(tput setab 6) grayb=$(tput setab 7) \
-red=$(tput setaf 1)  green=$(tput setaf 2)  yellow=$(tput setaf 3)  blue=$(tput setaf 4)  purple=$(tput setaf 5)  cyan=$(tput setaf 6)  gray=$(tput setaf 7) \
-white=$(tput setaf 7 bold)  pink=$(tput setaf 5 bold) darkblue=$(tput setab 5 bold) \
-left2=$(tput cub 2) up1=$(tput cuu1) c75="  ---------------------------------------------------------------------------"
-
+green="tput setaf 2"; red="tput setaf 1"; def="tput sgr0"; dim="tput dim";
 clear;
-BLA_metro=( 2 '   o_0 ' "   0_o " '   o_0 ' '   o_x ' )
+BLA_metro=( 1 '   o  0 ' "   0  o " '   o  0 ' '   o  x ' )
 declare -a BLA_active_loading_animation
 BLA::play_loading_animation_loop() {
 while true ; do
 for frame in "${BLA_active_loading_animation[@]}" ; do
-${pink} ; ${dim} ; tput civis ;
+${green} ; ${dim} ; tput civis ;
 #printf "\r%s" "    [ ${frame} ]"
-printf "\r%s ]"; printf "\r%s" "${frame}"; ${re}; printf "\r%s" "  ["; tput cuf 3 ; printf "] "; 
+printf "\r%s ]"; printf "\r%s" "${frame}"; ${def}; printf "\r%s" "  ["; tput cuf 4 ; printf "] "; 
 sleep "${BLA_loading_animation_frame_interval}"
-${re}
+${def}
 done
 done
 }
@@ -59,6 +52,14 @@ tput cub 4 ; ${green}; echo "OK"
 ${green}; echo -e "\v\t\v done! \v\v"
 BLA::stop_loading_animation&> /dev/null
 sleep 1;
+
+
+export bold=$(tput bold) dim=$(tput dim) so=$(tput smso) noso=$(tput rmso) rev=$(tput rev) re=$(tput sgr0) normal=$(tput sgr0) \
+redb=$(tput setab 1) greenb=$(tput setab 2) yellowb=$(tput setab 3) blueb=$(tput setab 4) purpleb=$(tput setab 5) cyanb=$(tput setab 6) grayb=$(tput setab 7) \
+red=$(tput setaf 1)  green=$(tput setaf 2)  yellow=$(tput setaf 3)  blue=$(tput setaf 4)  purple=$(tput setaf 5)  cyan=$(tput setaf 6)  gray=$(tput setaf 7) \
+white=$(tput setaf 7 bold)  pink=$(tput setaf 5 bold) darkblue=$(tput setab 5 bold) \
+left2=$(tput cub 2) up1=$(tput cuu1) c75="  ---------------------------------------------------------------------------"
+
 
 
 ###################################
