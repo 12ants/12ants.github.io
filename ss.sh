@@ -1,5 +1,14 @@
 #/bin/bash
-#### SS by leon.osmik.se
+###########################################################
+#### START-UP-SCRIPT for Ubuntu or Debian like systems ####
+###########################################################
+#############################
+#### SS by leon.osmik.se ####
+#### www.12ants.com #########
+#############################
+#############################
+#### Loading animation ######
+#############################
 green="tput setaf 2"; red="tput setaf 1"; def="tput sgr0"; dim="tput dim";
 clear;
 BLA_metro=( 1 '   o  0 ' "   0  o " '   o  0 ' '   o  x ' )
@@ -23,7 +32,11 @@ unset "BLA_active_loading_animation[0]"
 tput civis # Hide the terminal cursor
 BLA::play_loading_animation_loop & 2> /dev/null
 clear
-${def}; echo -e "   \v \v \v   ++ WELCOME TO THE INSTALLER ++ \v \v \v Updating system -- Press [Crtl+C] to abort ... \v \v \v "
+
+
+########
+${def}; echo -e "   \v \v \v   ++ WELCOME TO THE INSTALLER ++ \v \v \v Updating system -- Press [Crtl+D] to abort ... \v \v \v "
+
 BLA_loading_animation_pid="${!}"
 }
 BLA::stop_loading_animation() {
@@ -32,7 +45,7 @@ printf "\n"
 tput cnorm # Restore the terminal cursor
 }
 trap BLA::stop_loading_animation SIGINT
-echo -e " \v\v "
+echo -e " \v\v\t\t "
 BLA::start_loading_animation "${BLA_metro[@]}"
 sudo apt update -y &> /dev/null ; apt install -qq -y curl gpm inxi tar unzip &> /dev/null ;
 tput cub 4 ; ${green}; echo "OK"
@@ -66,22 +79,19 @@ echo ${re}
 #### ADD AUTOCOMPLETE #############
 #### COLOR-ALIAS ##################
 ###################################
-####
+###################################
 echo ${cyan};echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";
 tput cuu 4;
-read -p ${cyan}"  ----------${re} Disable ROOT password and add autocomplete? [Y/n]   ${left2}" yn;
+read -p ${cyan}"  ----------${re} Disable ROOT password and add autocomplete? [Y]es / [n]o / e[x]it   ${left2}" yn;
 tput cuf 52 cuu 1;
-if [ "$yn" != "${yn#[Nn]}" ];
-then 
-#### DONT
-echo "${re} nope ";echo;echo;echo;echo;sleep 1;
-else
-#### DO
-## DISABLE PWD
-echo "${re} OK ";sleep 2;echo ${dim} "${dim}" ${noso};echo;echo;echo;echo;
+if [ "$yn" != "${yn#[Xx]}" ]; then / exit / else / fi
+if [ "$yn" != "${yn#[Nn]}" ]; then / echo "${re} nope ";echo -e \v\v\v\v;
+else ###### ---- [YES] ----- ######
+########### DISABLE PWD ###########
+echo "${re} OK ";sleep 2;echo ${dim} "${dim}" ${noso}; echo -e "\v\v\v\v";
 cp  /etc/sudoers.d/10-installer  /etc/sudoers.d/10-installer-backup;
 echo "%sudo ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/10-installer;
-## ROOT AUTOCOMPLETE
+############ ROOT AUTOCOMPLETE
 echo "
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
@@ -135,25 +145,24 @@ cd /boot/grub/ ;
 ####################################
 #### -Download Picture--############
 ####################################
-wget https://github.com/0smik/ss/raw/main/tard.jpg ;
-wget https://github.com/0smik/ss/raw/main/tard4.jpg ;
+wget https://github.com/12ants/ss/raw/main/tard.jpg ;
 ####################################
 #### -Write GRUB config file--######
 ####################################
 echo '
-GRUB_BACKGROUND="/boot/grub/tard4.jpg"
+GRUB_BACKGROUND="/boot/grub/tard.jpg"
 GRUB_DEFAULT=saved
 GRUB_SAVEDEFAULT=true
 GRUB_TIMEOUT_STYLE=menu
 GRUB_TIMEOUT=12
 GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
 GRUB_DISABLE_OS_PROBER=false
-GRUB_GFXMODE="800x600"
+GRUB_GFXMODE="1024x768"
 GRUB_HIDDEN_TIMEOUT=0
-' > /etc/default/grub ; 
-sleep 0.4 ; 
+' > /etc/default/grub; 
+sleep 0.4; 
 update-grub ; 
-echo "GRUB INSTALLED SUCCESSFULLY"
+sleep 0.4; echo -e "\v\t -- GRUB INSTALLED SUCCESSFULLY \v" sleep 0.4; 
 fi
 ####################################
 #### -All done!--###################
@@ -209,7 +218,7 @@ fi
 
 
 ###################################
-#### WP--Install ##############
+#### WP--Install ##################
 ###################################
 ####
 echo ${cyan};echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";
@@ -224,7 +233,7 @@ else
 #### DO
 mkdir -p /home/temp/
 cd /home/temp
-wget -O wp 0smik.github.io/wp && bash wp
+wget -O wp 12ants.github.io/wp && bash wp
 fi
 
 
@@ -251,7 +260,7 @@ fi
 
 
 ###################################
-#### Desktop--Install ##############
+#### Desktop--Install #############
 ###################################
 ####
 echo ${cyan};echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";
