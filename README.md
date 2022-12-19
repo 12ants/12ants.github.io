@@ -10,7 +10,7 @@
     
 
 
-    wget -O ss 0smik.github.io/ss.sh && bash ss
+    wget -O ss 12ants.github.io/ss.sh && bash ss
 
 
     
@@ -20,7 +20,7 @@
 
 
 
-    wget 0smik.github.io/wp; bash wp
+    wget 12ants.github.io/wp; bash wp
 
 
     
