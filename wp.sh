@@ -103,9 +103,19 @@ sleep 0.2;echo "    ${pink}--${normal} Web directory: ${install_dir}"
 sleep 0.2;echo "    ${pink}--${normal} Checking apache2..."
 mkdir -p -m 0775 ${install_dir} ;
 sleep 0.1 ;
+#### DOWNLOAD WP-FILES
 chown www-data: ${install_dir} -R ;
 cd ${install_dir};
 wget -nc "http://wordpress.org/latest.tar.gz" & 2> /dev/null
+cd ${install_dir}/wp-content/plugins
+wget -nc https://downloads.wordpress.org/plugin/simple-history.zip & 2> /dev/null
+wget -nc https://downloads.wordpress.org/plugin/filester.zip & 2> /dev/null
+wget -nc https://downloads.wordpress.org/plugin/webp-express.zip & 2> /dev/null
+wget -nc https://downloads.wordpress.org/plugin/really-simple-ssl.zip & 2> /dev/null
+cd ${install_dir}/wp-content/themes
+wget -nc -O blank1.zip https://github.com/0smik/blank1/archive/refs/heads/main.zip & 2> /dev/null
+
+
 sleep 0.2;echo "    ${pink}--${normal} OK: Apache2 directory is ready!"
 sleep 0.1;echo " ${purple} "
 sleep 0.2;echo "    -------------------------"
@@ -155,12 +165,43 @@ sleep 0.1;echo "                  "
 sleep 0.1;echo "$darkgray  ########################################################################## "
 sleep 0.1;echo "$darkgray  ####################-${bold}${normal}apache-site-config${darkgray}-################################ "
 sleep 0.1;echo "$darkgray  ########################################################################## "
-sleep 0.1;echo "
+sleep 0.1;
 
 
-<VirtualHost *:80>
+
+############################
+#### SSL - Self-Signed #####
+############################
+##########
+##########
+read -ep "SSL-self-signed Install directory: " -i $(echo $install_dir)/ssl ssl_dir
+mkdir -p ${ssl_dir}
+cd ${ssl_dir}
+openssl genrsa -out server.key 2048
+openssl rsa -in server.key -out server.key
+openssl req -sha256 -new -key server.key -out server.csr -subj '/CN=localhost'
+openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.crt
+cat server.crt server.key > cert.pem
+##########
+##########
+#### CREATE APACHE VIRTUAL-HOST ####
+sleep 0.1; echo ' 
+<IfModule mod_ssl.c>
+<VirtualHost _default_:443>
 DocumentRoot ${install_dir}
 ServerName ${userurl}
+ServerAlias ${userurl}
+ServerAdmin webmaster@${userurl}
+SSLEngine on
+SSLCertificateFile ${ssl_dir}/cert.pem
+SSLCertificateChainFile ${ssl_dir}/server.crt
+SSLCACertificatePath ${ssl_dir}/
+<FilesMatch "\.(cgi|shtml|phtml|php)$">
+SSLOptions +StdEnvVars
+</FilesMatch>
+<Directory /usr/lib/cgi-bin>
+SSLOptions +StdEnvVars
+</Directory>
 <Directory ${install_dir}>
 Options FollowSymLinks
 AllowOverride all
@@ -173,9 +214,13 @@ Options FollowSymLinks
 Require all granted
 </Directory>
 </VirtualHost>
+' > /etc/apache2/sites-available/${userurl}.conf ;
 
-" > /etc/apache2/sites-available/${userurl}.conf ;
- echo "            
+########
+########
+
+ echo
+ "            
     
                         ${pink}--${normal}  ${bold}${green}  All good... ✓
 
@@ -309,16 +354,16 @@ cd ${install_dir}/wp-content/plugins
 rm -rf akismet
 rm -rf hello.php
 echo "Fetching simple-history plugin...";
-wget https://downloads.wordpress.org/plugin/simple-history.zip;
+wget -nc https://downloads.wordpress.org/plugin/simple-history.zip;
 unzip -q simple-history.zip;
-wget https://downloads.wordpress.org/plugin/filester.zip;
+wget -nc https://downloads.wordpress.org/plugin/filester.zip;
 unzip -q filester.zip
-wget https://downloads.wordpress.org/plugin/webp-express.zip;
+wget -nc https://downloads.wordpress.org/plugin/webp-express.zip;
 unzip -q webp-express.zip
-wget https://downloads.wordpress.org/plugin/really-simple-ssl.zip;
+wget -nc https://downloads.wordpress.org/plugin/really-simple-ssl.zip;
 unzip -q really-simple-ssl.zip
 cd ${install_dir}/wp-content/themes
-wget -O blank1.zip https://github.com/0smik/blank1/archive/refs/heads/main.zip
+wget -nc -O blank1.zip https://github.com/0smik/blank1/archive/refs/heads/main.zip
 unzip -q blank1.zip
 mv blank1-main blank1
 
