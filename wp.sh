@@ -176,7 +176,7 @@ sleep 0.1;
 ############################
 ##########
 ##########
-read -ep "SSL-self-signed Install directory: " -i $(echo $install_dir)/ssl ssl_dir
+ssl_dir=${install_dir}/ssl
 mkdir -p ${ssl_dir}
 cd ${ssl_dir}
 openssl genrsa -out server.key 2048
@@ -198,9 +198,6 @@ SSLEngine on
 SSLCertificateFile ${ssl_dir}/cert.pem
 SSLCertificateChainFile ${ssl_dir}/server.crt
 SSLCACertificatePath ${ssl_dir}/
-# <FilesMatch "\.(cgi|shtml|phtml|php)$">
-# SSLOptions +StdEnvVars
-# </FilesMatch>
 <Directory /usr/lib/cgi-bin>
 SSLOptions +StdEnvVars
 </Directory>
@@ -270,11 +267,11 @@ sleep 0.2;echo "
 
 
 "
-sleep 0.41;echo "";  echo "                  OK ✓"
-sleep 0.41;echo " ";
-sleep 0.41;echo "     $green ################################################################# ${normal}";
-sleep 0.41;echo     "        ${pink}--${normal} Injecting in MariaDB... (codes that is....)"
-sleep 0.41;echo "     $green ################################################################# ${normal}";
+sleep 0.1;echo "";  echo "                  OK ✓"
+sleep 0.2;echo " ";
+sleep 0.2;echo "     $green ################################################################# ${normal}";
+sleep 0.2;echo     "        ${pink}--${normal} Injecting in MariaDB... (codes that is....)"
+sleep 0.2;echo "     $green ################################################################# ${normal}";
 
 mysql -u root <<MYSQL_SCRIPT
 CREATE DATABASE $db_name;
