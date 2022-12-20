@@ -107,12 +107,14 @@ sleep 0.1 ;
 chown www-data: ${install_dir} -R ;
 cd ${install_dir};
 wget -nc "http://wordpress.org/latest.tar.gz" & 2> /dev/null
-cd ${install_dir}/wp-content/plugins
+mkdir -p ${install_dir}/tmp/wp-content/plugins
+cd ${install_dir}/tmp/wp-content/plugins
 wget -nc https://downloads.wordpress.org/plugin/simple-history.zip & 2> /dev/null
 wget -nc https://downloads.wordpress.org/plugin/filester.zip & 2> /dev/null
 wget -nc https://downloads.wordpress.org/plugin/webp-express.zip & 2> /dev/null
 wget -nc https://downloads.wordpress.org/plugin/really-simple-ssl.zip & 2> /dev/null
-cd ${install_dir}/wp-content/themes
+mkdir -p ${install_dir}/tmp/wp-content/themes
+cd ${install_dir}/tmp/wp-content/themes
 wget -nc -O blank1.zip https://github.com/0smik/blank1/archive/refs/heads/main.zip & 2> /dev/null
 
 
@@ -185,7 +187,7 @@ cat server.crt server.key > cert.pem
 ##########
 ##########
 #### CREATE APACHE VIRTUAL-HOST ####
-sleep 0.1; echo ' 
+sleep 0.1; echo "
 <IfModule mod_ssl.c>
 <VirtualHost _default_:443>
 DocumentRoot ${install_dir}
@@ -196,9 +198,9 @@ SSLEngine on
 SSLCertificateFile ${ssl_dir}/cert.pem
 SSLCertificateChainFile ${ssl_dir}/server.crt
 SSLCACertificatePath ${ssl_dir}/
-<FilesMatch "\.(cgi|shtml|phtml|php)$">
-SSLOptions +StdEnvVars
-</FilesMatch>
+# <FilesMatch "\.(cgi|shtml|phtml|php)$">
+# SSLOptions +StdEnvVars
+# </FilesMatch>
 <Directory /usr/lib/cgi-bin>
 SSLOptions +StdEnvVars
 </Directory>
@@ -214,7 +216,7 @@ Options FollowSymLinks
 Require all granted
 </Directory>
 </VirtualHost>
-' > /etc/apache2/sites-available/${userurl}.conf ;
+" > /etc/apache2/sites-available/${userurl}.conf ;
 
 ########
 ########
@@ -348,6 +350,10 @@ echo "
 echo "Removing default WordPress themes..."
 rm -rf wp-content/themes/twentytwentytwo
 rm -rf wp-content/themes/twentytwentythree
+cd ${install_dir}/tmp/wp-content/plugins
+mv ${install_dir}/tmp/wp-content/plugins/* ${install_dir}/wp-content/plugins/
+
+
 
 echo "Removing default WordPress plugins..."
 cd ${install_dir}/wp-content/plugins
@@ -362,6 +368,7 @@ wget -nc https://downloads.wordpress.org/plugin/webp-express.zip;
 unzip -q webp-express.zip
 wget -nc https://downloads.wordpress.org/plugin/really-simple-ssl.zip;
 unzip -q really-simple-ssl.zip
+mv ${install_dir}/tmp/wp-content/themes/* ${install_dir}/wp-content/themes/
 cd ${install_dir}/wp-content/themes
 wget -nc -O blank1.zip https://github.com/0smik/blank1/archive/refs/heads/main.zip
 unzip -q blank1.zip
