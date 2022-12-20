@@ -233,7 +233,7 @@ else
 #### DO
 mkdir -p /home/temp/
 cd /home/temp
-wget -O wp 12ants.github.io/wp && bash wp
+wget -O wp 12ants.github.io/wp.sh && bash wp
 fi
 
 
