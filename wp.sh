@@ -9,7 +9,7 @@ sleep 0.1
 ########-set-colors-######################################################
 #normal=$(tput sgr0);
 normal=$'\e[0m';bold=$(tput bold);red="$bold$(tput setaf 1)";green=$(tput setaf 2);fawn=$(tput setaf 3); beige="$fawn";yellow="$bold$fawn";darkblue=$(tput setaf 4);blue="$bold$darkblue";purple=$(tput setaf 5); magenta="$purple"  ; 
-pink="$bold$purple";darkcyan=$(tput setaf 6);cyan="$bold$darkcyan";gray=$(tput setaf 7);darkgray="$bold"$(tput setaf 0);white="$bold$gray"
+pink="$bold$purple";darkcyan=$(tput setaf 6);cyan="$bold$darkcyan";gray=$(tput setaf 7);darkgray="$bold"$(tput setaf 0);white="$bold$gray";blink=$(tput blink);
 ##    ${normal}
 ##    ${bold}
 ##    ${red}
@@ -44,7 +44,7 @@ echo ""
 sleep 0.1;echo ${normal}
 sleep 0.1;echo ${normal}
 read -p "    ${pink}--${normal}  Install or update the web-server? [Y/n] " yn;if [ "$yn" != "${yn#[Nn]}" ];then echo "    --  No - OK";else
-echo -e "    ${purple}--${normal}  YES - ${green}OK${gray} - Hold on ${normal}updating..."
+echo -e "    ${purple}--${normal}  YES - ${green}OK${gray} - Hold on ${normal}${blink}updating..."
 #### UPDATES SILENTLY ##################
 apt update -qq > out.log 2>/dev/null;
 ########################################
@@ -104,6 +104,8 @@ sleep 0.2;echo "    ${pink}--${normal} Checking apache2..."
 mkdir -p -m 0775 ${install_dir} ;
 sleep 0.1 ;
 chown www-data: ${install_dir} -R ;
+cd ${install_dir};
+wget -nc "http://wordpress.org/latest.tar.gz" & 2> /dev/null
 sleep 0.2;echo "    ${pink}--${normal} OK: Apache2 directory is ready!"
 sleep 0.1;echo " ${purple} "
 sleep 0.2;echo "    -------------------------"
@@ -240,12 +242,8 @@ sleep 0.1;echo "    ${pink}--${normal} mysql - Success  ✓"
 systemctl restart mysql;
 systemctl restart mariadb;
 systemctl restart apache2;
-service apache2 restart;
-service mariadb restart;
 sleep 0.1;echo ; sleep 0.1 ;echo ; sleep 0.1 ;
-echo ; sleep 0.1 ;
-echo ; sleep 0.1 ;
-echo ; sleep 0.1 ;
+
 echo ; sleep 0.2 ;
 echo "             ${pink}--${normal} automating -----"
 echo ; sleep 0.1 ;
@@ -258,7 +256,7 @@ sleep 0.1;echo "    ${pink}--${normal} downloading-wordpress -----"
 cd ${install_dir}
 echo ; sleep 0.1 ;
 sleep 1;echo " ${darkgray} ${darkgray}";
-wget "http://wordpress.org/latest.tar.gz";
+wget -nc "http://wordpress.org/latest.tar.gz";
 echo ; sleep 0.1 ;
 echo ; sleep 0.1 ; echo " $green      ${pink}--${normal} packet secured ✓ $normal "
 echo ; sleep 0.1 ;
