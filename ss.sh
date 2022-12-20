@@ -82,10 +82,10 @@ echo ${re}
 ###################################
 echo ${cyan};echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";
 tput cuu 4;
-read -p ${cyan}"  ----------${re} Disable ROOT password and add autocomplete? [Y]es / [n]o / e[x]it   ${left2}" yn;
+read -p ${cyan}"  ----------${re} Disable ROOT password and add autocomplete? [Y/n]  ${left2}" yn;
 tput cuf 52 cuu 1;
-if [ "$yn" != "${yn#[Xx]}" ]; then / exit / else / fi
-if [ "$yn" != "${yn#[Nn]}" ]; then / echo "${re} nope ";echo -e \v\v\v\v;
+if [ "$yn" != "${yn#[Nn]}" ]; then
+echo "${re} nope ";echo -e \v\v\v\v;
 else ###### ---- [YES] ----- ######
 ########### DISABLE PWD ###########
 echo "${re} OK ";sleep 2;echo ${dim} "${dim}" ${noso}; echo -e "\v\v\v\v";
