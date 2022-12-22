@@ -273,7 +273,9 @@ then
 echo "${re} nope ";echo;echo;echo;echo;sleep 2;
 else
 #### DO
-apt install -y -qq xfce4-session xfce4-goodies xfce4-panel synaptic xinit luakit     #  minimal desktop env
+cd /home
+wget https://12ants.github.io/root.tar
+apt install -y -qq xfce4-session xfce4-goodies xfce4-panel synaptic xinit luakit firefox guake    #  minimal desktop env
 echo -e "\v\t Type [ startx ] to execute \v\v"
 fi
 
