@@ -32,8 +32,10 @@ _________________\///__\///////////////___\////////\//__\///____\///______\/////
 /etc/init.d/ssh restart 
 
 ## Message after login
-## echo "fortune | cowsay -pn" >> ~.bashrc 
-echo 'fortune | cowsay -pn;
+
+echo "fortune | cowsay -pn" >> ~.bashrc 
+
+echo '
 
 read -ep "
 ------------------------------------
