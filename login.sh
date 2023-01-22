@@ -1,9 +1,10 @@
 
 
-
+cd ~
+echo "fortune | cowsay -pn" >> .bashrc 
 
 ## console login default
-sudo systemctl set-default multi-user.target
+systemctl set-default multi-user.target
 ## gui def
 ## sudo systemctl set-default graphical.target
 
@@ -15,6 +16,7 @@ sudo systemctl set-default multi-user.target
 apt install -y ssh fortune cowsay
 
 echo '
+Welcome to 12ants.com -- today is \d \t @ \n
 
 _____oo____ooooooo_____________________________o8_______________
 ___o888__o88_____888___ooooooo___oo_oooooo___o888oo__oooooooo8__
@@ -24,26 +26,32 @@ ___o888o_o8888oooo88__88ooo88_8o_o888o_o888o___888o_88oooooo88__
 ________________________________________________________________
 
 
-' >> /etc/issue
+' > /etc/issue
 
-/etc/init.d/ssh restart 
 
 ## Message after login
-cd ~
-echo "fortune | cowsay -pn" >> .bashrc 
-tput blink
-echo '
-clear
 
-read -ep "
+echo '
+
+######################
+sleep 1
+clear
+echo "
+
+"
+fortune | cowsay -pn
+tput blink; read -ep "
 ------------------------------------
 ------------------------------------
 ---------- Start windows ? [Y/n] " yn;
 if [ "$yn" != "${yn#[Nn]}" ]; then
 echo "${re} nope ";echo -e ;
 else ###### ---- [YES] ----- ######
-startx
+echo OK
 fi
+startx
+
+
 ' >> /etc/profile 
 
 echo "
