@@ -35,7 +35,7 @@ echo '
 echo '
 
 ######################
-clear; echo hello?; sleep.2; clear
+clear; echo hello?; sleep .2; clear
 fortune | cowsay -pn
 tput blink; read -ep "
 ------------------------------------
