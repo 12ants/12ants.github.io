@@ -35,7 +35,7 @@ echo '
 echo '
 
 ######################
-clear; echo hello?; sleep .2; clear
+clear; echo hello?; clear
 fortune | cowsay -pn
 tput blink; read -ep "
 ------------------------------------
@@ -45,8 +45,9 @@ if [ "$yn" != "${yn#[Nn]}" ]; then
 echo "${re} nope ";echo -e ;
 else ###### ---- [YES] ----- ######
 echo OK
-fi
 startx
+fi
+
 
 
 ' >> /etc/profile 
