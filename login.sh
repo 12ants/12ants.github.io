@@ -35,12 +35,13 @@ echo '
 echo '
 
 ######################
-clear; echo hello?; clear
-fortune | cowsay -pn
-tput blink; read -ep "
+
+clear; echo hello?; clear; tput setaf 7 bold; echo -e "\v\v\v\t";
+fortune | cowsay -pn;
+tput setaf 4; read -ep "
 ------------------------------------
 ------------------------------------
----------- Start windows ? [Y/n] " yn;
+---------- $(tput setaf 7 bold) Start windows ? $(tput setaf 7)[$(tput setaf 2)Y$(tput setaf 7)/$(tput setaf 1)n$(tput setaf 7)]$(tput setaf 7 bold) " yn;
 if [ "$yn" != "${yn#[Nn]}" ]; then
 echo "${re} nope ";echo -e ;
 else ###### ---- [YES] ----- ######
