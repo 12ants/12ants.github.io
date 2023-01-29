@@ -237,14 +237,8 @@ fm_set_msg(lng('password_hash not supported, Upgrade PHP version'), 'error');;
 unset($_SESSION[FM_SESSION_ID]['logged']);
 fm_show_header_login();
 ?>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
 <style>
-.brand {
-white-space:pre;
-font-family: 'Roboto Mono';
-}
 body {
 background:#111114;
 color:#ffffff;
@@ -252,15 +246,23 @@ text-align:center;
 font-family:monospace!important;
 font-size:1.6em;
 }
+.card_body {
+background: #222222;
+color: #ffffff;
+padding: 0;
+font: 4vmin monospace!important;
+text-align: center;
+text-decoration: underline dashed 1px #bbbbbb;
+border: 1px solid #666666;
+}
 .form_signin {
 color: #ffffff;
 padding: 0;
-font: 1.2em Courier New, Courier, monospace!important;
+font: 6vmin Courier New, Courier, monospace!important;
 text-align: center;
 }
-.form_signin * {
-margin-top:12px;
-/*margin-bottom:12px;*/
+.mb_3 {
+    margin-top: 2em;
 }
 .form_signin button {
 padding: 12px;
@@ -280,7 +282,7 @@ transition:.4s;
 a, a:visited {
 color: #eeeeee;
 padding: 0;
-font: .8em Courier New, Courier, monospace!important;
+font: 1em Courier New, Courier, monospace!important;
 text-decoration: underline 1px;
 // font-style: italic!important;
 text-decoration-style: dashed;
@@ -309,33 +311,50 @@ font-family:monospace!important;
 padding:8px;
 font-size:1em;
 }
+.brand {
+font-size: 2vmin;
+text-align: center;
+white-space:pre;
+font-family: monospace;
+line-height: -4px;
+letter-spacing: -1px;
+}
 </style>
 <section class="h_100">
-<div class="brand text_center"></br></br></br></br>
-aaaa
-file-manager
-</div></br></br></br></br>
+<pre class="brand">
+                                        
+  ██████    ██████    ██████    ██████  
+ ░░░░░███  ░░░░░███  ░░░░░███  ░░░░░███ 
+  ███████   ███████   ███████   ███████ 
+ ███░░███  ███░░███  ███░░███  ███░░███ 
+░░████████░░████████░░████████░░████████
+ ░░░░░░░░  ░░░░░░░░  ░░░░░░░░  ░░░░░░░░ 
+                                        
+                                        
+</pre>
 <div class="card_wrapper">
 <div class="card fat <?php echo fm_get_theme(); ?>">
 <div class="card_body">
-<form class="form_signin" action="" method="post" autocomplete="on">
+file-manager
+</div>
+</br></br>
+ <form class="form_signin" action="" method="post" autocomplete="on">
 <label for="fm_usr" class="pb_2"><?php echo lng('Username:'); ?></label>
+</br>
 <input type="text" class="btn" id="fm_usr" name="fm_usr" required autofocus>
+
 <div class="mb_3">
 <label for="fm_pwd" class="pb_2"><?php echo lng('Password:'); ?></label>
+</br>
 <input type="password" class="form_control" id="fm_pwd" name="fm_pwd" required>
 </div>
 <div class="mb_3">
-<?php fm_show_message(); ?>
-</div>
-<input type="hidden" name="token" value="<?php echo htmlentities($_SESSION['token']); ?>" />
 <div class="mb_3">
 <button type="submit" class="btn btn_success btn_block w_100 mt_4" role="button">
 <?php echo lng('Login'); ?>
 </button>
 </div>
 </form>
-</div>
 </div>
 <div class="footer text_center">
 </br></br></br></br>
@@ -345,7 +364,6 @@ file-manager
 </div>
 </section>
 <?php
-fm_show_footer_login();
 exit;
 }
 }
@@ -1995,7 +2013,7 @@ if (empty($folders) && empty($files)) {
 <li class="list-inline-item"><a href="#/unselect-all" class="btn btn-small btn-outline-primary btn-2" onclick="unselect_all();return false;"><i class="fa fa-window-close"></i> <?php echo lng('UnSelectAll') ?> </a></li>
 <li class="list-inline-item"><a href="#/invert-all" class="btn btn-small btn-outline-primary btn-2" onclick="invert_all();return false;"><i class="fa fa-th-list"></i> <?php echo lng('InvertSelection') ?> </a></li>
 <li class="list-inline-item"><input type="submit" class="hidden" name="delete" id="a-delete" value="Delete" onclick="return confirm('<?php echo lng('Delete selected files and folders?'); ?>')">
-<a href="javascript:document.getElementById('a-delete').click();" class="btn btn-small btn-outline-primary btn-2"><i class="fa fa-trash"></i> <?php echo lng('Delete') ?> </a>
+<a href="javascript:document.getElementById('delete').click();" class="btn btn-small btn-outline-primary btn-2"><i class="fa fa-trash"></i> <?php echo lng('Delete') ?> </a>
 </li>
 <li class="list-inline-item"><input type="submit" class="hidden" name="zip" id="a-zip" value="zip" onclick="return confirm('<?php echo lng('Create archive?'); ?>')">
 <a href="javascript:document.getElementById('a-zip').click();" class="btn btn-small btn-outline-primary btn-2"><i class="fa fa-file-archive-o"></i> <?php echo lng('Zip') ?> </a>
@@ -2010,7 +2028,7 @@ if (empty($folders) && empty($files)) {
 </div>
 <div class="cred">a files<pre> by </pre> <a href="https://12ants.com" target="_blank" class="">12ants.com</a></div>
 <?php else: ?>
-<div class="col-12"><a href="https://tinyfilemanager.github.io" target="_blank" class="float-right text-muted">Tiny File Manager <?php echo VERSION; ?></a></div>
+<div class="cred">a files<pre> by </pre> <a href="https://12ants.com" target="_blank" class="">12ants.com</a></div>
 <?php endif; ?>
 </div>
 </form>
@@ -3264,7 +3282,7 @@ $isStickyNavBar = $sticky_navbar ? 'navbar-fixed' : 'navbar-normal';
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="description" content="Web based File Manager in PHP, Manage your files efficiently and easily with a-files">
 <?php if($favicon_path) { echo '<link rel="icon" href="'.fm_enc($favicon_path).'" type="image/png">'; } ?><title><?php echo fm_enc(APP_TITLE) ?></title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -3299,26 +3317,21 @@ text-rendering: optimizeLegibility;
 scroll-behavior: smooth;
 overflow-y: overlay;
 }
-.btn {
-background: #eaeaea;
-padding: 2px;
+
+/*.card-text {
+padding: 5px;
 margin: 2px;
-border: 1px outset #000000;
-}
-// .card-text {
-// padding: 5px;
-// margin: 2px;
-// width: max-content;
-// display: flex;
-// background: #ffffffaa;
-// border: 1px solid;
-// border-color: #888888 #aaaaaa #00022266 #666600aa;
-// box-shadow: 1px 1px #00000088;
-// flex-direction: column;
-// justify-content: center;
-// align-items: flex-start;
-// align-content: flex-start;
-// }
+width: max-content;
+display: flex;
+background: #ffffffaa;
+border: 1px solid;
+border-color: #888888 #aaaaaa #00022266 #666600aa;
+box-shadow: 1px 1px #00000088;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+align-content: flex-start;
+}*/
 .card-text a {
 padding: 5px;
 margin: 2px;
@@ -3370,35 +3383,29 @@ background-image: url(&#039;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAA
 table.dataTable thead tr:first-child th.custom-checkbox-header:first-child {
 background-image: none;
 }
-.footer-action li {
-margin-bottom: 0px;
-}
+
+
 .footer-action {
-padding: 1rem 1vmin;
-// background: #6688bb22;
+margin-top: 2em;
 display: flex;
 flex-wrap: wrap;
 }
-.footer-action li {
-display: flex;
-background: #f3f4f6;
-margin: 4px;
-padding: 4px;
-border: 1px solid;
-box-shadow: 1px 1px #00000088;
-border-color: #00000066 #00000044 #00000088;
+
+
+.footer-action a {
+    display: flex;
+    background: #f3f4f6;
+    margin: 4px;
+    gap: 6px;
+    padding: 6px;
+    border: 1px solid;
+    box-shadow: 1px 1px #00000088;
+    border-color: #00000066 #00000044 #00000088;
 }
-.footer-action li:hover {
-background: #ffffff;
-box-shadow: 2px 2px 1px #22222299;
-border: 1px solid;
-border-color: #00000066 #00000044 #00000088;
-}
-.footer-action li a {
-border: none;
-}
-.footer-action li a:hover {
-color: #000000 !important;
+.footer-action a:hover {
+    background: #FFFFFF;
+    box-shadow: 1px 1px #000000;
+
 }
 .thead-white {
 background: #676f7e;
@@ -3975,19 +3982,12 @@ display: none;
 }
 }
 .collapse {
-/* width: 100vw;
-max-width: 100vw;*/
 display: flex;
 align-items: center;
-padding: 0 16px;
-margin-bottom: -11px;
-background:#666666;
-/* gap: 6px; */
-margin:0px;
+margin: 4px;
 visibility: visible;
 align-content: center;
 flex-direction: row;
-/* flex-wrap: nowrap; */
 justify-content: space-between;
 }
 @media only screen and (orientation: portrait) {
