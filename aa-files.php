@@ -237,7 +237,6 @@ fm_set_msg(lng('password_hash not supported, Upgrade PHP version'), 'error');;
 unset($_SESSION[FM_SESSION_ID]['logged']);
 fm_show_header_login();
 ?>
-
 <style>
 body {
 background:#111114;
@@ -262,7 +261,7 @@ font: 6vmin Courier New, Courier, monospace!important;
 text-align: center;
 }
 .mb_3 {
-    margin-top: 2em;
+margin-top: 2em;
 }
 .form_signin button {
 padding: 12px;
@@ -322,15 +321,12 @@ letter-spacing: -1px;
 </style>
 <section class="h_100">
 <pre class="brand">
-                                        
-  ██████    ██████    ██████    ██████  
- ░░░░░███  ░░░░░███  ░░░░░███  ░░░░░███ 
-  ███████   ███████   ███████   ███████ 
- ███░░███  ███░░███  ███░░███  ███░░███ 
+██████ ██████ ██████ ██████
+░░░░░███ ░░░░░███ ░░░░░███ ░░░░░███
+███████ ███████ ███████ ███████
+███░░███ ███░░███ ███░░███ ███░░███
 ░░████████░░████████░░████████░░████████
- ░░░░░░░░  ░░░░░░░░  ░░░░░░░░  ░░░░░░░░ 
-                                        
-                                        
+░░░░░░░░ ░░░░░░░░ ░░░░░░░░ ░░░░░░░░
 </pre>
 <div class="card_wrapper">
 <div class="card fat <?php echo fm_get_theme(); ?>">
@@ -338,11 +334,10 @@ letter-spacing: -1px;
 file-manager
 </div>
 </br></br>
- <form class="form_signin" action="" method="post" autocomplete="on">
+<form class="form_signin" action="" method="post" autocomplete="on">
 <label for="fm_usr" class="pb_2"><?php echo lng('Username:'); ?></label>
 </br>
 <input type="text" class="btn" id="fm_usr" name="fm_usr" required autofocus>
-
 <div class="mb_3">
 <label for="fm_pwd" class="pb_2"><?php echo lng('Password:'); ?></label>
 </br>
@@ -3282,6 +3277,7 @@ $isStickyNavBar = $sticky_navbar ? 'navbar-fixed' : 'navbar-normal';
 <html>
 <head>
 <meta charset="utf-8">
+<link rel="icon" href=" data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAAA3CAYAAAC7DJKyAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAJwSURBVGhD7Zk7aypBGIY/jyjYWWolghAErbSyFX9AfkCaNCKkyA9QEKwELbz0lqKFkMIiRRpBDASMooKCKKiF4AVRvKDZfNlZJoty9hCz8aSZeeDFZWbn8uzOzoKrEQQBgVH+0F8m4fKswuVZhcuzCpdnFS7PKlyeVbg8q3B5VuHyrMLl1fD+/g7Pz8/w8PAAi8WClv4eiAij0Qjy+TwMh0Na+j1Uy38Ofnt7C263G2KxGPT7fan8fyIIAjQaDQgGg9K4qVQKVqsVrf0m5K9rNTkcDlgsFtFqtaJWq5Xj9/uxVCrhdrtVbKc2m80Gn56e8Obm5mQ8r9eL7XZbsc1XUS3/mfF4jOLSw+vr678mlc1mcTKZKLY7N7PZTOqH9HfcPxmvUCjgfD5XbHdOfiz/GbISOp0OJhIJdLlc8iTT6TTudjvpHPIrLtMTieNYLBZ8fHzEt7c36fz9fo+ZTEauv7q6wmg0iq1WS6o7Hl9NLrbbr9dr6Ha7UK/XoVar0VIAvV5Pj9QhStMjgMFgIG1u0+kURHla+gOUrsi5IXeyWq1iJBI5efYNBgPe3d1hpVKR77rakPakn0AgIPdPQlZXMplE8YLLK+W7US1Pll0ul0Oj0ShPyG63Yzwex16vp3pC/wrpjzxW4XAYzWazPKbH40Fx91ds81Uusux9Ph+IFwLK5TLc39+D+OyCRqOhtZeB9Gez2SAUCsHLy4v0inM4HLRWHaq/0pL3ebPZBHGjA6fTCTqdjtb8HsvlEl5fX0HcCMFkMtHS8+GfqFmFy7MKl2cVLs8qXJ5VuDyrcHlW4fKswuVZhcuzCpdnFS7PJgAfRQeqv9ijk/gAAAAASUVORK5CYII=">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="description" content="Web based File Manager in PHP, Manage your files efficiently and easily with a-files">
 <?php if($favicon_path) { echo '<link rel="icon" href="'.fm_enc($favicon_path).'" type="image/png">'; } ?><title><?php echo fm_enc(APP_TITLE) ?></title>
@@ -3317,7 +3313,6 @@ text-rendering: optimizeLegibility;
 scroll-behavior: smooth;
 overflow-y: overlay;
 }
-
 /*.card-text {
 padding: 5px;
 margin: 2px;
@@ -3383,29 +3378,24 @@ background-image: url(&#039;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAA
 table.dataTable thead tr:first-child th.custom-checkbox-header:first-child {
 background-image: none;
 }
-
-
 .footer-action {
 margin-top: 2em;
 display: flex;
 flex-wrap: wrap;
 }
-
-
 .footer-action a {
-    display: flex;
-    background: #f3f4f6;
-    margin: 4px;
-    gap: 6px;
-    padding: 6px;
-    border: 1px solid;
-    box-shadow: 1px 1px #00000088;
-    border-color: #00000066 #00000044 #00000088;
+display: flex;
+background: #f3f4f6;
+margin: 4px;
+gap: 6px;
+padding: 6px;
+border: 1px solid;
+box-shadow: 1px 1px #00000088;
+border-color: #00000066 #00000044 #00000088;
 }
 .footer-action a:hover {
-    background: #FFFFFF;
-    box-shadow: 1px 1px #000000;
-
+background: #FFFFFF;
+box-shadow: 1px 1px #000000;
 }
 .thead-white {
 background: #676f7e;
