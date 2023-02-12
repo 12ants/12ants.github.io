@@ -1,5 +1,61 @@
-#!/bin/bash
-bash 12ants.github.io/ss.sh
+#bin/bash
+
+<pre>
+
+export bold=$(tput bold) dim=$(tput dim) so=$(tput smso) noso=$(tput rmso) rev=$(tput rev) re=$(tput sgr0) normal=$(tput sgr0) \
+redb=$(tput setab 1) greenb=$(tput setab 2) yellowb=$(tput setab 3) blueb=$(tput setab 4) purpleb=$(tput setab 5) cyanb=$(tput setab 6) grayb=$(tput setab 7) \
+red=$(tput setaf 1)  green=$(tput setaf 2)  yellow=$(tput setaf 3)  blue=$(tput setaf 4)  purple=$(tput setaf 5)  cyan=$(tput setaf 6)  gray=$(tput setaf 7) \
+white=$(tput setaf 7 bold)  pink=$(tput setaf 5 bold) darkblue=$(tput setab 5 bold) \
+left2=$(tput cub 2) up1=$(tput cuu1) c75="  ---------------------------------------------------------------------------"
+
+
+
+
+###################################
+#### SS--Install ##################
+###################################
+####
+echo ${cyan};echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";
+tput cuu 4;
+read -p ${cyan}"  ----------${re} Install SS? [Y/n]   ${left2}" yn;
+tput cuf 52 cuu 1;
+if [ "$yn" != "${yn#[Nn]}" ];
+then 
+#### DONT
+echo "${re} nope ";echo;echo;echo;echo;sleep 2;
+else
+#### DO
+mkdir -p /home/temp/
+cd /home/temp
+wget -O ss 12ants.github.io/ss.sh && bash ss
+fi
+
+echo ${cyan};echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";
+tput cuu 4;
+read -p ${cyan}"  ----------${re} Install SS? [Y/n]   ${left2}" yn;
+tput cuf 52 cuu 1;
+if [ "$yn" != "${yn#[Nn]}" ];
+then 
+#### DONT
+echo "${re} nope ";echo;echo;echo;echo;sleep 2;
+else
+#### DO
+mkdir -p /home/temp/
+cd /home/temp
+wget -O ss 12ants.github.io/ss.sh && bash ss
+fi
+
+
+read exit exit
+exit
+
+
+
+</pre>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +84,9 @@ border-radius: 8px
 ::-webkit-scrollbar-thumb:hover {
 background: #FFFFFF82;
 }
-
+pre {
+color :#ffffff88;
+}
 html {
 overflow-x: hidden;
 overflow-y: overlay;
