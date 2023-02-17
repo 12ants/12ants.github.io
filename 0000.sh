@@ -33,7 +33,7 @@ sha256sum -c && sudo bash install.sh
 else echo "no"; fi
 ## 
 if [ $hestia == y ]; then echo "installing hestia";
-wget -O hestia.sh https://raw.githubusercontent.com/hestiacp/hestiacp/release/install/hst-install.sh; bash hestia.sh;
+wget -O 12hestia https://raw.githubusercontent.com/hestiacp/hestiacp/release/install/hst-install.sh; bash 12hestia;
 else echo "no"; fi;
 ##
 if [ $guake == y ]; then echo "installing guake";
@@ -41,13 +41,16 @@ apt -y install guake;
 else echo "no"; fi;
 ##
 if [ $grub == y ]; then echo "installing grub";
-wget $rootgit/grub; bash grub.sh
+wget -O 12grub $rootgit/grub.sh; bash 12grub;
 else echo "no"; fi;
 
 
 
 
-echo "
--- 12ants.github.io
+echo "$green $blink
+  --  https://12ants.github.io
+$re $normal
+
+  enjoy!
 
 "
