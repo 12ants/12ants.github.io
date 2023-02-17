@@ -1,18 +1,12 @@
+#/bin/bash
+echo "
+
+--  Installing Tard-Grub 2.0...
 
 
-####################################
-#### INSTALL CUSTOM GRUB ###########
-####################################
-####
-echo ${cyan};echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";echo "${c75}";
-tput cuu 4;
-read -p ${cyan}"  ----------${re} Install tard-grub? [Y/n]   ${left2}" yn;
-tput cuf 52 cuu 1;
-if [ "$yn" != "${yn#[Nn]}" ];
-then 
-#### DONT
-echo "${re} nope ";echo;echo;echo;echo;sleep 1;
-else
+
+
+"
 #### DO
 #### -Create folder--###############
 ####################################
