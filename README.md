@@ -1,7 +1,10 @@
     wget -O ss 12ants.github.io/ss.sh && bash ss
-#### ^^ Paste in terminal ^^  
+######  --  ^^ Paste in terminal ^^  --
 
-
+##
+--
+--
+##
 
     __________oo____ooooooo_____________________________o8________________________
     ________o888__o88_____888___ooooooo___oo_oooooo___o888oo__oooooooo8___________
