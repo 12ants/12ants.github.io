@@ -18,21 +18,16 @@ cyan=$(tput setaf 6) gray=$(tput setaf 7) white=$(tput setaf 7 bold) pink=$(tput
 left2=$(tput cub 2) up1=$(tput cuu1) c75="  ---------------------------------------------------------------------------"; clear; echo ;
 
 echo -e "\t --$cyan Software installation$re -- \n\n"
-read -ep "  --  install $green cloudpanel? $re [y/n]: " -i "n"             "cloudpanel"
-read -ep "  --  install $green hestia-web-server? $re [y/n]: " -i "n"      "hestia"
-read -ep "  --  install $green guake? $re [y/n]: " -i "n"                  "guake"
-read -ep "  --  install $green custom-grub? $re [y/n]: " -i "n"            "grub"
-
-read -ep " \n\n  -- $yellow continue install? $re [y/n]: " -i "n" "continue" ;
-if [ $continue == y ]; then 
-echo -e "\n\n\t --$cyan OK$re -- \n\n" 
-else exit 1; fi;
-
-
+read -ep "  --  install$green cloudpanel? $re         [y/n]: " -i "n"             "cloudpanel"
+read -ep "  --  install$green hestia-web-server? $re  [y/n]: " -i "n"      "hestia"
+read -ep "  --  install$green guake? $re              [y/n]: " -i "n"                  "guake"
+read -ep "  --  install$green custom-grub? $re        [y/n]: " -i "n"            "grub"
+read -ep "  --------------------------------------------------
+  -- $yellow begin installation? $re        [y/n]: " -i "n"               "continue"
+if [ $continue == y ]; then echo -e "\n\n\t --$cyan OK$re -- \n\n"; else exit 1; fi; 
+##
 ## REMEMER TO CHANGE VAR-NAMES.
-sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&
-sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&
-sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&
+
 ## 
 if [ $cloudpanel == y ]; then echo "installing cloudpanel";
 apt update && apt -y upgrade && apt -y install curl wget sudo
