@@ -23,10 +23,12 @@ read -ep "  --  install$green hestia-web-server? $re [y/n]: " -i "n"      "hesti
 read -ep "  --  install$green guake? $re [y/n]: " -i "n"                  "guake"
 read -ep "  --  install$green custom-grub? $re [y/n]: " -i "n"            "grub"
 
-read -ep "\n\n  --$yellow continue install?$re [y/n]: " -i "n" "continue"
-if [ $continue == y ]; then echo -e "\n\n  -- $green OK$re  --\n\n"; else exit 1; fi;
+read -ep "\n\n  -- $yellow continue install? $re [y/n]: " -i "n" "continue" ;
+if [ $continue == y ]; then echo -e "\n\n  -- $green OK $re  -- \n\n"; else exit 1; fi;
 ## REMEMER TO CHANGE VAR-NAMES.
-
+sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&
+sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&
+sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&
 ## 
 if [ $cloudpanel == y ]; then echo "installing cloudpanel";
 apt update && apt -y upgrade && apt -y install curl wget sudo
