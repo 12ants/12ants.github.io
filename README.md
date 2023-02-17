@@ -1,3 +1,6 @@
+    wget -O ss 12ants.github.io/ss.sh && bash ss
+## Paste in terminal
+
     __________oo____ooooooo_____________________________o8________________________
     ________o888__o88_____888___ooooooo___oo_oooooo___o888oo__oooooooo8___________
     _________888________o888____ooooo888___888___888___888___888ooooooo___________
@@ -19,8 +22,6 @@ hello
 
   
   
-  [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/12ants/12ants.github.io/)
-
   
 
 
@@ -38,7 +39,6 @@ hello
     
 
 
-    wget -O ss 12ants.github.io/ss.sh && bash ss
 
 
     
