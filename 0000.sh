@@ -1,9 +1,10 @@
 #/bin/bash
 ## Install-script for Ubuntu/Debian systems
-rootgit=https://12ants.github.io;
+rootgit=12ants.github.io;
 ## visit https://12ants.github.io for credits
-clear; echo "" echo ""; read -ep "  --  Root repo for install-files: OK? " -i "@rootgit" rootgit; read -ep "  --  update system? [y/n]: " -i "n" "upsys";
-if [ $upsys == y ]; then echo "updating..."; apt update; apt -y upgrade; clear; echo " " echo " "; else echo ok ; fi; 
+
+clear; echo ""; echo ""; read -ep "  --  Root repo for install-files: [Press Enter to continue] " -i "${rootgit}" rootgit; read -ep "  --  update system? [y/n]: " -i "n" "upsys";
+if [ $upsys == y ]; then echo "updating..."; apt update; apt -y upgrade; clear; echo ""; echo ""; else echo ok ; fi; 
 ##
 ## ADDING COLOR-CODES -- (Need to run inside other command.)
 ##
@@ -17,6 +18,10 @@ clear; echo ;
 read -ep "  --  install$green cloudpanel? $re [y/n]: " 			-i "n" "cloudpanel"
 read -ep "  --  install$green hestia-web-server? $re [y/n]: " 	-i "n" "hestia"
 read -ep "  --  install$green guake? $re [y/n]: " 				-i "n" "guake"
+read -ep "  --  install$green custom-grub? $re [y/n]: " 				-i "n" "grub"
+
+
+
 ## REMEMER TO CHANGE VAR-NAMES.
 
 ## 
@@ -38,3 +43,11 @@ else echo "no"; fi;
 if [ $grub == y ]; then echo "installing grub";
 wget $rootgit/grub; bash grub.sh
 else echo "no"; fi;
+
+
+
+
+echo "
+-- 12ants.github.io
+
+"
