@@ -2,7 +2,7 @@
 ## Install-script for Ubuntu/Debian systems
 rootgit=12ants.github.io;
 ## visit https://12ants.github.io for credits
-if [ $UID != 0 ]; then echo -e "\n\n\t This script must be run as root... try command: [ sudo -s ]\n\n " 1>&2; fi; ## ROOT-CHECK
+if [ $UID != 0 ]; then echo -e "\n\n\t This script must be run as root... try command: [ sudo -s ]\n\n " 1>&2; exit 1; fi; ## ROOT-CHECK
 ##
 mkdir -p /home/00/; chmod 775 /home/00 cp /home/00/; clear; echo ; echo ; 
 read -ep "  --  Root repo for install-files: [Press Enter to continue] " -i "${rootgit}" rootgit;
