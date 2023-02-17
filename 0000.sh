@@ -15,10 +15,12 @@ white=$(tput setaf 7 bold)  pink=$(tput setaf 5 bold) darkblue=$(tput setab 5 bo
 left2=$(tput cub 2) up1=$(tput cuu1) c75="  ---------------------------------------------------------------------------"
 clear; echo ;
 ##
-read -ep "  --  install$green cloudpanel? $re [y/n]: " 			-i "n" "cloudpanel"
-read -ep "  --  install$green hestia-web-server? $re [y/n]: " 	-i "n" "hestia"
-read -ep "  --  install$green guake? $re [y/n]: " 				-i "n" "guake"
-read -ep "  --  install$green custom-grub? $re [y/n]: " 				-i "n" "grub"
+echo -e "
+$blue		-- Software installation --$re"
+read -ep "  --  install$green cloudpanel? $re [y/n]: " -i "n"			"cloudpanel"
+read -ep "  --  install$green hestia-web-server? $re [y/n]: " -i "n"	"hestia"
+read -ep "  --  install$green guake? $re [y/n]: " -i "n"				"guake"
+read -ep "  --  install$green custom-grub? $re [y/n]: " -i "n"			"grub"
 
 
 
