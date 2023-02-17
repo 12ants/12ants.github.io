@@ -2,7 +2,7 @@
 ## Install-script for Ubuntu/Debian systems
 rootgit=12ants.github.io;
 ## visit https://12ants.github.io for credits
-if [ $UID != 0 ]; then echo -e "\n\n\t This script must be run as root... try command: [ sudo -s ]\n\n " 1>&2; exit 1; fi; ## ROOT-CHECK
+if [ $UID != 0 ]; then echo -e " \n\n\t This script must be run as root... try command: [ sudo -s ] \n\n " 1>&2; exit 1; fi; ## ROOT-CHECK
 ##
 mkdir -p /home/00/; chmod 775 /home/00 cp /home/00/; clear; echo ; echo ; 
 read -ep "  --  Root repo for install-files: [Press Enter to continue] " -i "${rootgit}" rootgit;
@@ -12,19 +12,23 @@ if [ $upsys == y ]; then echo "updating..."; apt update; apt -y upgrade; clear; 
 ## ADDING COLOR-CODES -- (Need to run inside other command.)
 ##
 export bold=$(tput bold) dim=$(tput dim) so=$(tput smso) noso=$(tput rmso) rev=$(tput rev) re=$(tput sgr0) normal=$(tput sgr0) \
-redb=$(tput setab 1) greenb=$(tput setab 2) yellowb=$(tput setab 3) blueb=$(tput setab 4) purpleb=$(tput setab 5) cyanb=$(tput setab 6) \ 
-grayb=$(tput setab 7) red=$(tput setaf 1)  green=$(tput setaf 2)  yellow=$(tput setaf 3)  blue=$(tput setaf 4)  purple=$(tput setaf 5) \ 
-cyan=$(tput setaf 6)  gray=$(tput setaf 7) white=$(tput setaf 7 bold)  pink=$(tput setaf 5 bold) darkblue=$(tput setab 5 bold) \
+redb=$(tput setab 1) greenb=$(tput setab 2) yellowb=$(tput setab 3) blueb=$(tput setab 4) purpleb=$(tput setab 5) cyanb=$(tput setab 6) \
+grayb=$(tput setab 7) red=$(tput setaf 1) green=$(tput setaf 2) yellow=$(tput setaf 3) blue=$(tput setaf 4) purple=$(tput setaf 5) \
+cyan=$(tput setaf 6) gray=$(tput setaf 7) white=$(tput setaf 7 bold) pink=$(tput setaf 5 bold) darkblue=$(tput setab 5 bold) \
 left2=$(tput cub 2) up1=$(tput cuu1) c75="  ---------------------------------------------------------------------------"; clear; echo ;
 
 echo -e "\t --$cyan Software installation$re -- \n\n"
-read -ep "  --  install$green cloudpanel? $re [y/n]: " -i "n"             "cloudpanel"
-read -ep "  --  install$green hestia-web-server? $re [y/n]: " -i "n"      "hestia"
-read -ep "  --  install$green guake? $re [y/n]: " -i "n"                  "guake"
-read -ep "  --  install$green custom-grub? $re [y/n]: " -i "n"            "grub"
+read -ep "  --  install $green cloudpanel? $re [y/n]: " -i "n"             "cloudpanel"
+read -ep "  --  install $green hestia-web-server? $re [y/n]: " -i "n"      "hestia"
+read -ep "  --  install $green guake? $re [y/n]: " -i "n"                  "guake"
+read -ep "  --  install $green custom-grub? $re [y/n]: " -i "n"            "grub"
 
-read -ep "\n\n  -- $yellow continue install? $re [y/n]: " -i "n" "continue" ;
-if [ $continue == y ]; then echo -e "\n\n  -- $green OK $re  -- \n\n"; else exit 1; fi;
+read -ep " \n\n  -- $yellow continue install? $re [y/n]: " -i "n" "continue" ;
+if [ $continue == y ]; then 
+echo -e "\n\n\t --$cyan OK$re -- \n\n" 
+else exit 1; fi;
+
+
 ## REMEMER TO CHANGE VAR-NAMES.
 sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&
 sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&sleep 1& echo -e "\t\n\t\n\t $green GG\t\n\t\n\t"&
