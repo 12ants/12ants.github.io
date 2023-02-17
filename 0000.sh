@@ -18,13 +18,13 @@ cyan=$(tput setaf 6)  gray=$(tput setaf 7) white=$(tput setaf 7 bold)  pink=$(tp
 left2=$(tput cub 2) up1=$(tput cuu1) c75="  ---------------------------------------------------------------------------"; clear; echo ;
 
 echo -e "\t --$cyan Software installation$re -- \n\n"
-read -ep "  --  install$green cloudpanel? $re [y/n]: " -i "n"			"cloudpanel"
-read -ep "  --  install$green hestia-web-server? $re [y/n]: " -i "n"	"hestia"
-read -ep "  --  install$green guake? $re [y/n]: " -i "n"				"guake"
-read -ep "  --  install$green custom-grub? $re [y/n]: " -i "n"			"grub"
+read -ep "  --  install$green cloudpanel? $re [y/n]: " -i "n"             "cloudpanel"
+read -ep "  --  install$green hestia-web-server? $re [y/n]: " -i "n"      "hestia"
+read -ep "  --  install$green guake? $re [y/n]: " -i "n"                  "guake"
+read -ep "  --  install$green custom-grub? $re [y/n]: " -i "n"            "grub"
 
-
-
+read -ep "\n\n  --$yellow continue install?$re [y/n]: " -i "n" "continue"
+if [ $continue == y ]; then echo -e "\n\n  -- $green OK$re  --\n\n"; else exit 1; fi;
 ## REMEMER TO CHANGE VAR-NAMES.
 
 ## 
