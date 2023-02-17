@@ -23,7 +23,7 @@ read -ep "  $c2  install$green hestia-web-server? $re  [y/n]: " -i "n"      "hes
 read -ep "  $c2  install$green guake? $re              [y/n]: " -i "n"                  "guake"
 read -ep "  $c2  install$green custom-grub? $re        [y/n]: " -i "n"            "grub"
 read -ep "$purple ---------------------------------------------$re
-  $c2 $yellow begin installation? $re        [y/n]: " -i "n"               "continue"
+  $c2 $yellow begin installation? $re         [y/n]: " -i "n"               "continue"
 if [ $continue == y ]; then echo -e "\n\n\t --$cyan OK$re -- \n\n"; else exit 1; fi; 
 ##
 ## REMEMER TO CHANGE VAR-NAMES.
