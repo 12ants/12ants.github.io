@@ -11,24 +11,26 @@ if [ $upsys == y ]; then echo "updating..."; apt update; apt -y upgrade; clear; 
 export bold=$(tput bold) dim=$(tput dim) so=$(tput smso) noso=$(tput rmso) rev=$(tput rev) re=$(tput sgr0) normal=$(tput sgr0) \
 redb=$(tput setab 1) greenb=$(tput setab 2) yellowb=$(tput setab 3) blueb=$(tput setab 4) purpleb=$(tput setab 5) cyanb=$(tput setab 6) \
 grayb=$(tput setab 7) red=$(tput setaf 1) green=$(tput setaf 2) yellow=$(tput setaf 3) blue=$(tput setaf 4) purple=$(tput setaf 5) \
-cyan=$(tput setaf 6) gray=$(tput setaf 7) white=$(tput setaf 7 bold) pink=$(tput setaf 5 bold) darkblue=$(tput setab 5 bold) \
+cyan=$(tput setaf 6) gray=$(tput setaf 7) white=$(tput setaf 7 bold) pink=$(tput setaf 5 bold) darkblue=$(tput setab 5 bold) blink=$(tput blink) \
 left2=$(tput cub 2) up1=$(tput cuu1) c75="  ---------------------------------------------------------------------------"; clear; echo ; c2="$cyan --$re";
 
 ##############################
 ######## INSTALLER ############
 ######################
 echo -e "\n\n\t --$pink Software installation$re -- \n\n"
-read -ep "  $c2  install$green cloudpanel? $re         [y/n]: " -i "n"             "cloudpanel"
-read -ep "  $c2  install$green hestia-web-server? $re  [y/n]: " -i "n"      "hestia"
-read -ep "  $c2  install$green guake? $re              [y/n]: " -i "n"                  "guake"
-read -ep "  $c2  install$green custom-grub? $re        [y/n]: " -i "n"            "grub"
+read -ep "  $c2  install$green cloudpanel? $re         [y/n]: " -i "n" "cloudpanel"
+read -ep "  $c2  install$green hestia-web-server? $re  [y/n]: " -i "n" "hestia"
+read -ep "  $c2  install$green guake? $re              [y/n]: " -i "n" "guake"
+read -ep "  $c2  install$green custom-grub? $re        [y/n]: " -i "n" "grub"
+read -ep "  $c2  install$green sudo-color? $re         [y/n]: " -i "n" "auto"
 read -ep "$purple ---------------------------------------------$re
   $c2 $yellow begin installation? $re         [y/n]: " -i "n"               "continue"
+  
+  
+  
 if [ $continue == y ]; then echo -e "\n\n\t --$cyan OK$re -- \n\n"; else exit 1; fi; 
 ##
 ## REMEMER TO CHANGE VAR-NAMES.
-
-## 
 if [ $cloudpanel == y ]; then echo "installing cloudpanel";
 apt update && apt -y upgrade && apt -y install curl wget sudo
 curl -sS https://installer.cloudpanel.io/ce/v2/install.sh -o install.sh; \
@@ -47,19 +49,8 @@ else echo "no"; fi;
 if [ $grub == y ]; then echo "installing grub";
 wget -O 12grub $rootgit/grub.sh; bash 12grub;
 else echo "no"; fi;
-
-
-###################################
-#### DISABLE ROOT PASSWORD ########
-#### ADD AUTOCOMPLETE #############
-#### COLOR-ALIAS ##################
-###################################
-###################################
-
+##
 if [ "$auto" == "y" ]; then
-###### ---- [YES] ----- ######
-########### DISABLE PWD ###########
-echo "${re} OK ";sleep 2;echo ${dim} "${dim}" ${noso}; echo -e "\v\v\v\v";
 echo "%sudo ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/10-installer;
 ############ ROOT AUTOCOMPLETE
 echo "
@@ -77,11 +68,11 @@ netip="$(hostname -I)"
 pubip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 function prompt_command {
 #  prompt_x is where to position the cursor to write the clock
-let prompt_x=$(tput cols)-20
+let prompt_x=$(tput cols)-40
 #  Move up one; not sure why we need to do this, but without this, I always
 tput sc; tput cup 0 ${prompt_x}; tput setaf 4;
 echo -e "                                ";
-tput cup 1 ${prompt_x}; echo -e "${netip} / ${pubip}"; tput rc
+tput cup 0; ${prompt_x}; echo -e "${netip} / ${pubip}"; tput rc
 }
 PROMPT_COMMAND=prompt_command
 ###############################################
