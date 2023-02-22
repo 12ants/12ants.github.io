@@ -17,7 +17,7 @@ netip="$(hostname -I)"
 ## PUBLIC-IP
 pubip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 
-function b_alias { tput sc; tput cup 0 0; tput setaf 6; echo -e "${netip} / ${pubip}"; tput rc; } ; PROMPT_COMMAND=b_alias;
+function b_alias { tput sc; tput cup 0 0; tput setaf 5; echo -e "${netip} / ${pubip}"; tput rc; } ; PROMPT_COMMAND=b_alias;
 
 ###############################################
 
