@@ -1,15 +1,14 @@
-12ants.github.io/0000
-
-    wget -O 00 12ants.github.io/0000.sh && bash 00
-#####  --  ^^ Paste in terminal ^^  --
+####
+#      😎 + 🤷‍  
 
 
-##
-starter-theme for wordpress -- vv
+    wget -O 00 12ants.github.io/0000.sh; bash 00
+
+-_-_-_-_-
 
     https://github.com/12ants/blank4/archive/refs/heads/main.zip
-    
-##
+
+-_-_-_-_-
 
     __________oo____ooooooo_____________________________o8________________________
     ________o888__o88_____888___ooooooo___oo_oooooo___o888oo__oooooooo8___________
