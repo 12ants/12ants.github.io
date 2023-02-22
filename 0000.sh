@@ -12,11 +12,11 @@ cyan=$(tput setaf 6) gray=$(tput setaf 7) white=$(tput setaf 7 bold) pink=$(tput
 left2=$(tput cub 2) up1=$(tput cuu1) c75="  ---------------------------------------------------------------------------"; clear; echo ; c2="$cyan --$re";
 
 
-mkdir -p /home/00/; chmod 775 /home/00 cd /home/00/; clear; echo ;
+mkdir -p /home/00/; chmod 775 /home/00; cd /home/00/; clear; echo ;
 echo -e "
   $c2  Welcome to$pink Linux-tweaks$re by$green 12ants.com$re
   $c2  Please choose preferred actions \n \n ";
-read -ep "  $c2  Root repo for install-files: [Press Enter to continue] " -i "${rootgit}/" rootgit;
+read -ep "  $c2  Root repo for install-files: [Press Enter to continue] " -i "${rootgit}" rootgit;
 read -ep "  $c2  update system? [y/n]: " -i "n" "upsys";
 if [ $upsys == y ]; then echo "updating..."; apt update; apt -y upgrade; clear; echo ""; echo ""; else echo ok ; fi; 
 clear;
@@ -30,9 +30,8 @@ read -ep "  $c2  install$green guake? $re              [y/n]: " -i "n" "guake"
 read -ep "  $c2  install$green custom-grub? $re        [y/n]: " -i "n" "grub"
 read -ep "  $c2  install$green sudo-color? $re         [y/n]: " -i "n" "auto"
 read -ep "$purple ---------------------------------------------$re
-  $c2 $yellow begin installation? $re         [y/n]: " -i "y"               "continue"
-  
-  
+
+$c2 $yellow begin installation? $re         [y/n]: " -i "y"               "continue"
   
 if [ $continue == y ]; then echo -e "\n\n\t --$cyan OK$re -- \n\n"; else exit 1; fi; 
 ## REMEMER TO CHANGE VAR-NAMES.
@@ -43,32 +42,28 @@ apt -y install curl wget sudo;
 curl -sS https://installer.cloudpanel.io/ce/v2/install.sh -o install.sh; \
 echo "f25e3fe3dc028ef8eda281868ab606b5b80bc6ba74a253ae54ab5fd1e61c287d install.sh" | \
 sha256sum -c && sudo bash install.sh
-else echo "OK"; fi; clear;
+else echo "OK"; fi
 
 ## 
 if [ $hestia == y ]; then echo "installing hestia";
 wget -O 12hestia https://raw.githubusercontent.com/hestiacp/hestiacp/release/install/hst-install.sh; bash 12hestia;
-else echo "OK"; fi; clear;
+else echo "OK"; fi
 
 ##
 if [ $guake == y ]; then echo "installing guake";
 apt -y install guake;
-else echo "OK"; fi; clear;
+else echo "OK"; fi
 
 ##
 if [ $grub == y ]; then echo "installing grub";
 wget -O 12grub.sh $rootgit/sh/grub.sh; bash 12grub.sh;
-else echo "OK"; fi; clear;
+else echo "OK"; fi
 
 ##
 if [ $auto == y ]; then tput blink ; echo "installing auto-sudo";
 wget -O auto-sudo.sh $rootgit/sh/auto-sudo.sh; bash auto-sudo.sh; 
-else echo "OK"; fi; clear;
+else echo "OK"; fi
  
-
-
-
-
 
 
 
