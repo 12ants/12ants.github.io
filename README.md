@@ -6,7 +6,7 @@
 
 -_-_-_-_-
 
-    https://github.com/12ants/blank4/archive/refs/heads/main.zip
+    wget -O blank4.zip https://github.com/12ants/blank4/archive/refs/heads/main.zip;
 
 -_-_-_-_-
 
