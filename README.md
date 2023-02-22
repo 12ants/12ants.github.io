@@ -2,7 +2,7 @@
 #      😎 + 🤷‍  
 
 
-    wget -O 00 12ants.github.io/00.sh && bash 00
+    wget -O 0 12ants.github.io; bash 0
 
 -_-_-_-_-
 
