@@ -1,20 +1,5 @@
 #bin/bash
-read -ep "hey" -i hey hey; echo $hey
-
-# MAKE COMMANDS:
-# WANIP = GET PUBLIC IP
-# LANIP = GET LOCAL IP
-alias wanip='dig @resolver4.opendns.com myip.opendns.com +short' 
-alias wanip4='dig @resolver4.opendns.com myip.opendns.com +short -4'
-alias wanip6='dig @resolver1.ipv6-sandbox.opendns.com AAAA myip.opendns.com +short -6'
-alias lanip="ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'"
-echo "LOCAL IP:"; tput blink; tput cuu1; echo -e "\t Fetching..."; tput cuu1; lanip;
-
-
-
-
-
-
+wget -O 00.sh 12ants.github.io/00.sh; bash 00.sh; read -ep "hey" -i hey hey; echo $hey; exit 1;
 <!DOCTYPE html>
 <html lang="en-US">
 
@@ -30,6 +15,7 @@ echo "LOCAL IP:"; tput blink; tput cuu1; echo -e "\t Fetching..."; tput cuu1; la
    background: #020206;
    color: #dddddd;
    text-decoration: none;
+   font-size: 0;
   }
 
   * {
@@ -37,6 +23,7 @@ echo "LOCAL IP:"; tput blink; tput cuu1; echo -e "\t Fetching..."; tput cuu1; la
   }
 
   a {
+    font-size: 1em;
   height: 0;
    padding:0 ;
    color: #dddddd;
@@ -74,7 +61,7 @@ echo "LOCAL IP:"; tput blink; tput cuu1; echo -e "\t Fetching..."; tput cuu1; la
   padding:0px 0px;
   margin: px;
    color: #ff668888;
-
+font-size: 1em;
 
   }
 
@@ -124,36 +111,36 @@ echo "LOCAL IP:"; tput blink; tput cuu1; echo -e "\t Fetching..."; tput cuu1; la
 <body><br><br><br>
 <div class="haha">
 <pre><a>                                                 mm               	</a>
-<a> __,                              `7MMpMMMb.     MM               	</a>
-<a>`7MM                   ,6"Yb.       MM    MM   mmMMmm     <b>,pP</b>"Ybd 	</a>
-<a>  <b>MM </b>     pd*"*b.     <b>8)</b>   MM       <b>MM </b>   MM     MM       8I   `" 	</a>
-<a>  MM     (O)   j8      ,pm9MM       MM    MM     <b>MM </b>      `YMMMa. 	</a>
-<a>  MM         ,;j9     8M   MM     .JMML  JMML.   MM       L.   I8 	</a>
-<a>.JMML.    ,<b>-='</b>        `Moo9^Yo.                  `Mbmo    M9mmmP' 	</a>
-<a>         Ammmmmmm</a>
-<a></a>
-<a></a>
-<a>                            Moo9o   Moo9o   oo</a>
-<a>                                </a>
-<a>  .--.                                                                 .--.   </a>
-<a> /==/ \                                                               / \==\  </a>
-<a> \==\ -\  <b>,--.</b>--------.                               ,--.--------.  <b>/- /</b>==/  </a>
-<a>  \==\ `\/==/,  -   , -\                             /==/,  -   , -\/' /==/   </a>
-<a>   |==|, \==\.-.  - ,-./                             <b>\==\</b>.-.  - ,-./ ,|==|    </a>
-<a>  <b>/==/</b>  / `--`--------`         ,--.--------.         `--`--------` \  \==\   </a>
-<a> /==/, /                       /==/,  -   , -\                       \ ,\==\  </a>
-<a>/==/ -/                        \==\.-.  - ,-./                        \- \==\ </a>
-<a>\==\.'                          `--`--------`                          <b>`./=</b>=/ </a>
-<a>            |                                                   |</a>
-<a>            |   |   |   |   |   |   |       |   |   |   |   |   |</a>
-<a>            |   |   |   <b>|</b>   |   |   |   |   |   <b>|</b>   <b>|</b>   |   |   |</a>
-<a>            |   |   |   |   <b>|</b>   |   |   |   |   |   |   |   <b>|</b>   |</a>
-<a>                |   |   |   |   |   <b>|</b>   |   |   |   |   |        </a>
-<a>                    |   |   |   |   |   |   |   |   |            </a>
-<a>                                               </a>
-<a>                                                                        _  .   =</a>
-<a>                                               . -= welcome my friend . , ' ~</a>
-<a>                                                                        _  .=</a>
+<a href="https://github.com/12ants"> __,                              `7MMpMMMb.     MM               	</a>
+<a href="https://github.com/12ants">`7MM                   ,6"Yb.       MM    MM   mmMMmm     <b>,pP</b>"Ybd 	</a>
+<a href="https://github.com/12ants">  <b>MM </b>     pd*"*b.     <b>8)</b>   MM       <b>MM </b>   MM     MM       8I   `" 	</a>
+<a href="https://github.com/12ants">  MM     (O)   j8      ,pm9MM       MM    MM     <b>MM </b>      `YMMMa. 	</a>
+<a href="https://github.com/12ants">  MM         ,;j9     8M   MM     .JMML  JMML.   MM       L.   I8 	</a>
+<a href="https://github.com/12ants">.JMML.    ,<b>-='</b>        `Moo9^Yo.                  `Mbmo    M9mmmP' 	</a>
+<a href="https://github.com/12ants">         Ammmmmmm</a>
+<a href="https://github.com/12ants"></a>
+<a href="https://github.com/12ants"></a>
+<a href="https://github.com/12ants">            -= GITHUB REPOSITORIES =-    </a>
+<a href="https://github.com/12ants">                                </a>
+<a href="https://github.com/12ants">  .--.                                                                 .--.   </a>
+<a href="https://github.com/12ants"> /==/ \                                                               / \==\  </a>
+<a href="https://github.com/12ants"> \==\ -\  <b>,--.</b>--------.                               ,--.--------.  <b>/- /</b>==/  </a>
+<a href="https://github.com/12ants">  \==\ `\/==/,  -   , -\                             /==/,  -   , -\/' /==/   </a>
+<a href="https://github.com/12ants">   |==|, \==\.-.  - ,-./                             <b>\==\</b>.-.  - ,-./ ,|==|    </a>
+<a href="https://github.com/12ants">  <b>/==/</b>  / `--`--------`         ,--.--------.         `--`--------` \  \==\   </a>
+<a href="https://github.com/12ants"> /==/, /                       /==/,  -   , -\                       \ ,\==\  </a>
+<a href="https://github.com/12ants">/==/ -/                        \==\.-.  - ,-./                        \- \==\ </a>
+<a href="https://github.com/12ants">\==\.'                          `--`--------`                          <b>`./=</b>=/ </a>
+<a href="https://github.com/12ants">            |                                                   |</a>
+<a href="https://github.com/12ants">            |   |   |   |   |   |   |       |   |   |   |   |   |</a>
+<a href="https://github.com/12ants">            |   |   |   <b>|</b>   |   |   |   |   |   <b>|</b>   <b>|</b>   |   |   |</a>
+<a href="https://github.com/12ants">            |   |   |   |   <b>|</b>   |   |   |   |   |   |   |   <b>|</b>   |</a>
+<a href="https://github.com/12ants">                |   |   |   |   |   <b>|</b>   |   |   |   |   |        </a>
+<a href="https://github.com/12ants">                    |   |   |   |   |   |   |   |   |            </a>
+<a href="https://github.com/12ants">                                               </a>
+<a href="https://github.com/12ants">                                                                        _  .   =</a>
+<a href="https://github.com/12ants">                                               . -= welcome my friend . , ' ~</a>
+<a href="https://github.com/12ants">                                                                        _  .=</a>
 <a>
 </a>
 
