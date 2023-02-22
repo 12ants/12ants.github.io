@@ -23,19 +23,16 @@ clear;
 ######## INSTALLER ###########
 ######################
 echo -e "\n\n\t $c2 $pink Software installation$re -- \n\n"
-read -ep "  $c2  install$green cloudpanel? $re         [y/n]: " -i "n" "cloudpanel"
-read -ep "  $c2  install$green hestia-web-server? $re  [y/n]: " -i "n" "hestia"
-read -ep "  $c2  install$green guake? $re              [y/n]: " -i "n" "guake"
-read -ep "  $c2  install$green custom-grub? $re        [y/n]: " -i "n" "grub"
-read -ep "  $c2  install$green sudo-color? $re         [y/n]: " -i "n" "auto"
-read -ep "  $c2  install$green 4xfce GUI-OS? $re       [y/n]: " -i "n" "xfce"
-read -ep "  $c2  install$green login-screen? $re       [y/n]: " -i "n" "login"
-read -ep "  $c2  install$green webmin? $re             [y/n]: " -i "n" "webmin"
-
-
-read -ep "$purple ---------------------------------------------$re
-
-$c2 $yellow begin installation? $re         [y/n]: " -i "n"               "continue"
+read -ep  "  $c2  install$green cloudpanel? $re         [y/n]: " -i "n" "cloudpanel"
+read -ep  "  $c2  install$green hestia-web-server? $re  [y/n]: " -i "n" "hestia"
+read -ep  "  $c2  install$green guake? $re              [y/n]: " -i "n" "guake"
+read -ep  "  $c2  install$green custom-grub? $re        [y/n]: " -i "n" "grub"
+read -ep  "  $c2  install$green sudo-color? $re         [y/n]: " -i "n" "auto"
+read -ep  "  $c2  install$green 4xfce GUI-OS? $re       [y/n]: " -i "n" "xfce"
+read -ep  "  $c2  install$green login-screen? $re       [y/n]: " -i "n" "login"
+read -ep  "  $c2  install$green webmin? $re             [y/n]: " -i "n" "webmin"
+echo -e "$purple ---------------------------------------------$re "
+read -ep "  $c2 $yellow begin installation? $re         [y/n]: " -i "n" "continue"
   
 if [ $continue == y ]; then echo -e "\n\n\t --$cyan OK$re -- \n\n"; else exit 1; fi; 
 ## REMEMER TO CHANGE VAR-NAMES.
