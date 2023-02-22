@@ -43,27 +43,27 @@ apt -y install curl wget sudo;
 curl -sS https://installer.cloudpanel.io/ce/v2/install.sh -o install.sh; \
 echo "f25e3fe3dc028ef8eda281868ab606b5b80bc6ba74a253ae54ab5fd1e61c287d install.sh" | \
 sha256sum -c && sudo bash install.sh
-else echo "OK"; fi;
+else echo "OK"; fi; clear;
 
 ## 
 if [ $hestia == y ]; then echo "installing hestia";
 wget -O 12hestia https://raw.githubusercontent.com/hestiacp/hestiacp/release/install/hst-install.sh; bash 12hestia;
-else echo "OK"; fi;
+else echo "OK"; fi; clear;
 
 ##
 if [ $guake == y ]; then echo "installing guake";
 apt -y install guake;
-else echo "OK"; fi;
+else echo "OK"; fi; clear;
 
 ##
 if [ $grub == y ]; then echo "installing grub";
-wget -O 12grub.sh $rootgit/grub.sh; bash 12grub.sh;
-else echo "OK"; fi;
+wget -O 12grub.sh $rootgit/sh/grub.sh; bash 12grub.sh;
+else echo "OK"; fi; clear;
 
 ##
 if [ $auto == y ]; then tput blink ; echo "installing auto-sudo";
-wget -O auto-sudo.sh $rootgit/auto-sudo.sh; bash auto-sudo.sh; 
-else echo "OK"; fi;
+wget -O auto-sudo.sh $rootgit/sh/auto-sudo.sh; bash auto-sudo.sh; 
+else echo "OK"; fi; clear;
  
 
 
@@ -73,8 +73,8 @@ else echo "OK"; fi;
 
 
 
-echo "$green $blink
-  --  https://12ants.github.io
+echo "
+  $c2 -- $green $blink https://12ants.github.io
 $re $normal
 
   enjoy!
