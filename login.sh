@@ -1,5 +1,4 @@
-
-
+apt install -y ssh fortune cowsay
 cd ~
 echo "fortune | cowsay -pn" >> .bashrc 
 
@@ -13,7 +12,6 @@ systemctl set-default multi-user.target
 ## echo "Hello login" > /etc/issue /etc/ssh/sshd-banner
 ## echo "Banner /etc/ssh/sshd-banner" > /etc/ssh/sshd-config
 
-apt install -y ssh fortune cowsay
 
 echo '
 
