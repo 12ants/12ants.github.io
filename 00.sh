@@ -17,7 +17,7 @@ echo -e "
   $c2  Please choose preferred actions \n \n ";
 read -ep "  $c2  Root repo for install-files: [Press Enter to continue] " -i "${rootgit}" rootgit;
 read -ep "  $c2  update system? [y/n]: " -i "n" "upsys";
-if [ $upsys == y ]; then echo "updating..."; apt update; apt -y upgrade; clear; echo ""; echo ""; else echo ok ; fi; 
+if [ $upsys == y ]; then echo "updating..."; apt update; apt -y upgrade; apt -y install curl wget; clear; echo ""; echo ""; else echo ok ; fi; 
 clear;
 ##############################
 ######## INSTALLER ###########
@@ -39,10 +39,7 @@ if [ $continue == y ]; then echo -e "\n\n\t --$cyan OK$re -- \n\n"; else exit 1;
 
 ##
 if [ $cloudpanel == y ]; then echo "installing cloudpanel";
-apt -y install curl wget sudo;
-curl -sS https://installer.cloudpanel.io/ce/v2/install.sh -o install.sh; \
-echo "f25e3fe3dc028ef8eda281868ab606b5b80bc6ba74a253ae54ab5fd1e61c287d install.sh" | \
-sha256sum -c && sudo bash install.sh
+wget -O cloudpanel.sh https://installer.cloudpanel.io/ce/v2/install.sh && bash cloudpanel.sh;
 else echo "OK"; fi; cd $inst;
 
 ## 
@@ -65,20 +62,18 @@ if [ $auto == y ]; then tput blink ; echo "installing auto-sudo";
 wget -O auto-sudo.sh $rootgit/sh/auto-sudo.sh; bash auto-sudo.sh; 
 else echo "OK"; fi; cd $inst;
   
-
+##
 if [ $xfce == y ]; then tput blink ; echo "installing xfce";
-wget https://12ants.github.io/root.tar; clear; echo -e "\n\t -- This might take a while \n\t "
-apt install -y -qq xfce4-session xfce4-goodies xfce4-panel synaptic xinit luakit firefox guake    #  minimal desktop env
+clear; echo -e "\n\t -- This might take a while \n\t "
+apt install -y -qq xfce4-session xfce4-goodies xfce4-panel alsa synaptic xinit luakit firefox guake    #  minimal desktop env
 echo -e "\v\t Type [ startx ] to execute \v\v"
 else echo "OK"; fi; cd $inst;
-
 
 ##
 if [ $login == y ]; then echo "installing login-screen";
 wget -O login.sh $rootgit/sh/login.sh; bash login.sh;
 else echo "OK"; fi; cd $inst;
 
-##
 ##
 if [ $webmin == y ]; then echo "installing webmin";
 wget https://download.webmin.com/devel/tarballs/webmin-current.tar.gz;
@@ -87,18 +82,13 @@ tar -xf webmin-current.tar.gz --strip-components=1;
 else echo "OK"; fi; cd $inst;
 
 
+##
+## end - reboot
 echo -e "
-  $c2 -- $green $blink https://12ants.github.io
-$re $normal
-
-$(hostname -I) 
-  enjoy!
-
-"
-
-read -t 5 -ep "  -- Restarting in 5 seconds: " -i Abort "restarts"
-if [ $restarts == Abort ] then echo ok
-else reboot;
-fi
-echo gg
+  $c2 $green https://12ants.github.io/$re $c2$re
+\v  $c2 $pink your ip: $(hostname -I) $re $c2$re
+\v  $c2  enjoy!$re $c2$re \v\v"
+echo -e "\v\v"; read -t 22 -ep "  $c2  reboot now?: " -i$green "yes" "reboot"$re;
+if [ $reboot == yes ]; then echo rebooting...; reboot;
+else echo -e "\v\v  $c2$re  OK \v\v"; fi; echo -e "  $c2$pink \v\v enjoy! \v\v\v\v"
 
