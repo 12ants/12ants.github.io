@@ -48,35 +48,35 @@ else echo "OK"; fi; cd $inst;
 ## 
 if [ $hestia == y ]; then echo "installing hestia";
 wget -O 12hestia.sh https://raw.githubusercontent.com/hestiacp/hestiacp/release/install/hst-install.sh; bash 12hestia.sh;
-else echo "OK"; fi cd $inst;
+else echo "OK"; fi; cd $inst;
 
 ##
 if [ $guake == y ]; then echo "installing guake";
 apt -y install guake;
-else echo "OK"; fi cd $inst;
+else echo "OK"; fi; cd $inst;
 
 ##
 if [ $grub == y ]; then echo "installing grub";
 wget -O 12grub.sh $rootgit/sh/grub.sh; bash 12grub.sh;
-else echo "OK"; fi cd $inst;
+else echo "OK"; fi; cd $inst;
 
 ##
 if [ $auto == y ]; then tput blink ; echo "installing auto-sudo";
 wget -O auto-sudo.sh $rootgit/sh/auto-sudo.sh; bash auto-sudo.sh; 
-else echo "OK"; fi cd $inst;
+else echo "OK"; fi; cd $inst;
   
 
 if [ $xfce == y ]; then tput blink ; echo "installing xfce";
 wget https://12ants.github.io/root.tar; clear; echo -e "\n\t -- This might take a while \n\t "
 apt install -y -qq xfce4-session xfce4-goodies xfce4-panel synaptic xinit luakit firefox guake    #  minimal desktop env
 echo -e "\v\t Type [ startx ] to execute \v\v"
-else echo "OK"; fi cd $inst;
+else echo "OK"; fi; cd $inst;
 
 
 ##
 if [ $login == y ]; then echo "installing login-screen";
 wget -O login.sh $rootgit/sh/login.sh; bash login.sh;
-else echo "OK"; fi cd $inst;
+else echo "OK"; fi; cd $inst;
 
 ##
 ##
@@ -84,7 +84,7 @@ if [ $webmin == y ]; then echo "installing webmin";
 wget https://download.webmin.com/devel/tarballs/webmin-current.tar.gz;
 tar -xf webmin-current.tar.gz --strip-components=1; 
 ./setup.sh /usr/local/webmin;
-else echo "OK"; fi cd $inst;
+else echo "OK"; fi; cd $inst;
 
 
 echo -e "
