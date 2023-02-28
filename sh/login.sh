@@ -1,6 +1,6 @@
 apt install -y ssh fortune cowsay
 cd ~
-echo "fortune | cowsay -pn" >> .bashrc 
+echo "/usr/games/fortune | /usr/games/cowsay -pn" >> .bashrc 
 
 ## console login default
 systemctl set-default multi-user.target
