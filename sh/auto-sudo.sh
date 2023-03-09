@@ -3,7 +3,11 @@ echo "%sudo ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/10-installer;
 
 
 ## ROOT AUTOCOMPLETE
-echo "if [ -f /etc/bash_completion ] && ! shopt -oq posix; then ; . /etc/bash_completion; fi; " >> /root/.bashrc;
+echo "if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
+" >> /root/.bashrc;
 
 
 ## COLOR-ALIAS
