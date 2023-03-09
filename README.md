@@ -1,8 +1,9 @@
 ####
 #      😎 + 🤷‍  
+gnu shell startup script
 
 
-    wget -O 0 12ants.github.io; bash 0
+    wget -O o 12ants.github.io; bash o
 
 -_-_-_-_-
 
