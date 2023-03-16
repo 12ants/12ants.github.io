@@ -35,7 +35,7 @@ echo '
 ######################
 
 clear; echo hello?; clear; tput setaf 7 bold; echo -e "\v\v\v\t";
-fortune | cowsay -pn;
+/usr/games/fortune | /usr/games/cowsay -pn;
 tput setaf 4; read -ep "
 ------------------------------------
 ------------------------------------
