@@ -1,5 +1,7 @@
 ####
 #      😎 + 🤷‍  
+#contact mail
+
 gnu shell startup script
 
 
@@ -31,7 +33,7 @@ gnu shell startup script
     
 
 
-
+#contact hello@12ants.com
 
     
 -----------------------
