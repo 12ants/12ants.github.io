@@ -39,7 +39,7 @@ if [ $continue == y ]; then echo -e "\n\n\t --$cyan OK$re -- \n\n"; else exit 1;
 
 ##
 if [ $cloudpanel == y ]; then echo "installing cloudpanel";
-wget -O cloudpanel.sh https://installer.cloudpanel.io/ce/v2/install.sh && bash cloudpanel.sh;
+wget -O 12cloudpanel.sh $rootgit/sh/cloudpanel_ask_install.sh && bash 12cloudpanel.sh;
 else echo "OK"; fi; cd $inst;
 
 ## 
