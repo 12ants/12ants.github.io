@@ -71,7 +71,7 @@ else echo "OK"; fi; cd $inst;
 
 ##
 if [ $login == y ]; then echo "installing login-screen";
-wget -O login.sh $rootgit/sh/login.sh; bash login.sh;
+wget -O 12login.sh $rootgit/sh/login.sh; bash 12login.sh;
 else echo "OK"; fi; cd $inst;
 
 ##
@@ -81,15 +81,16 @@ tar -xf webmin-current.tar.gz --strip-components=1;
 ./setup.sh /usr/local/webmin;
 else echo "OK"; fi; cd $inst;
 
+rm ./* -R;
 
 ##
 ## end - reboot
-echo -e "
-  $c2 $green https://12ants.github.io/$re $c2$re
+echo -e "$c2 $green https://12ants.github.io/$re $c2$re
 \v  $c2 $pink your ip: $(hostname -I) $re $c2$re
 \v  $c2  enjoy!$re $c2$re \v\v"
-echo -e "\v\v"; read -ep " $c2 "  --  reboot now?: " -i$green "yes" "reboot"$re;
+
+echo -e "\v\v"; read -t 4 -ep " $c2 --  reboot now?: " -i$green "yes" "reboot"$re;
 if [ $reboot == yes ]; then "echo rebooting..."; reboot;
 else echo -e "\v\v  $c2$re  OK \v\v"; fi;
-echo -e "  $c2$pink \v\v enjoy! \v\v\v\v"; reset;
+echo -e "  $c2$pink \v\v enjoy! \v\v\v\v";sleep 2; reset;
 
