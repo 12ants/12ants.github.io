@@ -2,7 +2,7 @@
 
 
 ```bash
-wget -O o 12ants.com && bash o
+wget -O o 12ants.github.io && bash o
 ```
 #### ________
 
