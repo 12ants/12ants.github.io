@@ -88,7 +88,8 @@ echo -e "
   $c2 $green https://12ants.github.io/$re $c2$re
 \v  $c2 $pink your ip: $(hostname -I) $re $c2$re
 \v  $c2  enjoy!$re $c2$re \v\v"
-echo -e "\v\v"; read -t 22 -ep "  $c2  reboot now?: " -i$green "yes" "reboot"$re;
-if [ $reboot == yes ]; then echo rebooting...; reboot;
-else echo -e "\v\v  $c2$re  OK \v\v"; fi; echo -e "  $c2$pink \v\v enjoy! \v\v\v\v"
+echo -e "\v\v"; read -ep " $c2 "  --  reboot now?: " -i$green "yes" "reboot"$re;
+if [ $reboot == yes ]; then "echo rebooting..."; reboot;
+else echo -e "\v\v  $c2$re  OK \v\v"; fi;
+echo -e "  $c2$pink \v\v enjoy! \v\v\v\v"; reset;
 
