@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>glowfish >-< ascii</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+<script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+<script type="importmap">
+{ "imports": { "three": "https://unpkg.com/three/build/three.module.js", "three/addons/": "https://unpkg.com/three/examples/jsm/" } }
+</script>
+
+<style>
+::-webkit-scrollbar {
+width: 6px;
+background: #00000044;
+}
+::-webkit-scrollbar-thumb {
+background: #00000088;
+}
+html {
+scroll-behavior: smooth;
+}
+body {
+background: #222222;
+margin: 0;
+overflow-x: hidden;
+overflow-y: overlay;
+height: 222vh;
+width: 100%;
+font: 400 18px monospace;
+}
+.over1 {
+position: fixed;
+color: #ffffff;
+padding: 0.1em 4vw;
+background: #222222;
+font: 400 2vw monospace;
+z-index: 12;
+transition: 0.4s;
+mix-blend-mode: exclusion;
+}
+.over1:hover {
+color: #ff22ff;
+padding: 0.1em 22vw;
+background: #09daff;
+transition: 0.4s;
+}
+#right0 {
+right: 0;
+bottom: 50%;
+}
+#left0 {
+left: 0;
+bottom: 50%;
+}
+#work {
+background: #bbbbbb;
+position: ;
+margin-top: 100vh;
+display: block;
+}
+#contact {
+width: ;
+background: #bbbbbb;
+margin-top: 100vh;
+display: block;
+}
+w {
+color: #666666;
+/* background: #ffffff; */
+}
+#center {
+text-align: center;
+}
+
+table {
+position: absolute;
+}
+#tall100 {
+right: 0;
+height: 100vh;
+width: 26vw;
+position: absolute;
+z-index: 11;
+}
+.lanks {
+text-decoration: none;
+}
+p {
+margin: 0 2vw;
+}
+</style>
+</head>
+<body>
+
+<div>
+<a class="over1" id="right0" href="#contact"><h2>contact</h2></a>
+<a class="over1" id="left0" href="#work"><h2>work</h2></a>
+<div id="tall100"></div>
+
+<div id="work">
+<p>
+<br /><br />
+<u>work:</u>
+<br />
+<a href="https://github.com/12ants"><w>github</w></a>
+<br /><br /><br />
+</p>
+</div>
+<br />
+<div id="contact">
+<p>
+<br /><br />
+<u>contact:</u>
+<br />
+</p>
+<p id="center">
+Leon Ljunghorn <w>| <a class="lanks" href="/cdn-cgi/l/email-protection#a3cfc6cccde3c4cfccd4c5cad0cb8dd0c6"><span class="__cf_email__" data-cfemail="4d212822230d2a21223a2b243e25633e28">[email&#160;protected]</span></a> |</w> +46790372242
+</p>
+<br />
+<br />
+<br />
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module">
+import * as THREE from 'three';
+import { AsciiEffect } from 'three/addons/effects/AsciiEffect.js';
+import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
+let camera, controls, scene, renderer, effect;
+let sphere, plane;
+const start = Date.now();
+init();
+animate();
+function init() {
+camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 1, 2000);
+camera.position.y = 800;
+camera.position.z = 111;
+camera.position.x = 1;
+scene = new THREE.Scene();
+scene.background = new THREE.Color(0, 0, 0);
+const pointLight1 = new THREE.PointLight(0xffffff);
+pointLight1.position.set(1200, 240, 500);
+scene.add(pointLight1);
+const pointLight2 = new THREE.PointLight(0xffffff, 0.25);
+pointLight2.position.set(-500, -500, -1100);
+scene.add(pointLight2);
+sphere = new THREE.Mesh(new THREE.SphereGeometry(200, 90, 20), new THREE.MeshPhongMaterial({ flatShading: true }));
+scene.add(sphere);
+plane = new THREE.Mesh(new THREE.PlaneGeometry(400, 20), new THREE.MeshBasicMaterial({ color: 0xe0e0e0 }));
+plane.position.y = -200;
+plane.rotation.x = -Math.PI / 2;
+scene.add(plane);
+renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+effect = new AsciiEffect(renderer, '_-glowfish.:', { invert: true });
+effect.setSize(window.innerWidth, window.innerHeight);
+effect.domElement.style.color = 'white';
+effect.domElement.style.position = 'absolute';
+effect.domElement.style.top = '0';
+document.body.appendChild(effect.domElement);
+controls = new TrackballControls(camera, effect.domElement);
+window.addEventListener('resize', onWindowResize);
+}
+
+function onWindowResize() {
+camera.aspect = window.innerWidth / window.innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(window.innerWidth, window.innerHeight);
+effect.setSize(window.innerWidth, window.innerHeight);
+}
+
+//
+
+function animate() {
+requestAnimationFrame(animate);
+
+render();
+}
+
+function render() {
+const timer = Date.now() - start;
+
+sphere.position.y = Math.abs(Math.sin(timer * 0.0002)) * 450;
+sphere.rotation.x = timer * 0.0003;
+sphere.rotation.z = timer * 0.0002;
+
+controls.update();
+
+effect.render(scene, camera);
+}
+</script>
+</div>
+</body>
+</html>
