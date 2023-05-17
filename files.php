@@ -1,4 +1,4 @@
-[]<?php
+<?php
 //Default Configuration
 $CONFIG = '{"lang":"en","error_reporting":false,"show_hidden":true,"hide_Cols":false,"theme":"dark"}';
 /**
@@ -23,12 +23,12 @@ $use_auth = true;
 $auth_users = array(
 'admin' => '$2y$10$UBRp3xJRRZfLtMa5c0XNG.wRVl39RQGIrxQPTQGiy4swsvqtUm1cK', //ll
 'leonel' => '$2y$10$UBRp3xJRRZfLtMa5c0XNG.wRVl39RQGIrxQPTQGiy4swsvqtUm1cK', //ll
-'user' => '$2y$10$Fg6Dz8oH9fPoZ2jJan5tZuv6Z4Kp7avtQ9bDfrdRntXtPeiMAZyGO' //12345
+'hello' => '$2y$10$Fg6Dz8oH9fPoZ2jJan5tZuv6Z4Kp7avtQ9bDfrdRntXtPeiMAZyGO' //12345
 );
 // Readonly users
 // e.g. array('users', 'guest', ...)
 $readonly_users = array(
-'user'
+'hello'
 );
 // Global readonly, including when auth is not being used
 $global_readonly = false;
@@ -302,11 +302,13 @@ fm_show_header_login();
 <div class="mb-3">
 <?php fm_show_message(); ?>
 </div>
-<input type="hidden" name="token" value="<?php echo htmlentities($_SESSION['token']); ?>" />
+<input type="text" name="token" value="<?php echo htmlentities($_SESSION['token']); ?>" />
 <div class="mb-3">
+    <a  target="_blank">
 <button type="submit" class="btn btn-success btn-block w-100 mt-4" role="button">
 <?php echo lng('Login'); ?>
 </button>
+    </a>
 </div>
 </form>
 </div>
