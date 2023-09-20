@@ -180,7 +180,7 @@ border: 1px dashed salmon;
  animation-duration: 155s;
  animation-timing-function: ease-in-out;
  animation-iteration-count: infinite;
- mix-blend-mode: darken;
+ mix-blend-mode: exclusion;
 }
 
 @keyframes backgroundAnimate {
@@ -191,7 +191,7 @@ border: 1px dashed salmon;
 
  20% {
   opacity: 1;
-  background-position: center;
+  background-position: left top;
  }
 
  40% {
@@ -201,14 +201,19 @@ border: 1px dashed salmon;
  }
 
  60% {
-  opacity: 1;
+  opacity: .6;
   background-size: 100vmax;
   background-position: left bottom;
  }
 
  80% {
-  background-size: 6vmin;
+  background-size: 2vmin;
   background-position: left top;
+ }
+
+ 90% {
+  background-size: 12vmin;
+  background-position: center;
  }
 
  100% {
