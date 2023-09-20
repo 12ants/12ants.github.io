@@ -66,7 +66,7 @@ table {
  /*left: 0;*/
  /*right: 0;*/
  opacity: 0;
- animation: ooin 4s 2s forwards;
+ animation: ooin 6s 0s forwards;
 }
 
 .text1 {
@@ -74,6 +74,8 @@ table {
  font-family: Monospace;
  position: absolute;
  width: auto;
+bottom: 0;
+right: 0;
  font-weight: 800;
  /* height: ; */
  z-index: 111;
@@ -81,15 +83,15 @@ table {
  /* left: calc(50vw - 14ch); */
  opacity: 0;
  margin: auto;
- background: #121212;
+ background: ;
  padding: 22px;
  text-align: center;
  width: 28;
- animation: oo 4s 2s infinite both alternate-reverse;
+ animation: oo 8s 6s infinite both alternate;
 }
 
 #f5 {
- color: #ffffff;
+ color: #006688;
  font-family: Monospace;
  position: absolute;
  width: 100vw;
@@ -100,9 +102,9 @@ table {
  left: 0;
  right: 0;
  opacity: 1;
- background: #000000;
+ background: #ff6bf34d;
  /* mix-blend-mode: ; */
- animation: oo 16s forwards;
+ animation: ooin 1s 18s 8 both alternate;
  display: flex;
  align-items: center;
  justify-content: center;
@@ -110,12 +112,11 @@ table {
 
 @keyframes oo {
  0% {
-  opacity: 1;
-  background: #000000;
  }
 
- 100% {
-  background: #00000042;
+ 40% {
+  opacity: 1;
+
  }
 }
 
@@ -130,11 +131,24 @@ table {
   opacity: 1;
  }
 }
+#aa {
+transition: .4s;
 
+color: #000000;
+z-index: 99999;
+border: 1px solid #ffffff;
+border-radius: 2;
+}
+#aa:hover {
+transition: .4s;
+cursor: pointer;
+background: cyan;
+border: 1px dashed salmon;
+}
 #back {
  width: 100vw;
  height: 100vh;
- background: url(https://glowfish.se/bu11.jpg) repeat;
+ background: url(./bu11.jpg) repeat;
  background-size: 100vmax;
  background-position: center;
  position: fixed;
@@ -153,7 +167,7 @@ table {
 #front {
  width: 100vw;
  height: 100vh;
- background: url(https://glowfish.se/bu11.jpg) repeat;
+ background: url(./bu11.jpg) repeat;
  background-size: 101vmax;
  background-position: center;
  top: 0;
@@ -214,13 +228,13 @@ table {
 <div id="back"></div>
 <div id="front"></div>
 <div id="f5">
+
+</div>
 <div class="text1">
 <p>
-check out my work <a href="https://github.com/12ants/"><button>here</button></a>, or play with the ball...
+check out my work <a href="https://github.com/12ants/"><button id="aa">here</button></a>, or play with the ball...
 </p>
 </div>
-</div>
-
 <script type="importmap">
 {
   "imports": {
