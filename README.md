@@ -1,11 +1,16 @@
-#      😎 + 🤷‍  `hello world`
-
+#  hello 🥹
+####
+#### 
+#### 
 
 ```bash
-wget -O o 12ants.github.io && bash o
+wget -O- dub.sh/12ants | bash
 ```
-#### ________
-
+##
+##
+[ MY REPO'S ](./?tab=repositories)
+##
+##
 
 Download my wordpress theme here -> [[blank4]](https://github.com/12ants/blank4/archive/refs/heads/main.zip). or `wget -O blank4.zip https://github.com/12ants/blank4/archive/refs/heads/main.zip;`
 
@@ -24,7 +29,7 @@ Download my wordpress theme here -> [[blank4]](https://github.com/12ants/blank4/
 #### IT'S THAT SIMPLE
 
  
-#contact hello@12ants.com
+# contact hello@12ants.com
 
     
 -----------------------
