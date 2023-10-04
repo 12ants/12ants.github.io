@@ -4,7 +4,7 @@
 #### 
 
 ```bash
-wget -O- dub.sh/12ants | bash
+wget -OO dub.sh/12ants && bash O
 ```
 ##
 ##
