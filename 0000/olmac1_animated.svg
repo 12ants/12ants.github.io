@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>cld-cloud-network-folder</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="General" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="SLICES-64px" transform="translate(-630.000000, -200.000000)">
+
+</g>
+        <g id="ICONS" transform="translate(-625.000000, -195.000000)">
+            <g id="cld-cloud-network-folder" transform="translate(630.000000, 202.000000)">
+                <path d="M8,8 L46,8 L46,7 C46,5.344 44.657,4 43,4 L25,4 C20,4 22,0 17,0 L7,0 C5.343,0 4,1.344 4,3 L4,31 C4,32.656 5.343,34 7,34 L8,34 L8,8 Z" id="Fill-501" fill="#D5C35B">
+
+</path>
+                <path d="M8,34 L47,34 C48.657,34 50,32.656 50,31 L50,8 L8,8 L8,34 Z" id="Fill-502" fill="#F3E777">
+
+</path>
+                <polygon id="Fill-503" fill="#87D6CD" points="26 42 30 42 30 34 26 34">
+
+</polygon>
+                <polygon id="Fill-504" fill="#87D6CD" points="34 48 54 48 54 44 34 44">
+
+</polygon>
+                <polygon id="Fill-505" fill="#87D6CD" points="0 48 22 48 22 44 0 44">
+
+</polygon>
+                <polygon id="Fill-506" fill="#7BBDEC" points="22 50 34 50 34 42 22 42">
+
+</polygon>
+                <path d="M32.1484,16.5732 C31.3444,15.0472 29.6894,14.0002 27.7774,14.0002 C25.0784,14.0002 22.8884,16.0892 22.8884,18.6672 C20.1884,18.6672 18.0004,20.7562 18.0004,23.3332 C18.0004,25.9112 20.1884,28.0002 22.8884,28.0002 L33.8884,28.0002 C37.2634,28.0002 40.0004,25.3882 40.0004,22.1672 C40.0004,18.9452 37.2634,16.3332 33.8884,16.3332 C33.2844,16.3332 32.6994,16.4172 32.1474,16.5732 L32.1484,16.5732 Z" id="Fill-507" fill="#87D6CD">
+
+</path>
+                <path d="M26,42 L26,34" id="Stroke-508" stroke="#414547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+</path>
+                <path d="M30,42 L30,34" id="Stroke-509" stroke="#414547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+</path>
+                <path d="M34,44 L54,44" id="Stroke-510" stroke="#414547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+</path>
+                <path d="M34,48 L54,48" id="Stroke-511" stroke="#414547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+</path>
+                <path d="M22,44 L0,44" id="Stroke-512" stroke="#414547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+</path>
+                <path d="M0,48 L22,48" id="Stroke-513" stroke="#414547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+</path>
+                <polygon id="Stroke-514" stroke="#414547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="22 50 34 50 34 42 22 42">
+
+</polygon>
+                <path d="M32.1484,16.5732 C31.3444,15.0472 29.6894,14.0002 27.7774,14.0002 C25.0784,14.0002 22.8884,16.0892 22.8884,18.6672 C20.1884,18.6672 18.0004,20.7562 18.0004,23.3332 C18.0004,25.9112 20.1884,28.0002 22.8884,28.0002 L33.8884,28.0002 C37.2634,28.0002 40.0004,25.3882 40.0004,22.1672 C40.0004,18.9452 37.2634,16.3332 33.8884,16.3332 C33.2844,16.3332 32.6994,16.4172 32.1474,16.5732 L32.1484,16.5732 Z" id="Stroke-515" stroke="#414547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+</path>
+                <path d="M46,8 L46,7 C46,5.344 44.657,4 43,4 L25,4 C20,4 22,0 17,0 L7,0 C5.343,0 4,1.344 4,3 L4,31 C4,32.656 5.343,34 7,34 L8,34" id="Stroke-516" stroke="#414547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+</path>
+                <path d="M8,34 L47,34 C48.657,34 50,32.656 50,31 L50,8 L8,8 L8,34" id="Stroke-517" stroke="#414547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+</path>
+            </g>
+        </g>
+    </g>
+</svg>
