@@ -44,13 +44,13 @@ table * * {
  font-size: 1em !important;
  letter-spacing: normal !important;
  text-align: center;
- z-index: 22;
+ z-index: 122;
  white-space: nowrap;
  /*animation: oo 2s ;*/
 }
 
 table {
- background: #00000042;
+ background: #00000022;
  /*background: #000000;*/
  /*font-weight: 600;*/
  /*mix-blend-mode:difference ;*/
@@ -60,8 +60,8 @@ table {
  /*! position: fixed; */
  /*left: 0;*/
  /*right: 0;*/
- opacity: 0;
- animation: ooin 6s 0s forwards;
+ opacity: 1;
+ animation: ooin 6s 10s both alternate ease;
 }
 
 .text2 {
@@ -76,7 +76,7 @@ left: 0;
  z-index: 111;
  /* top: calc(50vh - 6ch); */
  /* left: calc(50vw - 14ch); */
- opacity: 1;
+ opacity: .81;
  margin: 88px;
  background: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);;
  padding: 22px;
@@ -146,25 +146,27 @@ padding: 0px;
 
 @keyframes ooin {
  0% {
-  opacity: 0;
+  opacity: .2;
   background: #000000;
  }
- 80% {
-  opacity: 0;
+ 10% {
+  opacity: 1;
   background: #000000;
+ 
+filter: invert(0);
  }
-
  90% {
   background: #ff00c3e0;
   opacity: 1;
  }
  100% {
   background: #00ffff22;
+filter: invert(1);
   opacity: 0;
  }
 }
 #aa {
-transition: .4s;
+transition: 4s;
 
 color: #000000;
 z-index: 99999;
@@ -172,13 +174,13 @@ border: 1px solid #ffffff;
 border-radius: 2;
 }
 #aa:hover {
-transition: .4s;
+transition: 4s;
 cursor: pointer;
 background: cyan;
-border: 1px dashed salmon;
+border: 11px dashed salmon;
 }
 #bb {
-transition: .4s;
+transition: 4s;
 background: #11bbff22;
 
 color: #000000;
@@ -187,13 +189,13 @@ border: 1px solid #ffffff;
 border-radius: 2px;
 }
 #bb:hover {
-transition: .4s;
+transition: 4s;
 cursor: pointer;
 background: #1199bb22;
-border: 2vmax dashed salmon;
+outline: 2vmax dashed salmon;
 }
 #back {
- width: 10vw;
+ width: 102vw;
  height: 100vh;
  background: url(/img/tard.jpg) repeat;
  background-size: 100vmax;
@@ -201,7 +203,7 @@ border: 2vmax dashed salmon;
  position: fixed;
  top: 0;
  bottom: 0;
- opacity: 0;
+ opacity: .2;
  z-index: -6;
  animation-name: backgroundAnimate;
  animation-duration: 156s;
@@ -213,14 +215,14 @@ border: 2vmax dashed salmon;
 
 #front {
  width: 100vw;
- height: 10vh;
+ height: 110vh;
  background: url(/img/tard2.jpg) repeat;
  background-size: 101vmax;
  background-position: center;
  top: 0;
  bottom: 0;
  position: absolute;
- opacity: 0;
+ opacity: 0.2;
  z-index: -4;
  animation-direction: alternate;
  animation-name: backgroundAnimate;
@@ -259,12 +261,13 @@ opacity: 1;
   background-position: left top;
  }
 
- 90% {
+ 90% {filter:invert(1);
   background-size: 12vmin;
   background-position: center;
  }
 
- 100% {
+ 100% { 90% {filter:invert(0);
+
   opacity: 1;
   background-size: 100vmax;
   background-position: right bottom;
