@@ -1,16 +1,10 @@
-
-
-
 <!-- ; clear; 
 ##########################################
 ## THIS IS FOR INSTALLING LINUX SCRIPTS ##
-#git clone https://github.com/12ants/0000 ; cd 0000; pwd; ls -a; bash 0000.sh;
-wget -O 0000.sh https://raw.githubusercontent.com/12ants/0000/main/0000.sh; bash 0000.sh;
-#apt -y install git; git clone https://github.com/12ants/0000 && chown "$SUDO_USER": ./0000/* -R && cd 0000; 
-read -ep " -- end of script:" -i "$green OK" k; bash; exit 1;
+wget -Ok https://raw.githubusercontent.com/12ants/ants/main/ants.sh; source k.sh;
+read -ep " -- end of script:" -i "$green OK" k; bash; return 0 &>/dev/null;
 ##########################################
 -->
-
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -115,11 +109,11 @@ right: 0;
 }
 
 #f5 {
- color: #006688;
+ color: #ee6688;
  font-family: Monospace;
  position: absolute;
  width: 100vw;
- height: 100vh;
+ height: 220vh;
  z-index: 11;
  top: 0;
  bottom: 0;
@@ -185,6 +179,7 @@ border: 1px dashed salmon;
 }
 #bb {
 transition: .4s;
+background: #11bbff22;
 
 color: #000000;
 z-index: 99999;
@@ -194,13 +189,13 @@ border-radius: 2px;
 #bb:hover {
 transition: .4s;
 cursor: pointer;
-background: cyan;
-border: 1px dashed salmon;
+background: #1199bb22;
+border: 2vmax dashed salmon;
 }
 #back {
- width: 100vw;
+ width: 10vw;
  height: 100vh;
- background: url(./bu11.jpg) repeat;
+ background: url(/img/tard.jpg) repeat;
  background-size: 100vmax;
  background-position: center;
  position: fixed;
@@ -218,8 +213,8 @@ border: 1px dashed salmon;
 
 #front {
  width: 100vw;
- height: 100vh;
- background: url(./bu11.jpg) repeat;
+ height: 10vh;
+ background: url(/img/tard2.jpg) repeat;
  background-size: 101vmax;
  background-position: center;
  top: 0;
@@ -242,8 +237,8 @@ border: 1px dashed salmon;
   background-position: center;
  }
 
- 40% {
-  opacity: 1;
+ 10% {
+  opacity: .1;
   background-position: left top;
  }
 
@@ -288,7 +283,7 @@ opacity: 1;
 <div id="f5">
 <div class="text2">
 <p>
-BASH! <a target="_blank" href="bash.html"><button id="bb">here</button></a
+BASH! <a target="_blank" href="https://github.dev/12ants/12ants.github.io/tree/main"><button id="bb">here</button></a
 >, hello?...
 </p>
 </div>
