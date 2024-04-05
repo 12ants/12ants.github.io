@@ -1,4 +1,5 @@
 #!/bin/bash 
+reset; sleep 1;
 bash; tput indn $((LINES-4)); tput cuu $((LINES-9)); echo -e "\n\n\t\t$(tput blink) ¯\(ツ)/¯$(tput sgr0) ";
 alias "ee"='echo '; export bold=$(tput bold) dim=$(tput dim) so=$(tput smso) noso=$(tput rmso) rev=$(tput rev) re=$(tput sgr0) normal=$(tput sgr0) \
 redb=$(tput setab 1) greenb=$(tput setab 2) yellowb=$(tput setab 3) blueb=$(tput setab 4) purpleb=$(tput setab 5) cyanb=$(tput setab 6) \
