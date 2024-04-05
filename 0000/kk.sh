@@ -37,13 +37,13 @@ cd $gh/ants; ants="$gh/ants"; echo;echo; #######################################
 pro='git stash'; pro; sleep 1; pro='git pull'; pro; sleep .1; cd ..; sleep .1; echo -ne " $re ";
 pro git clone "https://github.com/12ants/ants"; pro; cd ants 2>/dev/null; sleep .1; #############################
 sleep 0.5; else echo "nope"; fi;
-chown $SUDO_USER: $ants -R; read -n1 -ep "$ll""$c2"" Install Improvments? "$dim"["$re$bold"Y"$dim"/"$re$bold"n"$re$dim"] $re" "yn"; 
+sudo chown $SUDO_USER: $ants -R; read -n1 -ep "$ll""$c2"" Install Improvments? "$dim"["$re$bold"Y"$dim"/"$re$bold"n"$re$dim"] $re" "yn"; 
 if [ "$yn" != "${yn#[Nn]}" ]; then echo "$c2 nope"; return 2>/dev/null; else echo "$ll$c2 OK";
-cd $ants; tput dim; sudo chown $SUDO_USER: $ants -R 2>x
+cd $ants; tput dim; sudo chown $SUDO_USER: $ants -R 2>/dev/null
 cp $ants/sh/ssss.sh /bin/ssss -bv 2>/dev/null
 if [ "$yn_upgrade_apt" == "${yn_upgrade_apt#[Nn]}" ]; then echo -e "\t $c2 OK"; 
 pro sudo apt update; pro sudo apt -y upgrade; pro sudo apt -y autoremove;
 else echo "nope"; fi;
 cd $gh/ants/; pwd; ls -a; sleep 2; echo;echo -e "\t Opening github-script...";echo;echo;  sleep 1; 
-sudo bash $ants/ants.sh 
-return 2>/dev/null; break 2>/dev/null; exit 0;
+. $ants/ants.sh; 
+return 2>/dev/null; break 2>/dev/null; echo gg;
