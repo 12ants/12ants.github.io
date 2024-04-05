@@ -1,0 +1,303 @@
+<!--
+##########################################
+## THIS IS FOR INSTALLING LINUX SCRIPTS ##
+#!/bin/bash 
+tput indn $((LINES-4)); tput cuu $((LINES-2)); echo -e "\n\n\t\t$(tput blink) ¯\(ツ)/¯$(tput sgr0) ";
+alias "ee"='echo '; export bold=$(tput bold) dim=$(tput dim) so=$(tput smso) noso=$(tput rmso) rev=$(tput rev) re=$(tput sgr0) normal=$(tput sgr0) \
+redb=$(tput setab 1) greenb=$(tput setab 2) yellowb=$(tput setab 3) blueb=$(tput setab 4) purpleb=$(tput setab 5) cyanb=$(tput setab 6) \
+grayb=$(tput setab 7) red=$(tput setaf 1) green=$(tput setaf 2) yellow=$(tput setaf 3) blue=$(tput setaf 4) purple=$(tput setaf 5) \
+cyan=$(tput setaf 6) gray=$(tput setaf 7) white=$(tput setaf 7 bold) pink=$(tput setaf 5 bold) darkblue=$(tput setab 5 bold) blink=$(tput blink) \
+left2=$(tput cub 2) up1=$(tput cuu1) 
+export dddd=$(echo -e ""$pink"--------------------------------$re") c2=""$cyan"--"$re""; ants="$_"; ll=$(echo -e " \t "); 
+###########
+if [ $UID != 0 ]; then echo -e " \n\n $ll This script must be run as root... try command: [ sudo -s ] \n\n " 1>&2; 
+read -ep "$ll K" "k7"; echo ok; fi;
+sudo sed -i 's/#$nrconf{restart} = '"'"'i'"'"';/$nrconf{restart} = '"'"'a'"'"';/g' /etc/needrestart/needrestart.conf 2>/dev/null;
+# echo "%sudo ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/; 
+############################################################
+## pro - task loading animation ############################
+############################################################
+pro() {
+alias tf='tput setaf $((RANDOM%16));'; alias tb='tput setab $((RANDOM%16));'; c2=""$cyan"--"$re""; tput civis; tput sgr0; 
+$1 $2 $3 $4 &>./tmp & disown; tput cuu1; PROC_ID=$!; while kill -0 "$PROC_ID" &>/dev/null; 
+do for X in "[        ]" "[$(tf)=$re       ]" "[$(tf)=$(tf)=$re      ]" "[$(tf)=$(tf)=$(tf)=$re     ]" "[$(tf)=$(tf)=$(tf)=$(tf)=    $re]"  \
+"[ $(tf)=$(tf)=$(tf)=$(tf)=   $re]" "[  $(tf)=$(tf)=$(tf)=$(tf)=$re  ]" "[   $(tf)=$(tf)=$(tf)=$(tf)= $re]" "[    $(tf)=$(tf)=$(tf)=$(tf)=$re]" \
+"[     "$(tf)"=$(tf)=$(tf)=$re]" "[      "$(tf)"=$(tf)="$re"]" "[       $(tf)=]" "[        ]" "[        ]" "[        ]"; 
+do echo -e "    $dim[$(tb)  $re$dim]$re "$c2" Executing $rev $1 $2 $3 $4 $re $c2$c2$c2$c2$c2"; tput cuu1; tput sgr0; echo -e "\t\t\t\t\t $X"; tput cuu1; sleep 0.1; 
+tput sc; tput cup $((LINES-4)) 0; echo -e "\t$darkblue $(tail -n2 ./tmp|head -n1) $re"; echo -e "\t$yellow $(tail -n1 ./tmp) $re"; tput cuu 2; tput rc; 
+done; done; echo -e "\t\t\t\t\t"$dim" [$re  "$green"DONE"$re" $dim ]$re "; tput cnorm; rm ./tmp &>/dev/null;
+}
+
+#### Update apt ############
+############################
+prompt='Update apt?'; 
+############################
+#tput indn 28; tput cuu 22; 
+echo -en "\t $re$c2 $prompt $white$dim["$re$bold"Y$dim/"$re$bold"n$dim]$re "; read -n1 yn; if [ "$yn" == "${yn#[Nn]}" ]; then echo -e "\t $c2 OK"; 
+pro sudo apt update; sleep 0.5; 
+else echo "nope"; fi;
+#### Upgrade apt ############
+############################
+prompt='Upgrade apt?'; 
+############################
+echo -en "\t $re$c2 $prompt $white$dim["$re$bold"Y$dim/"$re$bold"n$dim]$re "; read -n1 yn; if [ "$yn" == "${yn#[Nn]}" ]; then echo -e "\t $c2 OK"; 
+pro sudo apt update; pro sudo apt -y upgrade; pro sudo apt -y autoremove; sleep 0.5; 
+else echo "nope"; fi;
+#### DONE ####
+##
+
+##
+##
+###########################################################################################
+## pro - done #############################################################################
+###########################################################################################
+
+##########################################
+-->
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<link
+href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAACXBIWXMAAAsTAAALEwEAmpwYAAACOElEQVR4nO3cSUtjURAF4Py2K5qFTTnEjfKiQQU1gjhAoB3BRdSFrTiCiuPCAZqotIrRQPfirXSpElTUf3KaPMWNuDBGKxVOQUG27+PUvZUXSCjEYrFYLBarSCrlZ8HOvmtAQP9zASGgT0BoHjFMoE9AMIG+3ZueI+wTEEygrz+KHGGfgCjZS8SJx5a3BgSUzwWDgEJAaB4vTKAQEEyg2L3hOcJCQDCBoj+KHGEhILTTxEtECAjtRHGNkRIFDEdiqIm1qyfGJGBZVRRTv5dwcH2Mxp5e9Yc2BxiOxLDwZx3ppwyOb9NoG+xXf3BTgC6XwuooxjbnAsTTx3P8nBlXf3hTgO6lE7+SSD9mAsjkxixclT6CKUAnHjqGBnB0dxogzh2uBiOuDWEK0ImHaFcv9q+OAsT1fzv40dCqjmEK0ImHSHMHdi5SAeLe5T7qWjvVQUwBOvFQWd+C1cx2gHh4Y2/NUQd04qG8thEzqZUA8eT+DPGRIXUYU4DuZdkeXpx8XXNyn7VxzAGOLk+/AvbPTqjjmAGsiDRxhAtxiRwY/K5cNGvMbm6NaYmrg5hcpNf+bnOR/ghefHiQX+XyTV6CLxPyf501vjX/vKY8nCMxmVQ/v8ycgWG+UC3gK/3uPvXUmEugK9CPSrnx/4o2AegK0ASU0mtTCXRF2AQUAoIJFP1R5AgLAaGdJl4iQkBoJ4prjBAQlpqLtBAQTKDojyJHWAgI7TTxEpEiBmRn8//fGBaLxWKxWKHvqf9qod/a3xlAfwAAAABJRU5ErkJggg=="
+rel="shortcut icon" />
+<meta charset="utf-8" />
+<title>ants</title>
+<meta content=" -- Leon Ljunghorn -- " name="author" />
+<meta content=" -- my work -- " name="description" />
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<style>
+body, body *{
+font: 800 12px monospace;
+margin: 0;
+overflow: hidden;
+background: #ff002d11;
+}
+#back {
+width: 100vw;margin: 0;
+
+height: 100vh;
+mix-blend-mode: saturation;
+position: absolute;
+z-index: -1;top:0;
+animation: banim1 222s infinite alternate both;
+background-image: url(https://bobokrull.github.io/img/tard.jpg);}
+ #front {
+width: 100vw;
+height: 100vh;margin: 0;
+
+position: absolute;mix-blend-mode: difference;
+top:0;
+z-index: -2;
+background-image: url(https://bobokrull.github.io/img/tard.jpg);
+animation: banim1 224s infinite alternate both;
+ }
+.text1 {
+position: fixed;
+bottom: 44px;mix-blend-mode: soft-light;
+animation: banim1 42s infinite alternate both;
+
+margin: auto;
+width: 100vw;
+text-align: center;
+text-decoration: underline 2px dashed #2d2c2d;
+text-shadow: 1px 1px 22px #ffffff88, 2px 2px 44px #ffffff88 , 1px 1px 12px #880088, -2px 0px 12px #889900 ;
+}
+table{
+text-shadow: 1px 1px #880088, -2px 0px #889900 ;mix-blend-mode: soft-light
+;
+
+}
+#bb:hover {cursor: pointer;
+z-index: 22;
+filter: invert(1) drop-shadow(2px 2px #880088);
+padding: 10%;mix-blend-mode: luminosity;
+
+}
+#bb {
+transition: 1s;
+position: fixed;
+z-index: 22;mix-blend-mode: hard-light;
+
+bottom: 21px;
+right: 21px;
+}
+
+/** {*/
+/*    margin:0  ;*/
+/*}*/
+</style>
+</head>
+
+<body>
+<div id="back"></div>
+<div id="front"></div>
+<div id="f5">
+<div class="text2">
+<p>
+<a target="_blank" href="https://github.com/12ants"><button id="bb">github.com/12ants</button></a>
+</p><p>
+<a target="_blank" href="#"><button id="aa">bash <(wget -O- ants.ftp.sh)</button></a>
+</p>
+</div>
+</div>
+<div class="text1">
+<p>
+play with the ball... or check out my work
+</p>
+</div>
+<script type="importmap">
+      {
+        "imports": {
+          "three": "https://threejs.org/build/three.module.js",
+          "three/addons/": "https://threejs.org/jsm/"
+        }
+      }
+    </script>
+<script type="module">
+import * as THREE from 'https://cdn.skypack.dev/three@0.148.0'
+import { AsciiEffect } from 'https://threejs.org/examples/jsm/effects/AsciiEffect.js'
+import { TrackballControls } from 'https://threejs.org/examples/jsm/controls/TrackballControls.js'
+let camera, controls, scene, renderer, effect
+let sphere, plane
+const start = Date.now()
+init()
+animate()
+
+function init() {
+camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000)
+camera.position.y = 40
+camera.position.z = 48
+camera.position.x = 22
+scene = new THREE.Scene()
+scene.background = new THREE.Color(0, 0, 0)
+const pointLight1 = new THREE.PointLight(0xff0066, 0.96)
+pointLight1.position.set(444, 444, 444)
+scene.add(pointLight1)
+const pointLight2 = new THREE.PointLight(0xffff00, 0.96)
+pointLight2.position.set(-444, -444, -444)
+scene.add(pointLight2)
+sphere = new THREE.Mesh(
+new THREE.SphereGeometry(12, 22, 12),
+new THREE.MeshPhongMaterial({
+flatShading: true
+})
+)
+scene.add(sphere)
+sphere.position.y = 28
+
+// Plane
+plane = new THREE.Mesh(
+new THREE.PlaneGeometry(40, 40),
+new THREE.MeshBasicMaterial({
+color: 0xff2244
+})
+)
+plane.position.y = -12
+plane.rotation.x = -Math.PI / 2
+scene.add(plane)
+renderer = new THREE.WebGLRenderer()
+renderer.setSize(window.innerWidth, window.innerHeight)
+effect = new AsciiEffect(renderer, ' .:´¨-~+*^%_#=<>!?&%/\½', {
+invert: true
+})
+effect.setSize(window.innerWidth, window.innerHeight)
+effect.domElement.style.color = 'white'
+effect.domElement.style.backgroundColor = '#eeeeee00'
+// Special case: append effect.domElement, instead of renderer.domElement.
+// AsciiEffect creates a custom domElement (a div container) where the ASCII elements are placed.
+document.body.appendChild(effect.domElement)
+controls = new TrackballControls(camera, effect.domElement)
+//
+window.addEventListener('resize', onWindowResize)
+}
+
+function onWindowResize() {
+camera.aspect = window.innerWidth / window.innerHeight
+camera.updateProjectionMatrix()
+renderer.setSize(window.innerWidth, window.innerHeight)
+effect.setSize(window.innerWidth, window.innerHeight)
+}
+//
+function animate() {
+requestAnimationFrame(animate)
+render()
+}
+
+function render() {
+const timer = Date.now() - start
+sphere.position.y = Math.abs(Math.sin(timer * 0.002)) * 28
+sphere.rotation.x = timer * 0.0008
+sphere.rotation.z = timer * 0.0008
+sphere.rotation.z = timer * 0.008
+camera.rotation.y = timer * 0.08
+plane.rotation.z = timer * 0.08
+camera.position.y = Math.abs(Math.sin(timer * 0.002)) * 18
+camera.position.x = Math.abs(Math.sin(timer * 0.0006)) * -118
+camera.position.z = Math.abs(Math.sin(timer * 0.0001)) * 119
+plane.rotation.z = timer * 0.0008
+controls.update()
+effect.render(scene, camera)
+}
+</script>
+<style>
+@keyframes banim1 {
+0% {
+background-size: 100vmax;
+opacity: 1;
+background-position: center;filter: invert(0.2);
+
+}
+
+16% {
+opacity: 1;
+background-size: .1vmax;
+background-position: right top;
+}
+
+20% {
+opacity: 1;
+background-size: 10vmin;
+background-position: right center;
+text-shadow: 1px -1px #ffffff88, 2px -2px #ffffff88 , 1px 1px 2px #880088, -2px 0px 20px #889900 ;
+
+}
+
+40% {
+opacity: 1;
+background-size: 120vmax;
+background-position: left bottom;
+text-shadow: 1px 1px 12px #ffffff88, 2px 2px #ffffff88 , -11px 1px 12px #880088, -2px 0px 12px #889900 ;
+
+}
+
+60% {
+background-size: 2vmin;
+background-position: left top;
+text-shadow: 1px -11px 12px #ffffff88, 2px 2px #ffffff88 , 1px 1px 12px #880088, -2px 0px 12px #889900 ;
+
+}
+
+80% {
+filter: invert(0);
+opacity: 1;
+background-size: 1000vmax;
+background-position: right bottom;
+}
+90% {
+filter: invert(1);
+background-size: 2vmin;
+background-position: center;
+}
+
+100% {
+filter: invert(0);
+opacity: 1;
+background-size: 100vmax;
+background-position: right bottom;
+}
+}
+</style>
+</body>
+
+</html>
