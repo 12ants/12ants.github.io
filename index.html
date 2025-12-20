@@ -2,4 +2,9 @@ printf %b "hello \n\n"
 ## 12ants.github.io
 #### https://12ants.github.io
 read -p "ok" "ok"; 
-git clone git@github.com:12ants/12ants.github.io.git $HOME/.config/12
+hash sudo && sudo=sudo 2>/dev/null; 
+hash git || $sudo apt install git -y 2>/dev/null;
+git clone https://github.com:12ants/12ants.github.io.git $HOME/.config/12
+rm -fr $HOME/.config/12 2>/dev/null; 
+cd $HOME/.config/12; 
+. ./zz/install.sh; 
