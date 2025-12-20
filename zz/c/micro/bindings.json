@@ -1,0 +1,13 @@
+{
+    "Alt-/": "lua:comment.comment",
+    "Ctrl-Enter": "command:set filetype shell",
+    "Ctrl-l": "command:log",
+    "Ctrl-o": "command:tree",
+    "Ctrl-r": "command:reload",
+    "CtrlSpace": "CommandMode",
+    "CtrlUnderscore": "lua:comment.comment",
+    "F1": "command:cheat",
+    "F12": "command:makeup",
+    "F5": "command:runit",
+    "F9": "command:makeupbg"
+}

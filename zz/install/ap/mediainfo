@@ -1,0 +1,10 @@
+Version: 25.04
+Maintainer: @termux
+Installed-Size: 139 kB
+Depends: libandroid-support, libc++, libmediainfo, libzen
+Homepage: https://mediaarea.net/en/MediaInfo
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Command-line utility for reading information from media files
+

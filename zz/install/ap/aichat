@@ -1,0 +1,9 @@
+Version: 0.29.0
+Maintainer: @termux
+Installed-Size: 11.9 MB
+Homepage: https://github.com/sigoden/aichat
+Download-Size: 4230 kB
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: A powerful chatgpt cli
+

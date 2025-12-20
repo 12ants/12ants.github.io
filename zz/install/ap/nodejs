@@ -1,0 +1,14 @@
+Package: nodejs
+Version: 24.11.1
+Maintainer: Yaksh Bariya <thunder-coding@termux.dev>
+Installed-Size: 67.1 MB
+Depends: libc++, openssl, c-ares, libicu, libsqlite, zlib
+Suggests: clang, make, pkg-config, python
+Conflicts: nodejs-lts, nodejs-current
+Breaks: nodejs-dev
+Replaces: nodejs-current, nodejs-dev
+Homepage: https://nodejs.org/
+Download-Size: 11.1 MB
+APT-Sources: https://packages-cf.termux.dev/apt/termux-main stable/main aarch64 Packages
+Description: Open Source, cross-platform JavaScript runtime environment
+

@@ -1,0 +1,9 @@
+Version: 1.2.1
+Maintainer: @termux
+Installed-Size: 2810 kB
+Homepage: https://github.com/nabijaczleweli/termimage
+Download-Size: 843 kB
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Terminal image viewer
+

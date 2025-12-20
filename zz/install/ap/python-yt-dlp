@@ -1,0 +1,12 @@
+Package: python-yt-dlp
+Version: 2025.11.12-1
+Maintainer: Joshua Kahn @TomJo2000
+Installed-Size: 24.8 MB
+Provides: yt-dlp
+Depends: libc++, libexpat, openssl, python, python-brotli, python-pip, python-pycryptodomex
+Recommends: ffmpeg, yt-dlp-ejs
+Homepage: https://github.com/yt-dlp/yt-dlp
+Download-Size: 4944 kB
+APT-Sources: https://packages-cf.termux.dev/apt/termux-main stable/main aarch64 Packages
+Description: A youtube-dl fork with additional features and fixes
+

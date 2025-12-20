@@ -1,0 +1,14 @@
+{
+    "autoclose": false,
+    "clipboard": "terminal",
+    "colorscheme": "dracula-tc",
+    "fakecursor": true,
+    "mkparents": true,
+    "paste": true,
+    "ruler": false,
+    "savecursor": true,
+    "saveundo": true,
+    "scrollbar": true,
+    "softwrap": true,
+    "wordwrap": true
+}

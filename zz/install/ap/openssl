@@ -1,0 +1,10 @@
+Version: 1:3.5.0-1
+Maintainer: @termux
+Installed-Size: 9269 kB
+Depends: ca-certificates, zlib
+Conflicts: libcurl (<< 7.61.0-1)
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Library implementing the SSL and TLS protocols as well as general purpose cryptography functions
+

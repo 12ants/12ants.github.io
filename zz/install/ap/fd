@@ -1,0 +1,8 @@
+Version: 10.2.0-1
+Maintainer: @termux
+Installed-Size: 3645 kB
+Homepage: https://github.com/sharkdp/fd
+Download-Size: 1042 kB
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Simple, fast and user-friendly alternative to find
+

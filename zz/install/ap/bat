@@ -1,0 +1,10 @@
+Version: 0.25.0-2
+Maintainer: @termux
+Installed-Size: 5698 kB
+Depends: less, libgit2
+Homepage: https://github.com/sharkdp/bat
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: A cat(1) clone with wings
+

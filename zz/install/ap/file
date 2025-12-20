@@ -1,0 +1,10 @@
+Version: 5.46-1
+Maintainer: @termux
+Installed-Size: 10.6 MB
+Depends: zlib
+Breaks: file-dev
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Command-line tool that tells you in words what kind of data a file contains
+

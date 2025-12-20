@@ -1,0 +1,3 @@
+#!/bin/bash
+####
+word() { local IFS=$' \n\t'; fold="$HOME/logs/words/wordlog"; sh $HOME/88/i/words/wpre.sh 2>/dev/null; printf %b "\n\n\e[A"; [ "$1" ] && wordget="$@" || read -rep " -- word: " "wordget" && printf %b "\n\e[2A\e[K"; printf %b "\n\e[2m----\n\e[0m"; printf %b "$wordget\n"|tee $fold/${wordget}.log; lynx -force_empty_hrefless_a -nomargins -width 800 -nonumbers -dump "https://www.dictionary.com/browse/${wordget}"|head -n188|grep -vE "(BUTTON)|_|Phonetic|Advertisement|View synonyms for|Skip to" 2>/dev/null|grep -e " 1. " -m1 -B14|sed -e "/\^[1-9]/d" -e "/([1-9])/d" -e "s/\ 1\.\ /\n__\n/"|sed -e "/plural/,/__/d" -e "/^$/d" -e "/_/d"|tail -n3|tee -a $fold/$wordget.log; printf %b "\e[2m----\n\n\e[0m"; }; 

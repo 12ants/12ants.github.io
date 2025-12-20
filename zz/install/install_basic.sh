@@ -1,0 +1,14 @@
+#!/bin/bash
+## install tmux
+
+# file
+# mediainfo
+# bat
+# batcat
+# ncdu
+for i in $(ls -1 $HOME/88/install/ap); do rr="$((RANDOM%222))";  printf %b "\ec\e[0m -- \e[48;5;${rr}m ${i} \e[0m --\n\e[38;5;${rr}m "; $sudo apt install -y $i; done; printf %b "\n\n\e[0m -- \e[48;5;196m DONE \e[0m --\n\n"; 
+
+####
+## apt install -y autoconf libevent ncurses pkg-config automake; 
+## mkdir $HOME/gh 2>/dev/null; cd $HOME/gh; gh repo clone tmux/tmux
+####

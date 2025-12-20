@@ -1,0 +1,10 @@
+Essential: yes
+Maintainer: @termux
+Installed-Size: 418 kB
+Depends: libcurl (= 8.14.1)
+Homepage: https://curl.se/
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Command line tool for transferring data with URL syntax
+

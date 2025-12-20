@@ -1,0 +1,10 @@
+Version: 1.8.1
+Maintainer: @termux
+Installed-Size: 541 kB
+Depends: oniguruma
+Breaks: jq-dev
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Command-line JSON processor
+

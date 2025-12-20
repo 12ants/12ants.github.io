@@ -1,0 +1,10 @@
+Version: 1.1.5
+Maintainer: Krishna Kanhaiya @kcubeterm
+Installed-Size: 3486 kB
+Depends: zlib
+Homepage: https://github.com/lsd-rs/lsd
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Next gen ls command
+

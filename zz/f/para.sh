@@ -1,0 +1,1 @@
+para() { local IFS=$'\n'; para=($(command ls $HOME/88/para)); plength=$(printf %b "${para[*]}"|wc --max-line-length); parass=($(printf %b "${para[*]/.*/}"|fzf-tmux -h --preview "bat $HOME/88/para/{}.sh")); local IFS=$'\n\t '; for i in ${parass[*]}; do printf %b "$i\n----\n"; . $HOME/88/para/${i}.sh; done; };

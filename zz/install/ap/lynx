@@ -1,0 +1,10 @@
+Version: 2.9.2
+Maintainer: @termux
+Installed-Size: 1974 kB
+Depends: brotli, libiconv, ncurses, openssl, libbz2, libidn, zlib
+Homepage: http://lynx.browser.org/
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: The text web browser
+

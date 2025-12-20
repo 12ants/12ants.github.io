@@ -1,0 +1,9 @@
+Version: 0.5.1-1
+Maintainer: @termux
+Installed-Size: 139 kB
+Homepage: https://github.com/theZiz/aha
+Download-Size: 26.9 kB
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Converts ANSI escape sequences of a unix terminal to HTML code
+

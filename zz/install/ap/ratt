@@ -1,0 +1,9 @@
+Version: 2023.02.02-2
+Maintainer: @termux
+Installed-Size: 10.2 MB
+Homepage: https://git.sr.ht/~ghost08/ratt
+Download-Size: 3006 kB
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: A tool for converting websites to rss/atom feeds
+

@@ -1,0 +1,394 @@
+## /etc/inputrc - global inputrc for libreadline
+## conf for $HOME/.inputrc
+# See readline(3readline) and `info rluserman' for more information.
+# Be 8 bit clean.
+set input-meta on
+set output-meta on
+# some defaults / modifications for the emacs mode
+$if mode=emacs
+# allow the use of the Home/End keys
+"\e[1~": beginning-of-line
+"\e[2~": quoted-insert
+# allow the use of the Delete/Insert keys
+"\e[3~": delete-char
+"\e[4~": end-of-line
+# mappings for Ctrl-left-arrow and Ctrl-right-arrow for word moving
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+"\e[5C": forward-word
+"\e[5D": backward-word
+"\e[8~": end-of-line
+"\ek": backward-kill-line
+C-t: '\e4klock\n'
+C-o: '\ek\ncd $(lf -print-last-dir); \n'
+C-p: 'printf %b "";\C-b\C-b' 
+"\e[v": '\ek\nsed -n l;\n' 
+C-x: '\ek\nreset -Q; exec bash;\n'
+# C-f: '\ek\nserch\n'
+C-z: undo
+# ^Z: undo
+"\e[z": undo
+"\ez": undo
+"\eq": insert-comment
+"\e[q": insert-comment
+"\e3": insert-comment
+\C-q: insert-comment
+# "£": insert-insert
+"\eU": upcase-word
+"\eu": upcase-word
+# "\e1": dump-functions
+"\e2": '2>/dev/null'
+"\e4": insert-comment
+# 'kk' insert-comment 'kk'
+"\e0": 'tmux split-window -v\n'
+"\e9": 'tmux split-window -h\n'
+"\e8": complete-into-braces 
+# "\e9": complete-into-braces 
+"\ew": copy-region-as-kill
+"\e[1;2D": copy-backward-word
+C-f: copy-backward-word
+C-b: copy-forward-word
+C-y: yank
+"\e[p": "export PATH=${PATH}\e\C-e\"\C-a\ef\ef\C-f:\C-b\""
+"\e[6~": kill-whole-line
+"\e[6": kill-whole-line
+"\e[5~": '\e[6~\ hh\n'
+"\e[1;2A": '\e[6~\ hh\n'
+"°": '\e4\l\n'
+"⁰": '\e[6~'
+"\eq": '\e[q'
+"⁹": '\e[612_inputrc\n'
+
+
+$endif
+
+# C-3: insert-comment
+# C-h: '\ek\nprintf "\\e[A\\e[7m\\e[0K$HISTFILE\\n"; search_history\n'
+
+# read -rei "$hh" "hh";\n$hh\n'
+# "\eq": '\ek\C-d'
+# 
+# "\es": '\ek\nfzf\n'
+# 
+# 
+# alias hh='hello="$HISTFILE size: $HISTFILESIZE"; hh="$(tac $HISTFILE|fzf --inline-info --scheme history --no-sort -i --expect q;)"; printf "\n\e[37;45m\e[1m ·· ${hello}\e[${#hello}D$hello "; for i in $(seq $((COLUMNS - ${#hello} - 8))); do printf "·"; done; printf " \e[0m\n"; printf "$hh\n"; \n'
+# 
+# \ef: hh\n
+
+# copy-forward-word
+# 
+
+
+
+
+##############################
+## CONFIF CHOICES ############
+# When listing completions, readline displays the common prefix of the set of possible completions using a different color
+# The color definitions are taken from the value of the LS_COLORS environment variable
+# If there is a color definition in $LS_COLORS for the custom suffix "readline-colored-completion-prefix", readline uses this color for the common prefix instead of its default
+set colored-completion-prefix on
+# Enable tab-completion regardless of filename case
+set completion-ignore-case on
+# Treats hyphens (-) and underscores (_) as equivalent when performing case-insensitive filename matching and completion
+set completion-map-case off
+# Common prefixes longer than 5 are replaced with an ellipsis when displaying possible completions
+set completion-prefix-display-length 4
+# Enable returning up to 500 tab-completions without having to be asked
+set completion-query-items 500
+# Don't expand the home dir tilde (~)
+set expand-tilde on
+# Scroll text horizontally on a single line when longer than the width of the screen, instead of wrapping onto a new line
+#set horizontal-scroll-mode on
+# Display the common prefix of the list of possible completions (which may be empty) before cycling through the list
+set menu-complete-display-prefix on
+# Attempt to place the cursor position at the same location on each history line retrieved with previous-history or next-history
+set history-preserve-point on
+# Tab-completed directory names have a slash appended
+set mark-directories on
+# Immediately add a trailing slash when tab-completing symlinks to directories
+set mark-symlinked-directories on
+# Do not tab-complete hidden files unless the pattern explicitly begins with a dot
+set match-hidden-files on
+# Turn off the use of the internal pager when returning long tab-completion lists
+set page-completions off
+# Display completions with matches sorted horizontally in alphabetical order, rather than down the screen
+set print-completions-horizontally off
+# Only require single tab key press for tab-completion
+# (Default is double tab key press)
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set skip-completed-text off
+# Colored file types
+set colored-stats on
+# Suffix each returned file tab-completion with a character denoting its type
+set visible-stats on
+##############################
+##############################
+## --v-- ORIGINAL BELOW --v-- #### 
+# Be 8 bit clean.
+
+
+
+
+# 
+# 
+# 
+# 
+# 
+# 
+
+#######################################################
+## possible functions ## 
+
+# abort
+# accept-line
+# alias-expand-line
+# arrow-key-prefix
+# backward-byte
+# backward-char
+# backward-delete-char
+# backward-kill-line
+# backward-kill-word
+# backward-word
+# beginning-of-history
+# beginning-of-line
+# bracketed-paste-begin
+# call-last-kbd-macro
+# capitalize-word
+# character-search
+# character-search-backward
+# clear-display
+# clear-screen
+# complete
+# complete-command
+# complete-filename
+# complete-hostname
+# complete-into-braces
+# complete-username
+# complete-variable
+# copy-backward-word
+# copy-forward-word
+# copy-region-as-kill
+# dabbrev-expand
+# delete-char
+# delete-char-or-list
+# delete-horizontal-space
+# digit-argument
+# display-shell-version
+# do-lowercase-version
+# downcase-word
+# dump-functions
+# dump-macros
+# dump-variables
+# dynamic-complete-history
+# edit-and-execute-command
+# emacs-editing-mode
+# end-kbd-macro
+# end-of-history
+# end-of-line
+# exchange-point-and-mark
+# fetch-history
+# forward-backward-delete-char
+# forward-byte
+# forward-char
+# forward-search-history
+# forward-word
+# glob-complete-word
+# glob-expand-word
+# glob-list-expansions
+# history-and-alias-expand-line
+# history-expand-line
+# history-search-backward
+# history-search-forward
+# history-substring-search-backward
+# history-substring-search-forward
+# insert-comment
+# insert-completions
+# insert-last-argument
+# kill-line
+# kill-region
+# kill-whole-line
+# kill-word
+# magic-space
+# menu-complete
+# menu-complete-backward
+# next-history
+# next-screen-line
+# non-incremental-forward-search-history
+# non-incremental-forward-search-history-again
+# non-incremental-reverse-search-history
+# non-incremental-reverse-search-history-again
+# old-menu-complete
+# operate-and-get-next
+# overwrite-mode
+# possible-command-completions
+# possible-completions
+# possible-filename-completions
+# possible-hostname-completions
+# possible-username-completions
+# possible-variable-completions
+# previous-history
+# previous-screen-line
+# print-last-kbd-macro
+# quoted-insert
+# redraw-current-line
+# re-read-init-file
+# reverse-search-history
+# revert-line
+# self-insert
+# set-mark
+# shell-backward-kill-word
+# shell-backward-word
+# shell-expand-line
+# shell-forward-word
+# shell-kill-word
+# shell-transpose-words
+# skip-csi-sequence
+# spell-correct-word
+# start-kbd-macro
+# tab-insert
+# tilde-expand
+# transpose-chars
+# transpose-words
+# tty-status
+# undo
+# universal-argument
+# unix-filename-rubout
+# unix-line-discard
+# unix-word-rubout
+# upcase-word
+# yank
+# yank-last-arg
+# yank-nth-arg
+# yank-pop
+
+######################################################
+# C-3 -- expand
+#
+#
+#
+#
+#
+# 
+# abort can be found on "\C-g", "\C-x\C-g", "\e\C-g".
+# accept-line can be found on "\C-j", "\C-m".
+# alias-expand-line is not bound to any keys
+# arrow-key-prefix is not bound to any keys
+# backward-byte is not bound to any keys
+# backward-char can be found on "\C-b", "\eOD", "\e[D".
+# backward-delete-char can be found on "\C-?".
+# backward-kill-line can be found on "\C-x\C-?".
+# backward-kill-word can be found on "\e\C-h", "\e\C-?".
+# backward-word can be found on "\e[1;3D", "\e[1;5D", "\eb".
+# beginning-of-history can be found on "\e<".
+# beginning-of-line can be found on "\C-a", "\eOH", "\e[H".
+# bracketed-paste-begin can be found on "\e[200~".
+# call-last-kbd-macro can be found on "\C-xe".
+# capitalize-word can be found on "\ec".
+# character-search can be found on "\C-]".
+# character-search-backward can be found on "\e\C-]".
+# clear-display can be found on "\e\C-l".
+# clear-screen can be found on "\C-l".
+# complete can be found on "\C-i", "\e\e".
+# complete-command can be found on "\e!".
+# complete-filename can be found on "\e/".
+# complete-hostname can be found on "\e@".
+# complete-into-braces can be found on "\e{".
+# complete-username can be found on "\e~".
+# complete-variable can be found on "\e$".
+# copy-backward-word is not bound to any keys
+# copy-forward-word is not bound to any keys
+# copy-region-as-kill is not bound to any keys
+# dabbrev-expand is not bound to any keys
+# delete-char can be found on "\C-d", "\e[3~".
+# delete-char-or-list is not bound to any keys
+# delete-horizontal-space can be found on "\e\\".
+# digit-argument can be found on "\e-", "\e0", "\e5", "\e6", "\e7", ...
+# display-shell-version can be found on "\C-x\C-v".
+# do-lowercase-version can be found on "\C-xA", "\C-xB", "\C-xC", "\C-xD", "\C-xE", ...
+#### downcase-word can be found on "\el".
+# dump-functions can be found on "\e1".
+# dump-macros can be found on "\e3".
+# dump-variables can be found on "\e2".
+# dynamic-complete-history can be found on "\e\C-i".
+# edit-and-execute-command can be found on "\C-x\C-e".
+# emacs-editing-mode is not bound to any keys
+# end-kbd-macro can be found on "\C-x)".
+# end-of-history can be found on "\e>".
+# end-of-line can be found on "\C-e", "\eOF", "\e[F".
+# exchange-point-and-mark can be found on "\C-x\C-x".
+# fetch-history is not bound to any keys
+# forward-backward-delete-char is not bound to any keys
+# forward-byte is not bound to any keys
+# forward-char can be found on "\eOC", "\e[C".
+# forward-search-history can be found on "\C-s".
+# forward-word can be found on "\e[1;3C", "\e[1;5C", "\ef".
+# glob-complete-word can be found on "\eg".
+# glob-expand-word can be found on "\C-x*".
+# glob-list-expansions can be found on "\C-xg".
+# history-and-alias-expand-line is not bound to any keys
+# history-expand-line can be found on "\e^".
+# history-search-backward is not bound to any keys
+# history-search-forward can be found on "\e[6~".
+# history-substring-search-backward is not bound to any keys
+# history-substring-search-forward is not bound to any keys
+#### insert-comment can be found on "\e#".
+# insert-completions can be found on "\e*".
+# insert-last-argument can be found on "\e.", "\e_".
+# kill-line can be found on "\C-k".
+# kill-region is not bound to any keys
+# kill-whole-line can be found on "\ek".
+# kill-word can be found on "\e[3;5~", "\ed".
+# magic-space is not bound to any keys
+# menu-complete is not bound to any keys
+# menu-complete-backward is not bound to any keys
+# next-history can be found on "\C-n", "\eOB", "\e[B".
+# next-screen-line is not bound to any keys
+# non-incremental-forward-search-history can be found on "\en".
+# non-incremental-forward-search-history-again is not bound to any keys
+# non-incremental-reverse-search-history is not bound to any keys
+# non-incremental-reverse-search-history-again is not bound to any keys
+# old-menu-complete is not bound to any keys
+# operate-and-get-next is not bound to any keys
+# overwrite-mode can be found on "\e[2~".
+# possible-command-completions can be found on "\C-x!".
+# possible-completions can be found on "\e=", "\e?".
+# possible-filename-completions can be found on "\C-x/".
+# possible-hostname-completions can be found on "\C-x@".
+# possible-username-completions can be found on "\C-x~".
+# possible-variable-completions can be found on "\C-x$".
+# previous-history can be found on "\eOA", "\e[A".
+# previous-screen-line is not bound to any keys
+# print-last-kbd-macro is not bound to any keys
+# quoted-insert can be found on "\C-q", "\C-v", "\eP".
+# redraw-current-line is not bound to any keys
+# re-read-init-file can be found on "\C-x\C-r".
+# reverse-search-history can be found on "\C-r".
+# revert-line can be found on "\e\C-r", "\er".
+# self-insert can be found on " ", "!", "\"", "#", "$", ...
+# set-mark can be found on "\C-@", "\e ".
+# shell-backward-kill-word is not bound to any keys
+# shell-backward-word can be found on "\e\C-b".
+# shell-expand-line can be found on "\e\C-e".
+# shell-forward-word can be found on "\e\C-f".
+# shell-kill-word can be found on "\e\C-d".
+# shell-transpose-words can be found on "\e\C-t".
+# skip-csi-sequence is not bound to any keys
+# spell-correct-word can be found on "\C-xs".
+# start-kbd-macro can be found on "\C-x(".
+# tab-insert is not bound to any keys
+# tilde-expand can be found on "\e&".
+# transpose-chars is not bound to any keys
+# transpose-words can be found on "\et".
+# tty-status is not bound to any keys
+# undo can be found on "\C-x\C-u", "\C-_".
+# universal-argument is not bound to any keys
+# unix-filename-rubout is not bound to any keys
+# unix-line-discard can be found on "\C-u".
+# unix-word-rubout can be found on "\C-w".
+# upcase-word can be found on "\eu".
+# yank can be found on "\C-y".
+# yank-last-arg can be found on "\e.", "\e_".
+# yank-nth-arg can be found on "\e\C-y".
+# yank-pop can be found on "\ey".
+

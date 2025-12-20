@@ -1,0 +1,10 @@
+Version: 7.2-2
+Maintainer: @termux
+Installed-Size: 10.4 MB
+Depends: gawk, libiconv, ncurses, perl
+Recommends: update-info-dir
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Documentation system for on-line information and printed output
+

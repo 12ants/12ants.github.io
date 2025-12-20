@@ -1,0 +1,9 @@
+Version: 35
+Maintainer: @termux
+Installed-Size: 6365 kB
+Homepage: https://github.com/gokcehan/lf
+Download-Size: 1790 kB
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Terminal file manager
+

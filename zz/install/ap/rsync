@@ -1,0 +1,10 @@
+Version: 3.4.1
+Maintainer: Joshua Kahn @TomJo2000
+Installed-Size: 594 kB
+Depends: libiconv, liblz4, libpopt, openssh | dropbear, openssl, openssl-tool, xxhash, zlib, zstd
+Homepage: https://rsync.samba.org/
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Fast incremental file transfer utility
+

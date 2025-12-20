@@ -1,0 +1,10 @@
+Version: 2.2
+Maintainer: @termux
+Installed-Size: 106 kB
+Depends: bash
+Suggests: w3m-img, xdotool
+--
+Download-Size: 16.3 kB
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: A simple file manager written in bash
+

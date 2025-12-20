@@ -1,0 +1,10 @@
+Version: 3.5a
+Maintainer: Joshua Kahn @TomJo2000
+Installed-Size: 1077 kB
+Depends: ncurses, libevent, libandroid-support, libandroid-glob
+Homepage: https://tmux.github.io/
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Terminal multiplexer
+

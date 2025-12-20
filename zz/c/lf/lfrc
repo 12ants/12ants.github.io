@@ -1,0 +1,533 @@
+#!/usr/bin/env bash
+#!/data/data/com.termux/files/usr/bin/bash
+## lf config
+#[ -e "/data/data/com.termux/files/usr/etc/lf/previewer"]&&PREFIX="/data/data/com.termux/files/usr"; 
+# set previewer $PREFIX/etc/lf/previewer
+# IFS=$""; 
+set locale sv-SE 
+set shellopts '+eu'
+set drawbox false
+set icons false
+set globfilter true
+set globsearch true
+set mouse true
+cmap 8
+map 8
+cmap 8 :cd ~/88
+map 8 :cd ~/88
+map f
+map . set hidden! 
+map <esc> quit
+map i set icons!
+# map F setfilterF
+map <c-r> reload
+map <c-q> quit
+cmap <c-d> ""
+cmap p "" 
+map p 
+cmap <c-up> "" 
+map <c-up> half-up
+map <a-up> page-up
+map <a-down> half-down
+map <c-down> page-down
+map <c-d> :read quit
+map <?> maps
+map <pgdn> half-down
+map <s-down> invert-below:pa
+map <pgup> half-up
+# map <a-up> top
+# map <a-down> bottom
+map <s-up> :invert && :invert-below 
+map M set mouse!
+map <c-a> invert glob-select *
+map a invert glob-select *
+map <lt> :cd /ants
+map n toch 
+map <tab> :push :<tab>
+map <delete> delete
+map d trash
+map zu unzip
+map zz zip
+map c copy
+map ss :search 
+map sp :set preview! 
+map s0 :set ratios 1
+map s1 :set ratios 1:1
+map 1
+map 1 :set ratios 1:1
+map s2 :set ratios 1:2
+map s4 :set ratios 1:4
+map s8 :set ratios 1:8
+map s6 :set ratios 2:1
+map s9 :set ratios 1:1:1
+map s5 :set ratios 1:4:4
+map sl :sese 
+map sr :set reverse!
+map sz :set sortby size; set info size:time;  
+map st :set sortby time; set info size:time;  
+map sd :set drawbox!
+map sn :set sortby natural; set noreverse; set info size:time;  
+map S :cd ~/start
+map <c-s> :search-next
+cmap w
+map ww :search 
+map M mark-save
+map 12 :mark-load
+map 122 :mark-remove 
+map v paste
+map k cut
+map A :cd /ants
+map p :chmod_p && reload
+map O :chown_p 
+map <c-p> :reload && :history 
+map 1 !true
+map x $$f
+map X !$f
+cmap o 
+map o
+map O $mimeopen --ask $f
+map oj !jp2a --color-depth=8 --fill $f
+map oc !chafa $f
+map ok !cacaview $f
+map ox !printf "\n\n\n\n\n\n\n\n\n\n"; exiftool $f|batcat -pl c++
+map oo openwith $f
+map or !read -rep " " -i "$fx" "x"; read -rep "to: " -i "aa@ants.ftp.sh:~/" "t"; rsync -avP "$x" "$t" ;
+map op $mimeopen --ask $f
+map h :cd ~
+map sh :cmds
+map H :maps 
+map m :push %mkdir<space>
+map oD :depl
+map j :tajm
+# map b !printf "\n\n\n\n\n\n\n\n\n\n"; exiftool $f|batcat -pl c++
+# map o :push !<space>$f<left><left><left>
+# map <enter>c !chafa $f 
+# map b $batcat --paging always --decorations never $f 
+map l :lenk
+# map <enter> pger
+map - maps
+map \\ :push :<up>
+map O bboo
+map _ cmds
+map <+> drawbox! 
+map x !$f 
+map T hora
+map t tag-toggle
+map <c-s> sese
+map fs :ffzz 
+map ff :search 
+map fz :fzf_search 
+map D :set dironly! 
+map R !read -ep ' ' -i '192.168.0.' 'ipa' && read -ep ' port: ' -i '8022' 'pp' && read -ep ' user: ' -i 'aa' 'uu' && read -ep 'folder: ' -i './' ipf; echo; rsync -avPe "ssh -p $pp" $fx $uu@$ipa:$ipf; echo
+map <space> :toggle; down
+map <enter> :open $f 
+map b bopen 
+map bb $batcat -pf $f
+map bg $glow -p $f
+map bq $return 0
+# map f :push F<backspace><right><backspace><right><backspace>**<left>
+####
+cmd bboo ${{ 
+IFS=$'\n\t '; popo=(chafa bat micro xgd-open); 
+po=($(printf %b "${popo[*]}"|fzf-tmux -h --no-preview -i --cycle --bind 'q:abort' --border 'top')); 
+case $po in chafa) pp="$po -f symbols"; pv="printf %b '\e[4A'$f'\n'; mediainfo $f|tr -d ' '|grep -E -m4 'Width|Height|File'|bat -ppfljava; ";; bat) pp="$po -p";; *) pp="$po";; esac; 
+tmux display-popup -E -w "99%" -h "95%" "${pp} $f; ${pv} read -e -n 1 kk"; 
+}} 
+
+# mediainfo oi_heyday.jpg|tr -d " "|grep -E -m4 "Width|Height|size|name"
+
+# ${kk[*]:0:((${#kk[*]}-1))} $f; 
+# read -ei "${po[*]} ${pos[*]} ${f/*\//}" kk; 
+# printf %b "${popo[*]} $f"; 
+
+cmd bopen ${{ 
+if [[ ${f/*./} = md ]]; then glow -p ${f}; 
+elif [[ ${f/*./} = sh ]]; then bat -pf ${f}; 
+else bat -pfljava ${f}; 
+fi; }}
+    # case $(file --mime-type -Lb $f) in
+    #     text/*) vi $fx;;
+    #     *) for f in $fx; do xdg-open $f > /dev/null 2> /dev/null & done;;
+    # esac
+####
+cmd sese ${{
+mv $(basename $f) $(slugify ${f/*\/})
+}}
+cmd hora ${{ printf "\e[$((lf_height/2-16))H\n\n\e[2J\e[2;38;5;24m"; figlet -w $lf_width -c -fDOS_Rebel $(date +%D); printf "\e[0;1;37m"; figlet -w $lf_width -c -fDOS_Rebel $(date +%H" : "%M); printf "\e[35;5m\e[$((lf_width/2-2))G >_<\n\n\n\n\n\n\n\n\e[25m\e[0m"; read }} 
+cmd sort_alpha ${{
+:set sortby natural
+}}
+
+cmd fzf_search ${{
+    cmd="rg --column --line-number --no-heading --color=always"
+    fzf --ansi --disabled --layout=reverse --delimiter=: \
+        --bind="start:reload([ -n {q} ] && $cmd -- {q} || true)" \
+        --bind="change:reload([ -n {q} ] && $cmd -- {q} || true)" \
+        --bind='enter:become(lf -remote "send $id select \"$(printf "%s" {1} | sed '\''s/\\/\\\\/g;s/"/\\"/g'\'')\"")' \
+        --preview='bat -p --color=always --highlight-line {2} -- {1}' # Use your favorite previewer here (bat, source-highlight, etc.), for example:
+        #--preview-window='+{2}-/2' \
+        #--preview='bat --color=always --highlight-line={2} -- {1}'
+        # Alternatively you can even use the same previewer you've configured for lf
+        #--preview='~/.config/lf/cleaner; ~/.config/lf/previewer {1} "$FZF_PREVIEW_COLUMNS" "$FZF_PREVIEW_LINES" "$FZF_PREVIEW_LEFT" "$FZF_PREVIEW_TOP"'
+}}
+
+# map x :push :shell<space>$f 
+# cmd tamo ${{ 
+# printf "\e[2;38;5;24m"; 
+# $figlet -w $lf_width -c -fDOS_Rebel $(date +%D;);
+# printf "\e[0;1;37m"; 
+# $figlet -w $lf_width -c -fDOS_Rebel $(date +%T;);
+# printf "\e[5m\n\n"; 
+# $read -n1 -rep ">_<" "aa"; 
+# printf "\e[25m\e[0m\e[?47l"; 
+# }}
+####
+####
+cmd ffzz ${{ 
+op=$(fzf --bind 'q:abort' -i --cycle) 
+type=($(file -bi $op|cut -f1 -d"/"))
+case $type in 
+inode) cd $op;; 
+text) micro $op;; 
+esac
+ }}
+#batcat --paging always -fpl c $f||cacaview $f||exiftool $f; read -r "x";
+# map x $printf "\033[?47h\033[H\033[0J -- exif-viewer -- \n\n"; [ -x "/bin/exiftool" ]&&(exiftool $f; jp2a --width=88 --color-depth=8 $f)|batcat -pfl c --paging always; printf "\033[?47l"; 
+
+# map x $printf "\033[?47hh \n\n\n\n\033[2A"; exiftool $f|batcat -fpl c; read -n1 -prs "" 2>/dev/null; printf "\033[?47l"; 
+cmd tajm ${{ 
+printf "\e[?47h\e[2J"; date +%R|figlet -w $lf_width -c -f Big_Money-nw|batcat -ppflrs; date +%^A%n%-d" "%^B|figlet -w $lf_width -c -f miniwi|batcat -ppflr; printf  "\n\n\n\n"; fortune|batcat -ppfld; printf "\n\n"; read -t60 -n1 -srp " " "aa"; [ -z "$aa" ]&& printf "\e[?47l\n\ngg\n\n"; [ -z "$aa" ]&&tajm
+}} 
+cmd tajm2 ${{
+[ "$lf_width" ]||lf_width=${COLUMNS}; 
+[ "$lf_height" ]||lf_height=${LINES}; 
+printf "\e[$((lf_height/2-12))H"; 
+printf "\n\e[2J\e[2;38;5;24m"; figlet -w $lf_width -c -fDOS_Rebel $(date +%A);  
+printf "\n\e[2K\e[2;38;5;224m"; figlet -w $lf_width -c -fDOS_Rebel $(date +%d); 
+printf "\n\e[2K\e[2;38;5;124m"; figlet -w $lf_width -c -fDOS_Rebel $(date +%B); 
+printf "\n\e[2K\e[2;38;5;14m"; figlet -w $lf_width -c -fDOS_Rebel $(date +%Y); 
+[ "$PREFIX" ]&& s="-s";	fortune $s|batcat -ppfl d; 
+printf "\n\e[0;1;37m"; figlet -w $lf_width -c -fDOS_Rebel $(date +%H" : "%M);
+printf "\e[35;5m\e[$((lf_width/2-2))G >_<\n\e[25m\e[0m"; 
+
+
+}} 
+
+
+
+cmd lenk ${{ 
+read -rep "ln from: $(printf "\e[96m")" -i "$fx" "kk"; read -rep "$(printf "\e[0m")to: $(printf "\e[92m")" -i "$PWD" "kt"; printf "\e[0m"; ln -s "${kk}" "${kt}"; ls $kt; sleep 1; 
+}} 
+
+
+
+####
+cmd pger ${{
+bat $f||cacaview $f||exiftool $f; read -r "x";
+}}
+
+cmd dial ${{ 
+unset x a c cmds_lf; declare cmds_lf a; declare i c; 
+dim="$(printf "\e[2m")"; re="$(printf "\e[0m")"; 
+#for i in ${cmds_lf[*]}; do printf " $i $i \n"; done
+#for i in $(seq $((lf_height/2))); do printf "\n"; done; 
+cmds_lf=(
+"ls" 
+'micro' 
+'batcat -p ' 
+"cd" 
+"chafa" 
+"kakaview" 
+"batcat -ppfld" 
+"jp2a" 
+"mediainfo"
+); 
+printf "\e[0m\n"; 
+# IFS="$(printf %b "\n")"; 
+c=0; a=2; for i in ${cmds_lf[@]}; do printf " $re $((c++)) [\e[38;5;$((a++))m$dim${i:0:1}$re]$dim${i:1} \n"; done; 
+printf %b "    $re["$dim"o"$re"]other\n\n\n\n\n\n\e[4A"; 
+read -n1 -srep " " "x"; 
+if [ "$x" != "q" ]; then 
+if [ -z "$x" ]; then exit; 
+if [ "$x" = o ]; then read -rep "Command$re: " "x"; 
+printf %b "${x[*]} $f "; read -rep "[OK]? " "ok"; [ -z "$ok" ]&& ${x[*]} $f; fi; 
+##
+unset re dim; 
+printf %b "${cmds_lf[${x}]} $f"; 
+/usr/bin/${cmds_lf[${x}]} $f; 
+read; 
+##  case "$lf_cmd" in 
+ftype="$(file -bi $f|cut -f1 -d"/")"; 
+#image
+#text
+#audio
+#inode
+#application
+# \e[$((lf_height/4))A
+dim="$(printf "\e[2m")"; re="$(printf "\e[0m")"; 
+printf "\n  --  $ftype\n"; 
+# case in $ftype 
+printf %b "
+${dim}[${re}C${dim}]${re}hafa 
+${dim}[${re}K${dim}]${re}akaview 
+${dim}[${re}B${dim}]${re}atcat 
+${dim}[${re}X${dim}]${re}iftool 
+${dim}[${re}M${dim}]${re}ediainfo 
+${dim}[${re}J${dim}]${re}p2a 
+${dim}[${re}O${dim}]${re}ther ...${re}\n"; 
+read -n1 -res "x"; 
+###########
+if [ -z "$x" ]; then exit; 
+elif [ "$x" = o ]; then read -rep "Command:$re " "x"; ${x[*]} $f; 
+elif [ "$x" = c ]; then chafa $f; 
+elif [ "$x" = k ]; then cacaview $f; 
+elif [ "$x" = b ]; then batcat --paging always $f -pl d; 
+elif [ "$x" = m ]; then mediainfo $f; 
+elif [ "$x" = j ]; then jp2a $f --color-depth=8; 
+fi; 
+printf %b "\n[\033[6;92mENTER\033[0m] to return\e[A"; 
+read -n1 -res; 
+fi; 
+}}
+#set drawbox
+# set '-eu' options for shell commands These options are used to have safer shell commands. Option '-e' is used to exit on error and option '-u' is used to give error for unset variables. Option '-f' disables pathname expansion which can be useful when $f, $fs, and $fx variables contain names with '*' or '?' characters. However, this option is used selectively within individual commands as it can be limiting at times.
+# exiftool $f|batcat --paging always -pl c++; read; 
+set ifs "
+"
+set scrolloff 20
+## cmds
+cmd open &{{
+case $(file --mime-type -Lb $f) in
+text/*) lf -remote "send $id \$$EDITOR \$f";;
+*) for f in $f; do ! $OPENER $f > /dev/null 2> /dev/null & done;;
+esac
+}}
+cmd depl ${{
+bash -c 'read -n1 -rp "this you? ${PWD##*/} " "gg"; [ "$gg" ]||npx wrangler pages deploy ./ --project-name ${PWD##*/} --commit-dirty=true; echo gg; '
+}}
+cmd toch ${{
+seq 12; printf "\e[12A\e[J"; pwd; lsd -p 2>/dev/null|tail -c44; 
+read -rp " -- newfile: " -i "$" "nf"; touch "$nf"; 
+read -rp " -- edit $(realpath $nf) $nf [Y/n] " "yn"; [ $yn ]||$EDITOR $nf
+}}
+
+cmd trash ${{
+set -f
+printf "\n--------\n\n\n\n$fx\n--------\n\n"
+printf "delete? [T]rash [P]ermanent [A]bort "
+read -n1 -rp " " "ans";
+if [ "$ans" = "t" ]; then
+mkdir -p ~/.trash 2>/dev/null;
+mv $fx ~/.trash/;
+elif [ "$ans" = "d" ]; then
+rm -rf $fx;
+elif [ "$ans" = "p" ]; then
+printf "delete? [Y/n]"
+read -n1 -rp " " "ans"; 
+if [ "$ans" != "n" ]; then 
+rm -rf $fx; else echo ok; fi; 
+fi; 
+}}
+cmd delete ${{
+set -f; printf "\e[91m\n\n\n\n$fx\e[0m\n"; printf "delete? [Y/n]"; read -n1 -rp " " "ans"; 
+if [ -z "$ans" ]; then rm -rf $fx; elif [ "$ans" = y ]; then rm -rf $fx; fi; 
+}}
+
+# use '<delete>' key for either 'trash' or 'delete' command
+# map <delete> trash
+# map <delete> delete
+
+# extract the current file with the right command
+# (xkcd link: https://xkcd.com/1168/)
+cmd unzip ${{
+mkdir $f_f; cp $f $f_f; cd $f; 
+    set -f
+    case $f in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
+        *.tar.gz|*.tgz) tar xzvf $f;;
+        *.tar.xz|*.txz) tar xJvf $f;;
+        *.zip) unzip $f;;
+        *.rar) unrar x $f;;
+        *.7z) 7z x $f;;
+    esac
+}}
+
+# compress current file or selected files with tar and gunzip
+cmd tar ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar czf $1.tar.gz $1
+    rm -rf $1
+}}
+
+# cmd zip ${{
+# set -f
+# cp -r $fx $f
+# mkdir $f
+# zip -r $f.zip $f
+# # rm -rf $1
+# }}
+# # 
+#  cmd zip ${{
+#  set -f
+# zip -r $f.zip $fx
+#  }} 
+
+
+ 
+cmd zip ${{
+printf "\n\n\n\nfiles: 
+--
+$fx
+--
+";
+set -f; 
+read -rp " ~ zip-name: " "ee";
+zip -r $ee.zip $fx
+}}
+
+# compress current file or selected files with zip
+#zip ${{
+#zip $1.zip $1
+#}}
+
+cmd chmod_p ${{
+printf "\n\n\e[36m$fx\e[0m\n----\nchmod:"; 
+read -rep " " -i "775" "chmod"; 
+chmod $chmod $fx||sudo chmod $chmod $fx; 
+lf -remote "send $id unselect *"; 
+lf -remote "send $id reload"; 
+}}
+
+cmd chown_p ${{
+printf "\n\n\e[36m$fx\e[0m\n----\nchmod:"; 
+read -rep " " -i "$LOGNAME" "chown"; 
+chown $chown $fx||sudo chown $chown $fx; 
+lf -remote "send $id unselect *"; 
+lf -remote "send $id reload"; 
+}}
+
+
+
+cmd rs ${{
+# for i in $(seq $lf_height); do printf "\n"; done; 
+# printf "\e[A\e[2K\n\n\e[12A"
+printf "\e[?47h\e[H\e[0J\n\ngg\n\n"
+rs=($fx); 
+printf "\e[7m rsync files: \e[0m\n"; 
+printf "\e[32m${rs[*]}\n\n\n\n\e[0m\e[7m rsync reciever: \e[0m\n"; 
+rsto="$(ls ~/start/config/ssh|fzf --margin 0,12,0,12 --border rounded --preview 'cat $ants/sh/config/ssh/{}' --preview-window border-left  --info=inline --height='~22%' --scroll-off=12 --header '-- ssh to: --')"; 
+# rs=("$(ls -ptr|grep -v '/'|fzf --height='~42%' --scroll-off=12 -m --info=inline --margin 0,12,0,12 --border rounded --preview 'cat {}' --preview-window border-left)"); 
+printf "\e[A\e[2K\n -- to: \t"; 
+[ "${rsto}" = "new" ] && read -rep " " -i "192.168.0.10" 'rsto'; 
+read -rep " " -i "$rsto" 'rsto'; 
+printf " -- user: \t"; 
+read -rep " " -i 'aa' 'rsuser'; 
+printf " -- folder: \t"; 
+read -rep " " -i '~/rs/' 'rsfold'; 
+printf "\n"; 
+rsync -a --info=name1 ${rs[*]} ${rsuser}@${rsto}:${rsfold} ; 
+printf "\n\e[7m$rsuser@$rsto:$rsfold\e[0m\n";
+ssh "$rsuser"@"$rsto" 'printf "\n\e[35m$HOME'"${rsfold/\~/}"'\n\n\e[0m"; ls -ptcr '"$rsfold"'|tail -n12';
+lf -remote "send $id unselect *"; 
+lf -remote "send $id reload"; 
+read; printf "\e[?47l\n"
+}}
+
+
+
+#fzf --margin 0,12,0,12 --height ~12% --preview "cat {}" --border rounded
+# 
+# cmd rs ${{
+# printf "\n\n\e[36m$fx\e[0m\n----\nchmod:"; 
+# read -rep " " -i "775" "chmod"; 
+# sudo chmod $chmod $fx; 
+# lf -remote "send $id unselect *"; 
+# lf -remote "send $id reload"; 
+# }}
+
+# 
+# cmd tata ${{
+# printf " tt\tll";
+# read -rep " " -i "aa $id aaaal" "chmod";
+# $(lf -remote "send $id echomsg "$id qqqq"");
+# }}
+# Main options
+# set icons
+# set sixel true
+# set period 1
+#set relativenumber
+#set number
+#set hiddenfiles "*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
+set hiddenfiles ".*"
+# [ -e "$PREFIX/etc/lf/previewer" ]&& lf_cdir="$PREFIX/etc/lf"; 
+
+
+# " ]&& 
+# lf_cdir="~/.config/lf"; 
+set cleaner "~/.config/cleaner"
+set opener "~/.config/lf/opener"
+# "$lf_cdir/opener"
+set previewer "~/.config/lf/previewer"
+#set previewer "~/.config/lf/previewer"
+#set previewer "$PREFIX/etc/lf/previewer" 
+set incsearch true
+set incsearch on 
+set incfilter false
+set incfilter on 
+set lf_user_${USER}
+set globsearch false
+set globsearch on 
+set ratios 1:1 
+#2:2:6 # 2:3:7:7
+#set truncatechar "..."
+# set waitmsg ">_<"
+set dircounts
+set errorfmt 		"\033[7;31m"
+set tabstop 2
+set scrolloff 22
+set wrapscroll
+set borderfmt "\033[38;5;200m"
+# set rulerfmt "%df:acc:progress:selection:filter:ind"
+#set rulerfmt "\033[38;5;200m|| %s \033[0m|\033[2;32m%{lf_user_selected_size}\033[0m 
+#\033[2m| %i \033[0;1;98m\e/\033[2m %t |
+#\033[0m \033[0m %d \033[0m "
+set timefmt "\033[0m2006\033[0m-\033[95mJan\033[0m-\033[31m02\033[94m\033[0m-\033[92m15:04:05\033[0m" 
+# set timefmt 'Mon Jan _2 15:04:05 2006' ## default
+set infotimefmtnew "Jan 02 15:04"
+set infotimefmtold "Jan 02 15:04" 
+
+set promptfmt "\033[37m\033[48;2;15;25;25m %w/\033[96m%f\033[95m  \033[0m %u\033[2m@\033[0m%h"
+##
+set statfmt "\033[35m%l| \033[96m%p\033[0m| %t|\033[45;30m %S \033[0m|%u" ## default
+set rulerfmt "%a  |%p  |\033[7;31m %m \033[30;44m| %{lf_user_selected_size} |\033[7;33m %c \033[0m  |\033[7;35m %s \033[0m  |\033[7;34m %f \033[0m  |%i/%t " 
+cmd on-select &{{ s=$(find $fx -type f -maxdepth 1 -ls | awk '{total += $7} END {print total}' | numfmt --to=iec --format='%.2fB')
+lf -remote "send $id set user_selected_size $s" }} 
+##
+set cursorpreviewfmt "\033[2m\033[91m"
+set cursorparentfmt "\033[92m" 
+set cursorpreviewfmt "\033[1m" 
+set cursoractivefmt "\033[4;7m"
+set drawbox false
+set drawbox off
+set mouse on 
+set icons true 
+set icons off 
+set shell bash 
+set info size:time
+set sortby time
+%test $LF_LEVEL -eq 1 || >&2 printf "Warning: You're in a nested lf instance!"
+# source "~/.config/lf/opener"
+#source "~/.config/lf/previewer"
+source "~/.config/lf/lf_m"
+
+
+
+
+
+
+
+
+
+

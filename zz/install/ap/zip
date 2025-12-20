@@ -1,0 +1,9 @@
+Version: 3.0-5
+Maintainer: Termux members @termux
+Installed-Size: 635 kB
+Depends: libandroid-support, libbz2
+Homepage: https://sourceforge.net/projects/infozip/
+Download-Size: 161 kB
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Tools for working with zip files
+

@@ -1,0 +1,9 @@
+Version: 1.70.2
+Maintainer: @termux
+Installed-Size: 99.2 MB
+Homepage: https://rclone.org/
+Download-Size: 22.6 MB
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: rsync for cloud storage
+

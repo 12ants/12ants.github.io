@@ -1,0 +1,1 @@
+alias chose='gum choose --no-limit --cursor=" > " --selected-prefix="[x] " --cursor.background="" --header="-------- 0000 --------" --header.foreground="6" --unselected-prefix="[ ] " --cursor-prefix="[ ] " --selected.background="24"'

@@ -1,0 +1,1 @@
+12create_colors() { wc=0; for i in $(pastel distinct 44|pastel format ansi-8bit); do printf %b "w[$((wc++))]=\"\\$i\"\n"; done | sed -e "s/x1b/e/g" | col -xb | tee $HOME/logs/colors.sh; cat $HOME/logs/colors.sh | sed -e "s/w/b/g" -e "s/38;/48;/g" | tee $HOME/logs/colorsb.sh; . $HOME/logs/colors.sh; . $HOME/logs/colorsb.sh; }; 

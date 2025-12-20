@@ -1,0 +1,10 @@
+Version: 6.15.0
+Maintainer: @termux
+Installed-Size: 2961 kB
+Depends: libandroid-glob, libandroid-support
+Homepage: https://wiki.linuxfoundation.org/networking/iproute2
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Utilities for controlling networking
+

@@ -1,0 +1,1 @@
+hahas() { local HISTTIMEFORMAT="%H:%M:%S_"; history 66|bat -ppfljava|cut -f 5- -d " "|fzf --bind 'focus:transform-header:(echo -e ""{1}"")' --header-first --tmux --with-nth "2.." --delimiter "_" --no-preview --accept-nth "2.." --tac --wrap; };

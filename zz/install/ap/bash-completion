@@ -1,0 +1,10 @@
+Version: 2.16.0
+Maintainer: Joshua Kahn @TomJo2000
+Installed-Size: 2675 kB
+Depends: bash
+Homepage: https://github.com/scop/bash-completion
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Programmable completion for the bash shell
+

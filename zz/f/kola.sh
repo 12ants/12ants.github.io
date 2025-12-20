@@ -1,0 +1,1 @@
+kola() { kk="$(realpath $1)"; [ $1 ]||read -ei "$PWD/" "kk"; tmux display-popup -b none -EE -w100% -h100% -e "kk=kk" "printf %b "'"\e[?25l\e[A"'"; chafa --format=symbols --scale=max --align right $kk; printf %b '"'\e[11A'"'; mediainfo $kk|tr -s '"'\n'"' '"'\n'"'|head -n9; bash -c '"'read -n1 kk'"'"; }; 

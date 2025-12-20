@@ -1,0 +1,11 @@
+Package: ffmpegthumbnailer
+Version: 2.2.3-p20251103-0
+Maintainer: @termux
+Installed-Size: 381 kB
+Depends: ffmpeg, libc++, libjpeg-turbo, libpng
+Homepage: https://github.com/dirkvdb/ffmpegthumbnailer
+Download-Size: 76.2 kB
+APT-Manual-Installed: yes
+APT-Sources: https://packages-cf.termux.dev/apt/termux-main stable/main aarch64 Packages
+Description: Lightweight video thumbnailer that can be used by file managers
+

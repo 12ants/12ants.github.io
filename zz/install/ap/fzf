@@ -1,0 +1,10 @@
+Version: 0.63.0
+Maintainer: @termux
+Installed-Size: 5116 kB
+Depends: bash, findutils, ncurses-utils
+Suggests: tmux
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Command-line fuzzy finder
+

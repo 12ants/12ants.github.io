@@ -1,0 +1,10 @@
+Essential: yes
+Maintainer: @termux
+Installed-Size: 913 kB
+Depends: libandroid-support
+Homepage: https://www.gnu.org/software/findutils/
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Utilities to find files meeting specified criteria and perform various actions on the files which are found
+

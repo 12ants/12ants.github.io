@@ -1,0 +1,9 @@
+Version: 2.2.5-2
+Maintainer: Termux members @termux
+Installed-Size: 856 kB
+Homepage: http://www.figlet.org/
+Download-Size: 91.9 kB
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Program for making large letters out of ordinary text
+

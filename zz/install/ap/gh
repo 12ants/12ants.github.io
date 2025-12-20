@@ -1,0 +1,10 @@
+Version: 2.74.2
+Maintainer: Krishna kanhaiya @kcubeterm
+Installed-Size: 43.5 MB
+Recommends: openssh
+Homepage: https://cli.github.com/
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: GitHub’s official command line tool
+

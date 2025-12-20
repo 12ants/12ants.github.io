@@ -1,0 +1,10 @@
+Version: 2.29-1
+Maintainer: @termux
+Installed-Size: 5325 kB
+Depends: brotli, fontconfig, freetype, glib, libbz2, libcairo, libevent, libjpeg-turbo, liblzma, libpng, librsvg, libtiff, libwebp, libx11, openssl, zlib, zstd
+Homepage: http://links.twibright.com
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Links is a text and graphics mode WWW browser
+

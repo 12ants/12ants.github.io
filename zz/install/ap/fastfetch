@@ -1,0 +1,9 @@
+Version: 2.47.0
+Maintainer: @termux
+Installed-Size: 3486 kB
+Homepage: https://github.com/fastfetch-cli/fastfetch
+Download-Size: 493 kB
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: A maintained, feature-rich and performance oriented, neofetch like system information tool
+

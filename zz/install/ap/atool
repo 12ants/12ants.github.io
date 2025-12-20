@@ -1,0 +1,7 @@
+Package: atool
+Installed-Size: 188 kB
+Depends: perl
+Homepage: https://www.nongnu.org/atool
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: tool for managing file archives of various types

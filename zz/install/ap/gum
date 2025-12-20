@@ -1,0 +1,9 @@
+Version: 0.16.2
+Maintainer: @termux
+Installed-Size: 15.0 MB
+Homepage: https://github.com/charmbracelet/gum
+Download-Size: 3527 kB
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: A tool for creating minimal interactive TUIs for shell scripts
+

@@ -1,0 +1,10 @@
+Version: 2.50.0-1
+Maintainer: Joshua Kahn @TomJo2000
+Installed-Size: 24.2 MB
+Depends: libcurl, libexpat, libiconv, less, openssl, pcre2, zlib
+Recommends: openssh
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Fast, scalable, distributed revision control system
+

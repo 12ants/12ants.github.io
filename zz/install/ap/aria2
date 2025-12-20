@@ -1,0 +1,10 @@
+Version: 1.37.0-1
+Maintainer: @termux
+Installed-Size: 2712 kB
+Depends: libc++, c-ares, libgnutls, libxml2, zlib
+Homepage: https://aria2.github.io
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Download utility supporting HTTP/HTTPS, FTP, BitTorrent and Metalink
+

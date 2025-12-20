@@ -1,0 +1,9 @@
+Version: 1.2-1
+Maintainer: Fredrik Fornwall @fornwall
+Installed-Size: 2654 kB
+Homepage: https://www.fefe.de/fortune/
+Download-Size: 818 kB
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Revealer of fortunes
+

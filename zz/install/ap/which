@@ -1,0 +1,10 @@
+Version: 2.23
+Maintainer: @termux
+Installed-Size: 86.0 kB
+Conflicts: debianutils (<< 5.7-1)
+Homepage: https://savannah.gnu.org/projects/which/
+--
+APT-Manual-Installed: yes
+APT-Sources: https://termux.cdn.lumito.net/termux-main stable/main x86_64 Packages
+Description: Shows the full path of (shell) commands
+

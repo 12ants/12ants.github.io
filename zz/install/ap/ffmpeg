@@ -1,0 +1,14 @@
+Package: ffmpeg
+Version: 8.0.1
+Maintainer: @termux
+Installed-Size: 36.2 MB
+Depends: fontconfig, freetype, fribidi, game-music-emu, glslang, harfbuzz, libaom, libandroid-glob, libandroid-stub, libass, libbluray, libbz2, libdav1d, libgnutls, libiconv, liblzma, libmp3lame, libopencore-amr, libopenmpt, libopus, libplacebo, librav1e, libsoxr, libsrt, libssh, libtheora, libv4l, libvidstab, libvmaf, libvo-amrwbenc, libvorbis, libvpx, libwebp, libx264, libx265, libxml2, libzimg, libzmq, littlecms, ocl-icd, rubberband, svt-av1, vulkan-icd, xvidcore, zlib
+Conflicts: libav
+Breaks: ffmpeg-dev
+Replaces: ffmpeg-dev
+Homepage: https://ffmpeg.org
+Download-Size: 10.2 MB
+APT-Manual-Installed: yes
+APT-Sources: https://packages-cf.termux.dev/apt/termux-main stable/main aarch64 Packages
+Description: Tools and libraries to manipulate a wide range of multimedia formats and protocols
+

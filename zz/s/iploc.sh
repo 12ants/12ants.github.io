@@ -1,0 +1,1 @@
+iploc=($(ip -brief -4 a|grep -vE "lo:|127.0.0.1|valid|altname|BROADCAST"|tr -s " " " "|cut -f1 -d"/")); [ $iploc ] && wlan="${iploc[-1]}";
