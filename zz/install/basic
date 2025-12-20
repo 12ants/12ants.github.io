@@ -1,13 +1,24 @@
 #!/bin/bash
 ## install basic apts etc
+[ -z "$start" ] && start="${HOME}/.config/12/zz"; 
+##
+hash sudo 2>/dev/null && sudo="sudo"; 
+rr="$((RANDOM%222))"; 
+printf %b "\ec\e[0m -- \e[48;5;${rr}m updating \e[0m --\n\e[38;5;${rr}m "; 
+$sudo apt update; 
+rr="$((RANDOM%222))"; 
+printf %b "\ec\e[0m -- \e[48;5;${rr}m upgrading \e[0m --\n\e[38;5;${rr}m "; 
+$sudo apt upgrade -y; 
 
-# file
-# mediainfo
-# bat
-# batcat
-# ncdu
-for i in $(command ls -p1 $HOME/88/install/ap|grep -v "*/"); do rr="$((RANDOM%222))";  printf %b "\ec\e[0m -- \e[48;5;${rr}m ${i} \e[0m --\n\e[38;5;${rr}m "; $sudo apt install -y $i; done; printf %b "\n\n\e[0m -- \e[48;5;196m DONE \e[0m --\n\n"; 
+unset IFS; 
+appa=($(command ls -p1 $start/install/ap|grep -v "*/")); 
 
+for i in ${appa[*]}; 
+do rr="$((RANDOM%222))"; 
+printf %b "\ec\e[0m -- \e[48;5;${rr}m ${i} \e[0m -\e[555b\b\n\e[38;5;${rr}m "; 
+$sudo apt install -y $i; done; 
+printf %b "\ec\e[0m -- \e[48;5;${rr}m installed \e[0m --\n\e[38;5;${rr}m \n\e[0m"; 
+printf %b "${appa[*]}\n\n\e[0m -- \e[48;5;82m\e[1;90m DONE \e[0m --\n\n"; 
 ####
 ## apt install -y autoconf libevent ncurses pkg-config automake; 
 ## mkdir $HOME/gh 2>/dev/null; cd $HOME/gh; gh repo clone tmux/tmux
