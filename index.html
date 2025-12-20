@@ -5,6 +5,6 @@ read -p "ok" "ok";
 hash sudo 2>/dev/null && sudo="sudo"; 
 hash git 2>/dev/null || $sudo apt install git -y 2>/dev/null; 
 rm -fr $HOME/.config/12 2>/dev/null; 
-git clone https://github.com/12ants/12ants.github.io.git $HOME/.config/12
-cd $HOME/.config/12; 
-. ./zz/install.sh; 
+git clone https://github.com/12ants/12ants.github.io.git $HOME/.config/12 --quiet 2>/dev/null; 
+cd $HOME/.config/12/zz; 
+. menu.sh; menu install.sh; 
