@@ -35,7 +35,7 @@ _link() { ln -s $@ 2>/dev/null; };
 _backup() { mv -fb --suffix="_${time}" $@ -t $bu &>/dev/null; }; 
 _newcolor() { printf %b "\e[38;5;$((uu++))m"; sleep .02; }; 
 _prompt() { [[ "$ny" = "q" ]] && return 1; p2 "$c2 "; p1 "$@"; _yno prompt; if [[ $_yno_prompt == true ]]; then _newcolor; else return 1; fi; }; 
-_where() { p2 "$c2 "; p1 "where to? "; read -ei "$HOME/" "hstart"; start="${hstart}/88"; sleep .2; }; 
+_where() { p2 "$c2 "; p1 "where to? "; read -ei "$HOME/" "hstart"; start="${hstart}/12"; sleep .2; }; 
 # export start="${start/\/\///}"; 
 #####
 #####
@@ -46,9 +46,8 @@ _prompt "update system? ";
 #####
 _prompt "install basic apps? "; 
 #####
-_prompt "download config-files? " && _where; 
+_prompt "download config-files? " && _where && _prompt "install config-files? "; 
 #####
-_prompt "install config-files? "; 
 ######
 _prompt "login to github? " && p2 "$c2 " && p1 "password? " && read -rs "pwgh" && echo;  
 #####
@@ -63,17 +62,27 @@ if [ "$pp1" ]; then printf %b "\n$c2 updating apts ...\n\n"; _newcolor; $sudo ap
 ##############################
 ##############################
 if [ "$pp2" ]; then printf %b "\n$c2 installing apts ... \n"; 
-for i in $(command ls -1 "$HOME/88/install/ap"); do rr="$(shuf -zn1 -i 12-88)"; printf %b "\ec\e[0m -- \e[48;5;${rr}m ${i} \e[0m --\n\e[38;5;${rr}m "; command -v "$i" 2>/dev/null || "$sudo" apt install -y "$i"; done; printf %b "\n$c2 apts installed ...\n"; fi; 
+for i in $(command ls -1 "$start/install/ap"); do rr="$(shuf -zn1 -i 12-88)"; printf %b "\ec\e[0m -- \e[48;5;${rr}m ${i} \e[0m --\n\e[38;5;${rr}m "; 
+command -v "$i" 2>/dev/null || "$sudo" apt install -y "$i"; done; 
+printf %b "\n$c2 apts installed ...\n"; fi; 
 ##############################
 ##############################
 if [ "$pp3" ]; then printf %b "\n$c2 downloading config files ...\n"; 
 # _backup "$start"; _newcolor; 
-hash git 2>/dev/null || $sudo apt install -y git 2>/dev/null; git clone https://github.com/12ants/12ants.github.io.git $start; cd "$start"; git config remote.origin.url git@github.com:12ants/12ants.github.io.git; cd $OLDPWD; printf %b "\n$c2 config files downloaded! \n"; fi; 
+hash git 2>/dev/null || $sudo apt install -y git 2>/dev/null; 
+git clone https://github.com/12ants/12ants.github.io.git $start; 
+cd "$start"; 
+git config remote.origin.url git@github.com:12ants/12ants.github.io.git; 
+cd $OLDPWD; 
+printf %b "\n$c2 config files downloaded! \n"; fi; 
 ##############################
 ##############################
 if [ "$pp4" ]; then 
 printf %b "\n$c2 installing config files ...\n"; 
-_backup $HOME/.inputrc; _newcolor; _link $start/c/inputrc $HOME/.inputrc; _newcolor; confolders=($(ls -1p $HOME/88/c|grep "/")); for q in ${confolders[*]}; do mkdir -p $HOME/.config/$q 2>/dev/null; _backup $HOME/.config/$q/*; _newcolor; ln -s $start/c/$q/* -t $HOME/.config/$q/ 2>/dev/null; sleep .2; printf %b "\n\e[0m"; p1 "updated"; _newcolor; printf %b " $q"; done; _newcolor; printf %b "${PATH}:${HOME}/.local/bin" > $HOME/.config/path.sh; chmod 775 $HOME/.config/path.sh; _newcolor; printf %b "\n\e[0m"; p1 'added PATH to ~/.config/path.sh '; printf %b "\n$c2 config files installed! \n"; fi; 
+_backup $HOME/.inputrc; _newcolor; _link $start/c/inputrc $HOME/.inputrc; _newcolor; confolders=($(ls -1p $HOME/88/c|grep "/")); 
+for q in ${confolders[*]}; do 
+mkdir -p $HOME/.config/$q 2>/dev/null; _backup $HOME/.config/$q/*; _newcolor; 
+ln -s $start/c/$q/* -t $HOME/.config/$q/ 2>/dev/null; sleep .2; printf %b "\n\e[0m"; p1 "updated"; _newcolor; printf %b " $q"; done; _newcolor; printf %b "${PATH}:${HOME}/.local/bin" > $HOME/.config/path.sh; chmod 775 $HOME/.config/path.sh; _newcolor; printf %b "\n\e[0m"; p1 'added PATH to ~/.config/path.sh '; printf %b "\n$c2 config files installed! \n"; fi; 
 ##############################
 ##############################
 if [ "$pp5" ]; then printf %b "\n$c2 logging in to github ...\n"; 
