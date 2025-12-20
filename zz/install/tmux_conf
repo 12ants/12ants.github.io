@@ -1,5 +1,5 @@
 #!/bin/bash
-## install tmux
+## install tmux config 
 printf %b "\n-- installing tmux & configs ... \n"; 
 mkdir -m 775 -p $HOME/.config/tmux/plugins/tpm 2>/dev/null; 
 ln -s ""$HOME/88/c/tmux/{hl.tmux,tmux.conf,tmuxbg.sh,tmuxcompletions.sh}" " -t $HOME/.config/tmux 2>/dev/null; 

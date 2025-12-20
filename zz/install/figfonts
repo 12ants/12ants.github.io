@@ -1,5 +1,5 @@
 #!/bin/bash
-## install tmux
+## install figzz
 hash sudo && sudo=sudo; 
 hash figlet || $sudo apt install -y figlet; 
 $sudo mkdir $PREFIX/share 2>/dev/null; 

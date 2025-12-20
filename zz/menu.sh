@@ -15,12 +15,12 @@ echo -e "$re -------------------  ${green}$hello${re}  -------------------------
  -- [${dim}Enter${re}]$dim$cyan Select${re} ---- \
 [${dim}c${re}]$dim$cyan Confirm${re} ------- [${dim}q${re}]$dim$cyan Exit${re} -- ";
 unset OPTIONS_VALUES OPTIONS_STRING SELECTED CHECKED OPTIONS_LABELS ov1 cd; 
-if [[ $1 ]]; then cd $1; OPTIONS_VALUES=($(ls -p|grep -v /)); else OPTIONS_VALUES=($(ls -p $PWD/$1)); fi; 
+if [[ $1 ]]; then cd $1; OPTIONS_VALUES=($(ls -p|grep -v "/")); else OPTIONS_VALUES=($(ls -p $PWD/$1 | grep -v "/")); fi; 
 if [[ $4 ]]; then for i in ${OPTIONS_VALUES[@]}; do
 OPTIONS_LABELS+=("\e[2m $($4 "$i";) "); done; 
 else for i in ${OPTIONS_VALUES[@]}; 
 do ft=$(file $i --mime-type -b|head -c4); if [[ $ft == "text" ]]; then
-OPTIONS_LABELS+=("\e[2m $(sed -n 2p $i|tr -s ';()\\' ' '|cut -c-${size[1]}) "); else 
+OPTIONS_LABELS+=("\e[2m $(sed -n 2p $i|col -xb|tr -s ';()\\' ' '|cut -c-${size[1]}) "); else 
 OPTIONS_LABELS+=("\e[2m $(file -b $i|cut -c-${size[1]}) "); fi; done; echo -e "\e[0J"; fi; 
 for i in "${!OPTIONS_VALUES[@]}"; do 
 OPTIONS_STRING+="$dots\e[6G "${OPTIONS_VALUES[$i]%/$PWD/}" \e[22G ${OPTIONS_LABELS[$i]};"; done;
