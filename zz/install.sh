@@ -8,7 +8,7 @@ mkdir -p ${HOME}/{tmp,logs,gh,backup,.config,.safe,.cache,.local/bin,bin,img,dl}
 tmp="$HOME/tmp" time=$(date +%y_%m_%d_%H_%M_%S) bu=$HOME/backup; 
 unset -v _yno_prompt _yno ny p pp yy; 
 for i in $(seq 1 22); do unset -v "pp$i"; done; 
-local IFS=$'\n\t ' start="$HOME/88" re='\e[0m' bold='\e[1m' height="$(stty size|cut -f1 -d" ")" width="$(stty size|cut -f2 -d" ")" yno='\e[0m[\e[2mY\e[0m/\e[2mn\e[0m]' c2='    \e[0m\e[36m--\e[0m' uu="60" enter='\e[\e[0m [\e[2mENTER\e[0m] to accept or [\e[2mq\e[0m]\e[2mto Quit \e[0m' x="2>/dev/null" yy="1" sl=".1"; 
+local IFS=$'\n\t ' start="$HOME/.config/12/zz" re='\e[0m' bold='\e[1m' height="$(stty size|cut -f1 -d" ")" width="$(stty size|cut -f2 -d" ")" yno='\e[0m[\e[2mY\e[0m/\e[2mn\e[0m]' c2='    \e[0m\e[36m--\e[0m' uu="60" enter='\e[\e[0m [\e[2mENTER\e[0m] to accept or [\e[2mq\e[0m]\e[2mto Quit \e[0m' x="2>/dev/null" yy="1" sl=".1"; 
 #####
 printf %b "\x1b[1 q"; ######### cursor = block 
 printf %b "\x1b]12;#ff44bb"; ## cursor = pink 
@@ -21,7 +21,7 @@ p2() { printf %b "$@"; };
 #####
 for i in $(seq $((height))); do printf %b "\n"; done; 
 p2 "\e[H\e[J"; sleep .2; echo; sleep .2; echo;
-p1 "       hello... "; 
+p1 "       hello... "; id -un; 
 sleep 1; echo; sleep .2; echo; sleep .2; sl="0.04"
 #####
 #####
@@ -50,7 +50,7 @@ _prompt "download config-files? " && _where;
 #####
 _prompt "install config-files? "; 
 ######
-_prompt "login to github? " && p2 "$c2 " && p1 "password? " && read -rs "pwgh"; 
+_prompt "login to github? " && p2 "$c2 " && p1 "password? " && read -rs "pwgh" && echo;  
 #####
 _prompt "install extras? " && p2 "$c2 " && p1 "password? " && read -rs "pw"; 
 ########################################
@@ -68,7 +68,7 @@ for i in $(command ls -1 "$HOME/88/install/ap"); do rr="$(shuf -zn1 -i 12-88)"; 
 ##############################
 if [ "$pp3" ]; then printf %b "\n$c2 downloading config files ...\n"; 
 # _backup "$start"; _newcolor; 
-hash git 2>/dev/null || $sudo apt install -y git 2>/dev/null; git clone https://github.com/aeniks/88.git $start; cd "$start"; git config remote.origin.url git@github.com:aeniks/88.git; cd $OLDPWD; printf %b "\n$c2 config files downloaded! \n"; fi; 
+hash git 2>/dev/null || $sudo apt install -y git 2>/dev/null; git clone https://github.com/12ants/12ants.github.io.git $start; cd "$start"; git config remote.origin.url git@github.com:12ants/12ants.github.io.git; cd $OLDPWD; printf %b "\n$c2 config files downloaded! \n"; fi; 
 ##############################
 ##############################
 if [ "$pp4" ]; then 
