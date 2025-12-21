@@ -1,10 +1,20 @@
-printf %b "hello \n\n"
+#!/bin/bash
+printf %b "\nhello \n\n\e[A"
 ## 12ants.github.io
 #### https://12ants.github.io
 read -p "ok" "ok"; 
+####
 hash sudo 2>/dev/null && sudo="sudo"; 
-hash git 2>/dev/null || $sudo apt install git -y 2>/dev/null; 
-rm -fr $HOME/.config/12 2>/dev/null; 
-git clone https://github.com/12ants/12ants.github.io.git $HOME/.config/12 --quiet 2>/dev/null; 
-cd $HOME/.config/12/zz; 
+####
+if hash git 2>/dev/null; then printf %b " -- installing git ... \n"; $sudo apt install git -y 2>/dev/null; fi; 
+####
+rm -fr $HOME/zz 2>/dev/null; 
+####
+git clone https://github.com/12ants/zz.git $HOME/zz --quiet 2>/dev/null; 
+####
+cd $HOME/zz; 
+####
 . menu.sh; menu install; 
+####
+cd $OLDPWD; 
+####
