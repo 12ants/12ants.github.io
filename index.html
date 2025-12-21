@@ -6,11 +6,15 @@ read -p "ok" "ok";
 ####
 hash sudo 2>/dev/null && sudo="sudo"; 
 ####
-if hash git 2>/dev/null; then printf %b " -- installing git ... \n"; $sudo apt install git -y 2>/dev/null; fi; 
+if hash git 2>/dev/null; then printf %b "ok"; 
+else printf %b " -- installing git ... \n"; 
+$sudo apt install git -y 2>/dev/null; 
+fi; 
 ####
 rm -fr $HOME/zz 2>/dev/null; 
 ####
-git clone https://github.com/12ants/zz.git $HOME/zz --quiet 2>/dev/null; 
+printf %b "\n\n\e[Adownloading files ... \n\n\e[A"; 
+git clone https://github.com/12ants/zz.git $HOME/zz --quiet &>/dev/null; 
 ####
 cd $HOME/zz; 
 ####
