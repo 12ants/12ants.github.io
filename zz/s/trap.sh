@@ -1,1 +1,0 @@
-trap "echo 'gg'" HUP

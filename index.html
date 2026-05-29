@@ -1,4 +1,1606 @@
 #!/bin/bash
+: <<'EOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="12ants // Monospace Retro Terminal Hub and Developer Portal">
+    <title>12ants // Monospace Terminal</title>
+    <!-- Preload Monospace Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* Custom variables for theme color sets */
+        #app.theme-matrix {
+            --primary-color: #00ff66;
+            --primary-glow: rgba(0, 255, 102, 0.35);
+            --bg-color: #050805;
+            --panel-bg: rgba(8, 14, 10, 0.85);
+            --border-color: #00cc52;
+            --border-color-dim: #005a24;
+            --text-highlight: #33ff77;
+            --text-muted: #008f37;
+            --grid-color: rgba(0, 255, 102, 0.03);
+        }
+        #app.theme-amber {
+            --primary-color: #ffb000;
+            --primary-glow: rgba(255, 176, 0, 0.35);
+            --bg-color: #080502;
+            --panel-bg: rgba(18, 12, 6, 0.85);
+            --border-color: #cc8d00;
+            --border-color-dim: #5c3f00;
+            --text-highlight: #ffc433;
+            --text-muted: #a37000;
+            --grid-color: rgba(255, 176, 0, 0.03);
+        }
+        #app.theme-cyber {
+            --primary-color: #00f0ff;
+            --primary-glow: rgba(0, 240, 255, 0.35);
+            --bg-color: #020608;
+            --panel-bg: rgba(6, 14, 18, 0.85);
+            --border-color: #00c0cc;
+            --border-color-dim: #00585e;
+            --text-highlight: #33f3ff;
+            --text-muted: #008891;
+            --grid-color: rgba(0, 240, 255, 0.03);
+        }
+        #app.theme-mono {
+            --primary-color: #e0e0e0;
+            --primary-glow: rgba(224, 224, 224, 0.3);
+            --bg-color: #0c0c0c;
+            --panel-bg: rgba(18, 18, 18, 0.85);
+            --border-color: #888888;
+            --border-color-dim: #3a3a3a;
+            --text-highlight: #ffffff;
+            --text-muted: #666666;
+            --grid-color: rgba(255, 255, 255, 0.02);
+        }
+
+        * {
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-color) var(--bg-color);
+        }
+        /* Webkit Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-highlight);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: var(--primary-color);
+            font-family: 'Fira Code', 'Share Tech Mono', monospace;
+            visibility: hidden;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        #app {
+            visibility: visible;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: var(--bg-color);
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 30px 30px;
+            display: flex;
+            flex-direction: column;
+            color: var(--primary-color);
+            transition: background-color 0.3s ease, background-size 0.3s ease;
+        }
+
+        /* CRT Glow Overlay */
+        .crt-effect::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 9999;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+        }
+
+        @keyframes crt-flicker {
+            0% { opacity: 0.995; }
+            50% { opacity: 1.0; }
+            100% { opacity: 0.995; }
+        }
+        .crt-effect {
+            animation: crt-flicker 0.15s infinite;
+        }
+
+        /* Header styling */
+        .sys-header {
+            height: 38px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 4px var(--primary-glow);
+        }
+        .sys-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        .blink-dot {
+            display: inline-block;
+            color: #ff3366;
+            margin-right: 8px;
+            font-size: 10px;
+            animation: pulse 1s infinite alternate;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+        .sys-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .control-item {
+            color: var(--text-muted);
+        }
+        .sys-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary-color);
+            font-family: inherit;
+            font-size: 11px;
+            cursor: pointer;
+            padding: 2px 8px;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+        .sys-btn:hover {
+            color: var(--text-highlight);
+            background: rgba(255, 255, 255, 0.05);
+            text-shadow: 0 0 5px var(--primary-glow);
+        }
+
+        /* Footer styling */
+        .sys-footer {
+            height: 32px;
+            border-top: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        .help-cmd {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        .footer-copyright {
+            letter-spacing: 0.5px;
+        }
+
+        /* Grid Layout */
+        .sys-grid {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Panels */
+        .panel-left {
+            width: 380px;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            background: var(--panel-bg);
+            backdrop-filter: blur(4px);
+            transition: background 0.3s ease;
+        }
+        .panel-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            background: var(--border-color-dim);
+            color: var(--text-highlight);
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-color);
+            text-shadow: 0 0 4px var(--primary-glow);
+        }
+
+        .panel-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* ASCII logo */
+        .ascii-logo {
+            font-family: monospace;
+            font-size: 8px;
+            line-height: 1.1;
+            margin: 0;
+            color: var(--primary-color);
+            text-shadow: 0 0 4px var(--primary-glow);
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            display: flex;
+            gap: 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+        .avatar-container {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 8px var(--primary-glow);
+            flex-shrink: 0;
+        }
+        .avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(1) hue-rotate(80deg) saturate(3) contrast(1.2);
+            transition: filter 0.3s ease;
+        }
+        #app.theme-amber .avatar {
+            filter: sepia(1) hue-rotate(0deg) saturate(350%) contrast(1.2);
+        }
+        #app.theme-cyber .avatar {
+            filter: sepia(1) hue-rotate(145deg) saturate(350%) contrast(1.2);
+        }
+        #app.theme-mono .avatar {
+            filter: grayscale(1) contrast(1.2);
+        }
+
+        .avatar-radar {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(transparent 50%, var(--primary-color) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            opacity: 0.15;
+            animation: radar-sweep 4s linear infinite;
+        }
+        @keyframes radar-sweep {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .profile-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+            font-size: 11px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+        }
+        .info-row .label {
+            color: var(--text-muted);
+        }
+        .info-row .val {
+            font-weight: 600;
+        }
+        .text-highlight {
+            color: var(--text-highlight);
+            text-shadow: 0 0 3px var(--primary-glow);
+        }
+
+        /* Diagnostics */
+        .diagnostics-box {
+            border: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .diag-header {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-highlight);
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 4px;
+            letter-spacing: 1px;
+        }
+        .diag-row {
+            display: flex;
+            align-items: center;
+            font-size: 11px;
+        }
+        .diag-label {
+            width: 40px;
+            color: var(--text-muted);
+        }
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            border: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.5);
+            margin: 0 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+            box-shadow: 0 0 6px var(--primary-color);
+            transition: width 0.5s ease;
+        }
+        .diag-pct {
+            width: 32px;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* Theme buttons */
+        .theme-box {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .theme-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+        .theme-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+        }
+        .theme-btn {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            color: var(--primary-color);
+            font-family: inherit;
+            font-size: 10px;
+            padding: 6px 0;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 3px;
+            transition: all 0.2s;
+        }
+        .theme-btn:hover, .theme-btn.active {
+            background: var(--primary-color);
+            color: var(--bg-color);
+            font-weight: 600;
+            box-shadow: 0 0 8px var(--primary-glow);
+        }
+
+        /* Repos list */
+        .repos-box {
+            border: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 4px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 200px;
+        }
+        .repos-header {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-highlight);
+            letter-spacing: 1px;
+        }
+        .repos-subheader {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        .repo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .repo-item {
+            border: 1px solid transparent;
+            padding: 6px 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.15s;
+        }
+        .repo-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: var(--border-color);
+            text-shadow: 0 0 3px var(--primary-glow);
+        }
+        .repo-icon {
+            font-size: 12px;
+        }
+        .repo-name {
+            flex: 1;
+            font-weight: 600;
+        }
+        .repo-lang {
+            color: var(--text-muted);
+            font-size: 10px;
+        }
+
+        /* Terminal window */
+        .terminal-window {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            margin: 16px;
+            border: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .term-titlebar {
+            height: 30px;
+            background: var(--border-color-dim);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-highlight);
+            text-shadow: 0 0 3px var(--primary-glow);
+        }
+        .term-dots {
+            display: flex;
+            gap: 6px;
+        }
+        .term-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border-color);
+            display: inline-block;
+            opacity: 0.5;
+        }
+        .term-dot.close { background: #ff5555; }
+        .term-dot.minimize { background: #ffaa00; }
+        .term-dot.maximize { background: #00ff66; }
+        .term-title {
+            font-weight: 600;
+        }
+        .term-status {
+            color: var(--text-muted);
+        }
+
+        .term-container {
+            flex: 1;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            cursor: text;
+        }
+
+        .terminal-body {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 12px;
+            line-height: 1.5;
+            padding-bottom: 24px;
+        }
+
+        .term-line {
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .term-cmd-echo {
+            color: var(--text-highlight);
+            font-weight: 600;
+            text-shadow: 0 0 3px var(--primary-glow);
+        }
+
+        /* Custom styles inside terminal output */
+        .term-header-logo {
+            color: var(--primary-color);
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--primary-glow);
+        }
+        .term-table {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 4px;
+            margin: 8px 0;
+        }
+        .term-label {
+            color: var(--text-muted);
+        }
+        .term-val {
+            color: var(--primary-color);
+        }
+
+        /* Matrix Overlay */
+        #matrix-canvas {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 10;
+        }
+
+        /* Input block */
+        .terminal-input-row {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            position: relative;
+            z-index: 20;
+            margin-top: 8px;
+        }
+        .terminal-prompt {
+            color: var(--text-highlight);
+            margin-right: 8px;
+            font-weight: 600;
+            text-shadow: 0 0 3px var(--primary-glow);
+            flex-shrink: 0;
+        }
+        .input-display-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        #terminal-input-display {
+            white-space: pre-wrap;
+            word-break: break-all;
+            color: var(--primary-color);
+        }
+        .terminal-cursor {
+            color: var(--primary-color);
+            animation: flash 0.8s steps(2, start) infinite;
+            text-shadow: 0 0 5px var(--primary-glow);
+            font-size: 13px;
+            margin-left: 1px;
+            flex-shrink: 0;
+        }
+        @keyframes flash {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        #hidden-terminal-input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            left: -9999px;
+            width: 0;
+            height: 0;
+        }
+
+        /* Responsive layouts */
+        @media (max-width: 900px) {
+            .sys-grid {
+                flex-direction: column;
+                overflow-y: auto;
+            }
+            .panel-left {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                max-height: 480px;
+                flex-shrink: 0;
+            }
+            .panel-right {
+                height: 520px;
+                flex-shrink: 0;
+            }
+            .terminal-window {
+                margin: 8px;
+                height: calc(100% - 16px);
+            }
+            body {
+                overflow: auto;
+            }
+            #app {
+                position: relative;
+                height: auto;
+                min-height: 100vh;
+                overflow: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="theme-matrix crt-effect">
+        <!-- Top System Header Bar -->
+        <header class="sys-header">
+            <div class="sys-title">
+                <span class="blink-dot">●</span> 
+                <span>12ANTS // BIOS v2.06 - SECURE CENTRAL SHELL // TTY1</span>
+            </div>
+            <div class="sys-controls">
+                <span class="control-item d-none-mobile" id="sys-ping">PING: 24ms</span>
+                <span class="control-item" id="sys-clock">2026-05-29 05:28:20</span>
+                <button class="sys-btn" id="sound-toggle">[ 🔊 SOUND: OFF ]</button>
+                <button class="sys-btn" id="crt-toggle">[ 📺 CRT: ON ]</button>
+            </div>
+        </header>
+        
+        <!-- Main Dashboard Grid -->
+        <main class="sys-grid">
+            <!-- Left Column: Status Monitor & Repo Cards -->
+            <section class="panel-left">
+                <div class="panel-header">=== SYSTEM MONITOR ===</div>
+                <div class="panel-body">
+                    <!-- ASCII Art / Logo -->
+                    <pre class="ascii-logo">
+ ▄▄▄▄▄▄▄ ▄▄   ▄▄ ▄▄   ▄▄ ▄▄▄▄▄▄▄ 
+█       █  █ █  █  █ █  █       █
+█   ▄▄▄▄█  █▄█  █  █▄█  █   ▄▄▄▄█
+█  █▄▄▄▄█       █       █  █▄▄▄▄ 
+█▄▄▄▄   █   ▄   █   ▄   █▄▄▄▄   █
+ ▄▄▄▄█  █  █ █  █  █ █  █ ▄▄▄▄█  █
+█▄▄▄▄▄▄▄█▄ █ █ ▄█▄ █ █ ▄█▄▄▄▄▄▄▄█
+                    </pre>
+                    
+                    <!-- Avatar & Identity Info -->
+                    <div class="profile-card">
+                        <div class="avatar-container">
+                            <img class="avatar" src="https://avatars.githubusercontent.com/u/245483746?v=4?s=400" alt="12ants Avatar">
+                            <div class="avatar-radar"></div>
+                        </div>
+                        <div class="profile-info">
+                            <div class="info-row"><span class="label">NODE:</span> <span class="val text-highlight">12ants</span></div>
+                            <div class="info-row"><span class="label">ROLE:</span> <span class="val">Systems Automator</span></div>
+                            <div class="info-row"><span class="label">SHELL:</span> <span class="val text-highlight">/bin/bash</span></div>
+                            <div class="info-row"><span class="label">UPTIME:</span> <span id="uptime-val" class="val">00:00:00</span></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Diagnostic Bars -->
+                    <div class="diagnostics-box">
+                        <div class="diag-header">SYS-DIAGNOSTICS</div>
+                        <div class="diag-row">
+                            <span class="diag-label">CPU:</span>
+                            <div class="progress-bar"><div class="progress-fill" id="cpu-fill" style="width: 12%"></div></div>
+                            <span class="diag-pct" id="cpu-val">12%</span>
+                        </div>
+                        <div class="diag-row">
+                            <span class="diag-label">RAM:</span>
+                            <div class="progress-bar"><div class="progress-fill" id="ram-fill" style="width: 48%"></div></div>
+                            <span class="diag-pct" id="ram-val">48%</span>
+                        </div>
+                        <div class="diag-row">
+                            <span class="diag-label">NET:</span>
+                            <div class="progress-bar"><div class="progress-fill" id="net-fill" style="width: 82%"></div></div>
+                            <span class="diag-pct" id="net-val">82%</span>
+                        </div>
+                    </div>
+
+                    <!-- Theme Toggles -->
+                    <div class="theme-box">
+                        <div class="theme-label">COLOR PALETTES:</div>
+                        <div class="theme-buttons">
+                            <button class="theme-btn active" data-theme="matrix">MATRIX</button>
+                            <button class="theme-btn" data-theme="amber">AMBER</button>
+                            <button class="theme-btn" data-theme="cyber">CYBER</button>
+                            <button class="theme-btn" data-theme="mono">MONO</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Pinned Repositories List -->
+                    <div class="repos-box">
+                        <div class="repos-header">=== SYSTEM NODES [SDA1] ===</div>
+                        <div class="repos-subheader">Click to 'cat' repository node:</div>
+                        <ul class="repo-list">
+                            <li class="repo-item" data-repo="12ants.github.io">
+                                <span class="repo-icon">📁</span>
+                                <span class="repo-name">12ants.github.io</span>
+                                <span class="repo-lang">[Shell]</span>
+                            </li>
+                            <li class="repo-item" data-repo="zz">
+                                <span class="repo-icon">📁</span>
+                                <span class="repo-name">zz</span>
+                                <span class="repo-lang">[Shell]</span>
+                            </li>
+                            <li class="repo-item" data-repo="12lightbox">
+                                <span class="repo-icon">📁</span>
+                                <span class="repo-name">12lightbox</span>
+                                <span class="repo-lang">[PHP]</span>
+                            </li>
+                            <li class="repo-item" data-repo="aeae">
+                                <span class="repo-icon">📁</span>
+                                <span class="repo-name">aeae</span>
+                                <span class="repo-lang">[PHP]</span>
+                            </li>
+                            <li class="repo-item" data-repo="w">
+                                <span class="repo-icon">📁</span>
+                                <span class="repo-name">w</span>
+                                <span class="repo-lang">[Shell]</span>
+                            </li>
+                            <li class="repo-item" data-repo="w2">
+                                <span class="repo-icon">📁</span>
+                                <span class="repo-name">w2</span>
+                                <span class="repo-lang">[Shell]</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Right Column: Interactive Monospace Terminal Console -->
+            <section class="panel-right">
+                <div class="terminal-window">
+                    <div class="term-titlebar">
+                        <div class="term-dots">
+                            <span class="term-dot close"></span>
+                            <span class="term-dot minimize"></span>
+                            <span class="term-dot maximize"></span>
+                        </div>
+                        <div class="term-title">bash - 12ants@terminal:~</div>
+                        <div class="term-status">tty1</div>
+                    </div>
+                    <div class="term-container" id="terminal-click-area">
+                        <div class="terminal-body" id="terminal-body">
+                            <!-- Output will be generated here -->
+                        </div>
+                        
+                        <!-- Dynamic Matrix Rain Canvas Overlay -->
+                        <canvas id="matrix-canvas" style="display: none;"></canvas>
+                        
+                        <div class="terminal-input-row" id="terminal-input-row" style="display: none;">
+                            <span class="terminal-prompt">12ants@localhost:~$</span>
+                            <div class="input-display-container">
+                                <span id="terminal-input-display"></span><span class="terminal-cursor">█</span>
+                            </div>
+                            <!-- Completely hidden but active input element -->
+                            <input type="text" id="hidden-terminal-input" autocomplete="off" spellcheck="false">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer / Help HUD Bar -->
+        <footer class="sys-footer">
+            <div class="footer-help">Type <span class="help-cmd">help</span> for commands | Use <span class="help-cmd">theme [name]</span> to reskin | Click list on left to 'cat'</div>
+            <div class="footer-copyright">SECURE NODE: //12ANTS.GITHUB.IO</div>
+        </footer>
+    </div>
+
+    <!-- Retro Interactive Script Engine -->
+    <script>
+        // System Config & Audio Synthesis
+        let audioCtx = null;
+        let soundEnabled = false;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playClickSound() {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                const freq = 800 + Math.random() * 400;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.015);
+                
+                gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.015);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.015);
+            } catch (e) {
+                console.log("Audio play click error: " + e);
+            }
+        }
+
+        function playEnterSound() {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(350, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.06);
+                
+                gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.06);
+            } catch (e) {
+                console.log("Audio play enter error: " + e);
+            }
+        }
+
+        function playBiosSound() {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                const now = audioCtx.currentTime;
+                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                
+                notes.forEach((freq, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+                    
+                    gain.gain.setValueAtTime(0.015, now + idx * 0.08);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.25);
+                    
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    
+                    osc.start(now + idx * 0.08);
+                    osc.stop(now + idx * 0.08 + 0.25);
+                });
+            } catch (e) {
+                console.log("Audio play bios chime error: " + e);
+            }
+        }
+
+        // Clock & Uptime & Sys Diagnostics Fluctuations
+        const clockEl = document.getElementById('sys-clock');
+        const uptimeEl = document.getElementById('uptime-val');
+        const sysPingEl = document.getElementById('sys-ping');
+        
+        let startTime = Date.now();
+        
+        function updateClockAndUptime() {
+            const now = new Date();
+            const pad = (n) => String(n).padStart(2, '0');
+            
+            // Format Clock
+            clockEl.textContent = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+            
+            // Calculate Uptime
+            const diff = Math.floor((Date.now() - startTime) / 1000);
+            const hrs = Math.floor(diff / 3600);
+            const mins = Math.floor((diff % 3600) / 60);
+            const secs = diff % 60;
+            uptimeEl.textContent = `${pad(hrs)}:${pad(mins)}:${pad(secs)}`;
+        }
+        
+        setInterval(updateClockAndUptime, 1000);
+        updateClockAndUptime();
+
+        // Fluctuate Ping
+        setInterval(() => {
+            const p = 15 + Math.floor(Math.random() * 20);
+            sysPingEl.textContent = `PING: ${p}ms`;
+        }, 4000);
+
+        // Fluctuate Diagnostics
+        let cpuVal = 12;
+        let ramVal = 48;
+        let netVal = 82;
+        
+        setInterval(() => {
+            cpuVal = Math.max(5, Math.min(95, cpuVal + Math.floor(Math.random() * 8) - 4));
+            ramVal = Math.max(45, Math.min(55, ramVal + Math.floor(Math.random() * 2) - 1));
+            netVal = Math.max(70, Math.min(98, netVal + Math.floor(Math.random() * 6) - 3));
+            
+            document.getElementById('cpu-fill').style.width = cpuVal + '%';
+            document.getElementById('cpu-val').textContent = cpuVal + '%';
+            
+            document.getElementById('ram-fill').style.width = ramVal + '%';
+            document.getElementById('ram-val').textContent = ramVal + '%';
+            
+            document.getElementById('net-fill').style.width = netVal + '%';
+            document.getElementById('net-val').textContent = netVal + '%';
+        }, 2000);
+
+        // Theme Reskin logic
+        const appEl = document.getElementById('app');
+        const themeBtns = document.querySelectorAll('.theme-btn');
+        
+        themeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const themeName = btn.getAttribute('data-theme');
+                setTheme(themeName);
+                playClickSound();
+            });
+        });
+        
+        function setTheme(themeName) {
+            themeBtns.forEach(b => {
+                if (b.getAttribute('data-theme') === themeName) {
+                    b.classList.add('active');
+                } else {
+                    b.classList.remove('active');
+                }
+            });
+            // Update app element classes
+            appEl.className = appEl.className.replace(/\btheme-\S+/g, '');
+            appEl.classList.add('theme-' + themeName);
+            localStorage.setItem('12ants-theme', themeName);
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('12ants-theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        }
+
+        // CRT Toggle
+        const crtToggleBtn = document.getElementById('crt-toggle');
+        let crtEnabled = true;
+        
+        crtToggleBtn.addEventListener('click', () => {
+            crtEnabled = !crtEnabled;
+            if (crtEnabled) {
+                appEl.classList.add('crt-effect');
+                crtToggleBtn.textContent = "[ 📺 CRT: ON ]";
+            } else {
+                appEl.classList.remove('crt-effect');
+                crtToggleBtn.textContent = "[ 📺 CRT: OFF ]";
+            }
+            playClickSound();
+        });
+
+        // Sound Toggle
+        const soundToggleBtn = document.getElementById('sound-toggle');
+        
+        soundToggleBtn.addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            if (soundEnabled) {
+                initAudio();
+                soundToggleBtn.textContent = "[ 🔊 SOUND: ON ]";
+                playBiosSound();
+            } else {
+                soundToggleBtn.textContent = "[ 🔊 SOUND: OFF ]";
+            }
+        });
+
+        // Database of repositories and their detailed outputs for the 'cat' command
+        const reposData = {
+            '12ants.github.io': {
+                lang: 'Shell / HTML',
+                desc: 'This minimal monospace retro web interface and polyglot installation landing page.',
+                details: [
+                    "Repository: 12ants/12ants.github.io",
+                    "Language: Shell / HTML (Polyglot)",
+                    "Active State: PRODUCTION",
+                    "",
+                    "This repository serves as the primary gateway for user '12ants'.",
+                    "It features a unique dual-mode architecture:",
+                    "  1. In browser environments, it renders a high-fidelity,",
+                    "     glowing CRT retro terminal dashboard.",
+                    "  2. In CLI curl pipelines, it operates as a standard shebang",
+                    "     bash script to launch the automated menu installation.",
+                    "",
+                    "Try running 'curl' in this console to see",
+                    "the raw shebang file structure in action!"
+                ]
+            },
+            'zz': {
+                lang: 'Shell Script',
+                desc: 'Automated software menu install utility suite for system configurations.',
+                details: [
+                    "Repository: 12ants/zz",
+                    "Language: Bash Shell Script",
+                    "Active State: DEPLOYED",
+                    "",
+                    "The 'zz' repository is a terminal-based configuration manager",
+                    "and software installer.",
+                    "It loads a user-friendly terminal UI menu ('menu.sh') and guides",
+                    "the host system through rapid dev package mounting, git setup,",
+                    "alias injections, and tool configurations.",
+                    "",
+                    "To trigger this installer on your host machine, execute:",
+                    "  curl -L 12ants.github.io | bash"
+                ]
+            },
+            '12lightbox': {
+                lang: 'PHP / JS',
+                desc: 'Light-weight, high-performance modular media overlay rendering system.',
+                details: [
+                    "Repository: 12ants/12lightbox",
+                    "Language: PHP / JavaScript / CSS",
+                    "Active State: PRODUCTION",
+                    "",
+                    "A fast, modern, completely responsive lightbox plugin designed",
+                    "with a zero-dependency footprint.",
+                    "It is optimized to automatically parse image grids, inject overlays,",
+                    "support keyboard swipe operations, and render media dynamically",
+                    "with ultra-smooth hardware-accelerated transitions."
+                ]
+            },
+            'aeae': {
+                lang: 'PHP',
+                desc: 'Experimental Core API routing hub for script pipelines.',
+                details: [
+                    "Repository: 12ants/aeae",
+                    "Language: PHP",
+                    "Active State: REFACTORED",
+                    "",
+                    "An experimental PHP core API controller and router.",
+                    "Built as a lightweight endpoint to capture webhook signals,",
+                    "format data buffers, and pipe automated triggers to remote",
+                    "server cron daemons and execution queues."
+                ]
+            },
+            'w': {
+                lang: 'Shell Script',
+                desc: 'Workflow trigger and rapid automation shell script chain.',
+                details: [
+                    "Repository: 12ants/w",
+                    "Language: Shell Script",
+                    "Active State: UTILITY",
+                    "",
+                    "Part of the 'w-series' automation utilities.",
+                    "A collection of tiny, hyper-focused shell loops designed to",
+                    "watch file changes, build packages, auto-bump versions,",
+                    "and push repository states to production runners."
+                ]
+            },
+            'w2': {
+                lang: 'Shell Script',
+                desc: 'Extended workflow automation suite and server deployment scripts.',
+                details: [
+                    "Repository: 12ants/w2",
+                    "Language: Shell Script",
+                    "Active State: UTILITY",
+                    "",
+                    "An extension of the 'w' script suite.",
+                    "Features advanced network triggers, background daemon monitors,",
+                    "backup synchronization modules, and automated remote server",
+                    "deployment utilities via SSH channels."
+                ]
+            }
+        };
+
+        // Interactive Terminal Engine
+        const termBody = document.getElementById('terminal-body');
+        const termInputRow = document.getElementById('terminal-input-row');
+        const hiddenInput = document.getElementById('hidden-terminal-input');
+        const inputDisplay = document.getElementById('terminal-input-display');
+        const clickArea = document.getElementById('terminal-click-area');
+        
+        let isBooting = true;
+        let skipBootPressed = false;
+        let commandHistory = [];
+        let historyIndex = -1;
+        
+        const commandsList = ['about', 'projects', 'skills', 'curl', 'matrix', 'theme', 'socials', 'clear', 'beep', 'help'];
+
+        // Auto focus hidden input
+        function focusTerminal() {
+            if (!isBooting) {
+                hiddenInput.focus();
+            }
+        }
+        
+        clickArea.addEventListener('click', focusTerminal);
+        window.addEventListener('load', () => {
+            // Start boot sequence
+            runBootSequence();
+        });
+
+        // Bios Boot Sequence Lines
+        const bootLines = [
+            { text: "ROM BIOS VERSION 2.06.29 (C) 1986-2026 RETROSYS INC.", delay: 30 },
+            { text: "RAM SPEED: 70ns | BASE MEMORY CHECK: 640KB - OK", delay: 50 },
+            { text: "EXTENDED MEMORY CHECK: 1048576KB - OK", delay: 50 },
+            { text: "CPU ID: INTEL 80386DX AT 33MHZ // MULTI-THREAD CORE ENHANCED", delay: 60 },
+            { text: "PROBING SDA0 [PRIMARY]... ATAPI COMPATIBLE DEVICE MOUNTED", delay: 80 },
+            { text: "MOUNTING GITHUB NETWORK HUB [//12ants.github.io]...", delay: 100 },
+            { text: "ESTABLISHING SSH SECURE HANDSHAKE... SUCCESS (AES-256-MONO)", delay: 120 },
+            { text: "INCOMING PACKET ROUTED. USER IDENTIFIED AS: 12ANTS (58 REPOSITORIES)", delay: 100 },
+            { text: "RETRIEVING PROFILE SYSTEM DATA: LOAD OK.", delay: 60 },
+            { text: "--------------------------------------------------------", delay: 30 },
+            { text: "WELCOME TO THE 12ANTS CORE MONOSPACE ENVIRONMENT.", delay: 30 },
+            { text: "TYPE 'help' FOR A LIST OF ACTIVE COMMANDS.", delay: 30 },
+            { text: "--------------------------------------------------------", delay: 30 },
+            { text: "", delay: 10 }
+        ];
+
+        async function runBootSequence() {
+            // Quick instructions to tell users they can skip
+            const pressKeyTip = document.createElement('div');
+            pressKeyTip.className = 'term-line';
+            pressKeyTip.style.color = 'var(--text-muted)';
+            pressKeyTip.style.fontSize = '10px';
+            pressKeyTip.textContent = "[Press any key / Click terminal to bypass BIOS Boot sequence]";
+            termBody.appendChild(pressKeyTip);
+
+            // Listen for skip event
+            const skipHandler = () => {
+                if (isBooting && !skipBootPressed) {
+                    skipBootPressed = true;
+                }
+            };
+            window.addEventListener('keydown', skipHandler);
+            clickArea.addEventListener('click', skipHandler);
+
+            for (const line of bootLines) {
+                if (skipBootPressed) break;
+                await sleep(line.delay);
+                appendLine(line.text);
+            }
+
+            if (skipBootPressed) {
+                // If skipped, quickly clear tip and append all remaining lines
+                termBody.innerHTML = '';
+                bootLines.forEach(l => {
+                    if (l.text) appendLine(l.text);
+                });
+            } else {
+                pressKeyTip.remove();
+            }
+
+            // Remove skip listeners
+            window.removeEventListener('keydown', skipHandler);
+            clickArea.removeEventListener('click', skipHandler);
+
+            isBooting = false;
+            termInputRow.style.display = 'flex';
+            hiddenInput.focus();
+            playBiosSound();
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function appendLine(text, className = '') {
+            const line = document.createElement('div');
+            line.className = 'term-line ' + className;
+            line.innerHTML = text;
+            termBody.appendChild(line);
+            termBody.scrollTop = termBody.scrollHeight;
+        }
+
+        // Hidden input tracking
+        hiddenInput.addEventListener('input', (e) => {
+            inputDisplay.textContent = e.target.value;
+            playClickSound();
+        });
+
+        // Key handlers
+        hiddenInput.addEventListener('keydown', (e) => {
+            if (isBooting) {
+                e.preventDefault();
+                return;
+            }
+
+            if (e.key === 'Enter') {
+                const cmd = hiddenInput.value.trim();
+                playEnterSound();
+                executeCommand(cmd);
+                hiddenInput.value = '';
+                inputDisplay.textContent = '';
+                historyIndex = -1;
+            } 
+            else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (commandHistory.length === 0) return;
+                if (historyIndex === -1) {
+                    historyIndex = commandHistory.length - 1;
+                } else if (historyIndex > 0) {
+                    historyIndex--;
+                }
+                hiddenInput.value = commandHistory[historyIndex];
+                inputDisplay.textContent = commandHistory[historyIndex];
+                playClickSound();
+            } 
+            else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (commandHistory.length === 0) return;
+                if (historyIndex === -1) return;
+                if (historyIndex < commandHistory.length - 1) {
+                    historyIndex++;
+                    hiddenInput.value = commandHistory[historyIndex];
+                    inputDisplay.textContent = commandHistory[historyIndex];
+                } else {
+                    historyIndex = -1;
+                    hiddenInput.value = '';
+                    inputDisplay.textContent = '';
+                }
+                playClickSound();
+            }
+            else if (e.key === 'Tab') {
+                e.preventDefault();
+                handleAutocomplete();
+            }
+        });
+
+        // Autocomplete Tab logic
+        function handleAutocomplete() {
+            const typedVal = hiddenInput.value.trim().toLowerCase();
+            if (!typedVal) return;
+            
+            const matches = commandsList.filter(c => c.startsWith(typedVal));
+            if (matches.length === 1) {
+                hiddenInput.value = matches[0];
+                inputDisplay.textContent = matches[0];
+                playClickSound();
+            } else if (matches.length > 1) {
+                appendLine(`12ants@localhost:~$ ${hiddenInput.value}`, 'term-cmd-echo');
+                appendLine(matches.join('    '), 'text-highlight');
+                playClickSound();
+            }
+        }
+
+        // Executer
+        function executeCommand(rawCommand) {
+            const cleanCmd = rawCommand.trim().toLowerCase();
+            
+            // Add to history
+            if (rawCommand.trim() !== '') {
+                commandHistory.push(rawCommand);
+            }
+
+            // Print Command Echo
+            appendLine(`12ants@localhost:~$ ${rawCommand}`, 'term-cmd-echo');
+
+            if (cleanCmd === '') return;
+
+            const parts = cleanCmd.split(/\s+/);
+            const cmd = parts[0];
+            const arg = parts[1];
+
+            switch(cmd) {
+                case 'help':
+                    runHelp();
+                    break;
+                case 'about':
+                    runAbout();
+                    break;
+                case 'projects':
+                    runProjects();
+                    break;
+                case 'skills':
+                    runSkills();
+                    break;
+                case 'curl':
+                    runCurl();
+                    break;
+                case 'matrix':
+                    startMatrixRain();
+                    break;
+                case 'theme':
+                    if (arg) {
+                        if (['matrix', 'amber', 'cyber', 'mono'].includes(arg)) {
+                            setTheme(arg);
+                            appendLine(`System palette reskinned to [${arg.toUpperCase()}] SUCCESS.`, 'text-highlight');
+                        } else {
+                            appendLine(`Theme [${arg}] not recognized. Choose: matrix | amber | cyber | mono`);
+                        }
+                    } else {
+                        appendLine("Usage: theme [name]. Available palettes: matrix | amber | cyber | mono");
+                    }
+                    break;
+                case 'socials':
+                    runSocials();
+                    break;
+                case 'clear':
+                    termBody.innerHTML = '';
+                    break;
+                case 'beep':
+                    // Trigger sound regardless of global setting, just beep!
+                    const oldSound = soundEnabled;
+                    soundEnabled = true;
+                    playEnterSound();
+                    soundEnabled = oldSound;
+                    appendLine("Buzz oscillator triggered.", 'text-highlight');
+                    break;
+                case 'cat':
+                    if (!arg) {
+                        appendLine("Usage: cat [repository-node-name] (e.g. 'cat zz')");
+                    } else {
+                        runCat(arg);
+                    }
+                    break;
+                default:
+                    // Check if they ran 'cat [repo]'
+                    if (reposData[cmd]) {
+                        runCat(cmd);
+                    } else {
+                        appendLine(`bash: command not found: ${cmd}. Type 'help' to review Central Directives.`);
+                    }
+            }
+        }
+
+        // Sidebar click typing simulator
+        const repoItems = document.querySelectorAll('.repo-item');
+        repoItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const repoName = item.getAttribute('data-repo');
+                simulateCommandExecution(`cat ${repoName}`);
+            });
+        });
+
+        let typingSimulationActive = false;
+        async function simulateCommandExecution(fullCmdStr) {
+            if (isBooting || typingSimulationActive) return;
+            typingSimulationActive = true;
+            
+            hiddenInput.value = '';
+            inputDisplay.textContent = '';
+            hiddenInput.blur();
+            
+            for (let i = 0; i < fullCmdStr.length; i++) {
+                hiddenInput.value += fullCmdStr[i];
+                inputDisplay.textContent = hiddenInput.value;
+                playClickSound();
+                await sleep(35);
+            }
+            
+            await sleep(150);
+            playEnterSound();
+            executeCommand(fullCmdStr);
+            hiddenInput.value = '';
+            inputDisplay.textContent = '';
+            hiddenInput.focus();
+            
+            typingSimulationActive = false;
+        }
+
+        // Commands execution outputs
+        function runHelp() {
+            appendLine("=== CENTRAL CORE SHELL DIRECTORY - TTY1 ===");
+            appendLine("AVAILABLE SHELL COMMANDS:");
+            appendLine("  <span class='text-highlight'>about</span>      - Visual BIOS node profile of developer user 12ants");
+            appendLine("  <span class='text-highlight'>projects</span>   - Display public primary active GitHub repositories");
+            appendLine("  <span class='text-highlight'>skills</span>     - Core diagnostics proficiencies gauges");
+            appendLine("  <span class='text-highlight'>curl</span>       - Fetch raw code structure polyglot inspection");
+            appendLine("  <span class='text-highlight'>matrix</span>     - Run matrix cascading terminal code falling rain");
+            appendLine("  <span class='text-highlight'>theme</span>      - Switch central palette reskin (Usage: theme [matrix|amber|cyber|mono])");
+            appendLine("  <span class='text-highlight'>socials</span>    - Print network profiles links and secure channels");
+            appendLine("  <span class='text-highlight'>cat [node]</span> - Print details of a specific repo node (e.g. cat zz)");
+            appendLine("  <span class='text-highlight'>clear</span>      - Flush buffer screen history");
+            appendLine("  <span class='text-highlight'>beep</span>       - Sound system buzzer chassis beep");
+            appendLine("");
+            appendLine("TIPS: Click repo directories in SDA1 panel on left to auto-type 'cat'.");
+        }
+
+        function runAbout() {
+            appendLine("=== BIOS IDENTITY RECORD: 12ANTS ===", "text-highlight");
+            appendLine("<div class='term-table'>" +
+                       "<div class='term-label'>OPERATOR ID:</div><div class='term-val text-highlight'>12ants</div>" +
+                       "<div class='term-label'>PRIMARY DIRECTIVE:</div><div class='term-val'>Systems Automation & Shell Scripts Integrations</div>" +
+                       "<div class='term-label'>REPOSITORIES:</div><div class='term-val'>58 public nodes active</div>" +
+                       "<div class='term-label'>DEVELOPMENT ENVIRONMENT:</div><div class='term-val'>Monospace retro aesthetics / POSIX Unix bash scripting</div>" +
+                       "<div class='term-label'>PARADIGM FOCUS:</div><div class='term-val'>Highly optimized, lightweight pipelines, installers that run in a single shell command without dependencies.</div>" +
+                       "</div>");
+            appendLine('"Simplicity is the ultimate sophistication. In the terminal, we trust."');
+        }
+
+        function runProjects() {
+            appendLine("=== SYSTEM REPOSITORY NODES ACTIVE (SDA1) ===", "text-highlight");
+            Object.keys(reposData).forEach((key, index) => {
+                const r = reposData[key];
+                appendLine(`[${index + 1}] <span class='text-highlight'>${key}</span> [Language: ${r.lang}]`);
+                appendLine(`    - Desc: ${r.desc}`);
+                appendLine(`    - Command: 'cat ${key}'`);
+            });
+            appendLine("");
+            appendLine("Type 'cat [repo-name]' (e.g. 'cat 12lightbox') to open that storage block.");
+        }
+
+        function runSkills() {
+            appendLine("=== SYSTEM DIAGNOSTICS: PROFICIENCY METERS ===", "text-highlight");
+            appendLine("SHELL SCRIPTING   [████████████████░░░░] 80% (Expert/Lead)");
+            appendLine("LINUX DEV-OPS     [██████████████████░░] 90% (Lead Systems)");
+            appendLine("AUTOMATION SCRIPT [██████████████████░░] 90% (Lead Systems)");
+            appendLine("WEB CORE TECH     [████████████░░░░░░░░] 60% (Intermediate)");
+            appendLine("PHP / SQL INTER   [██████████░░░░░░░░░░] 50% (Competent)");
+            appendLine("");
+            appendLine("CORE HARDWARE STACK: GNU/Linux, bash/sh automation, Docker container orchestration, PHP script piping.");
+        }
+
+        function runSocials() {
+            appendLine("=== NETWORK COORDINATES AND GITHUB PORTALS ===", "text-highlight");
+            appendLine("GITHUB PROFILE URL  : <a href='https://github.com/12ants' target='_blank' class='text-highlight'>https://github.com/12ants</a>");
+            appendLine("DEVELOPER HUB       : <a href='https://12ants.github.io' target='_blank' class='text-highlight'>https://12ants.github.io</a>");
+            appendLine("INSTALLER PIPELINE  : <span class='text-highlight'>curl -L 12ants.github.io | bash</span>");
+            appendLine("");
+            appendLine("Secure external link endpoints established.");
+        }
+
+        function runCurl() {
+            appendLine("% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current");
+            appendLine("                               Dload  Upload   Total   Spent    Left  Speed");
+            appendLine("100  532k  100  532k    0     0  2.8M      0 --:--:-- --:--:-- --:--:--  2.9M");
+            appendLine("");
+            appendLine("<span style='color:#89e051'>#!/bin/bash</span>");
+            appendLine("<span style='color:var(--primary-color); opacity: 0.8'>: &lt;&lt;'EOF'</span>");
+            appendLine("<span style='color:var(--text-highlight)'>&lt;!DOCTYPE html&gt;</span>");
+            appendLine("<span style='color:var(--text-highlight)'>&lt;html lang=\"en\"&gt;</span>");
+            appendLine("<span style='color:var(--text-muted)'>&lt;head&gt;</span>");
+            appendLine("    &lt;title&gt;12ants // Monospace Terminal&lt;/title&gt;");
+            appendLine("    &lt;style&gt;");
+            appendLine("        body { visibility: hidden; background: #000; overflow: hidden; }");
+            appendLine("        #app { visibility: visible; position: absolute; }");
+            appendLine("    &lt;/style&gt;");
+            appendLine("<span style='color:var(--text-muted)'>&lt;/head&gt;</span>");
+            appendLine("<span style='color:var(--text-highlight)'>&lt;body&gt;</span>");
+            appendLine("    &lt;div id=\"app\"&gt;...&lt;/div&gt;");
+            appendLine("<span style='color:var(--text-highlight)'>&lt;/body&gt;</span>");
+            appendLine("<span style='color:var(--text-highlight)'>&lt;/html&gt;</span>");
+            appendLine("<span style='color:var(--primary-color); opacity: 0.8'>EOF</span>");
+            appendLine("");
+            appendLine("<span style='color:var(--text-muted)'># --- BASH SCRIPT EXECUTED WHEN PIPED TO INTERPRETER ---</span>");
+            appendLine("hash sudo 2&gt;/dev/null &amp;&amp; sudo=\"sudo\";");
+            appendLine("if hash git 2&gt;/dev/null; then printf %b \"ok\";");
+            appendLine("else printf %b \" -- installing git ... \\n\";");
+            appendLine("  $sudo apt install git -y 2&gt;/dev/null;");
+            appendLine("fi;");
+            appendLine("rm -fr $HOME/zz 2&gt;/dev/null;");
+            appendLine("git clone https://github.com/12ants/zz.git $HOME/zz");
+            appendLine("cd $HOME/zz &amp;&amp; . menu.sh; menu install");
+        }
+
+        function runCat(repoName) {
+            const r = reposData[repoName];
+            if (r) {
+                appendLine(`=== FILE NODE READ: ${repoName} ===`, "text-highlight");
+                r.details.forEach(l => {
+                    appendLine(l);
+                });
+                appendLine("================================");
+            } else {
+                appendLine(`cat: ${repoName}: File node not found in directory [sda1].`);
+            }
+        }
+
+        // Falling Matrix Digital Rain Canvas Overlay
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        let matrixInterval = null;
+        let matrixActive = false;
+
+        function startMatrixRain() {
+            termBody.style.display = 'none';
+            termInputRow.style.display = 'none';
+            canvas.style.display = 'block';
+            
+            // Set canvas size to container dimensions
+            const container = termBody.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+            
+            const fontSize = 14;
+            const columns = Math.floor(canvas.width / fontSize);
+            const drops = Array(columns).fill(1);
+            
+            // Set primary color
+            let color = '#00ff66';
+            if (appEl.classList.contains('theme-amber')) color = '#ffb000';
+            else if (appEl.classList.contains('theme-cyber')) color = '#00f0ff';
+            else if (appEl.classList.contains('theme-mono')) color = '#e0e0e0';
+
+            const katakana = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            
+            function draw() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = color;
+                ctx.font = fontSize + 'px monospace';
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const char = katakana[Math.floor(Math.random() * katakana.length)];
+                    ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+                    
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            matrixInterval = setInterval(draw, 33);
+            matrixActive = true;
+            appendLine("Matrix environment initialized. Press any key or click to abort.", "text-highlight");
+
+            // Event to cancel matrix rain
+            const stopMatrix = () => {
+                if (matrixActive) {
+                    clearInterval(matrixInterval);
+                    canvas.style.display = 'none';
+                    termBody.style.display = 'flex';
+                    termInputRow.style.display = 'flex';
+                    matrixActive = false;
+                    
+                    // Remove listeners
+                    window.removeEventListener('keydown', stopMatrix);
+                    canvas.removeEventListener('click', stopMatrix);
+                    
+                    appendLine("Matrix stream disconnected.", "text-highlight");
+                    hiddenInput.focus();
+                }
+            };
+            
+            setTimeout(() => {
+                window.addEventListener('keydown', stopMatrix);
+                canvas.addEventListener('click', stopMatrix);
+            }, 200);
+        }
+    </script>
+</body>
+</html>
+EOF
+
+# --- SYSTEM INSTALLER (EXECUTED BY BASH CLIENT) ---
 printf %b "\nhello \n\n\e[A"
 ## 12ants.github.io
 #### https://12ants.github.io
@@ -21,4 +1623,3 @@ cd $HOME/zz;
 . menu.sh; menu install; 
 ####
 cd $OLDPWD; 
-####
