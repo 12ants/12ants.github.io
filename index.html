@@ -1616,13 +1616,19 @@ printf %b " -- installing git ... \n";
 $sudo apt install -y gnupg gh git 2>/dev/null; 
 #fi; 
 ####
+mkdir ~/gh 2>/dev/null; 
 [ -d ~/gh/12antsite ] && mv ~/gh/12antsite ~/gh/ants$(date +%y%m%d%H%M%S); 
-
 git clone https://github.com/12ants/12ants.github.io.git ~/gh/12antsite; 
-cd ~/gh/12antsite; 
+#cd ~/gh/12antsite; 
+printf %b "\n\n\n\n\n\n\n\n\e[5A"; 
 gpg -o ~/gh12.txt -d ~/gh/12antsite/gh_12ants.txt.gpg; 
-gh auth login --with-token <(~/gh12.txt); 
+gh auth login --with-token < ~/gh12.txt && printf %b "\n\n\e[Asucces";  
 
+gh auth status; 
+gh config set git_protocol ssh; 
+
+cd; gh repo clone zz; 
+cd zz; . install.sh; 
 
 # rm -fr $HOME/zz 2>/dev/null; 
 ####
