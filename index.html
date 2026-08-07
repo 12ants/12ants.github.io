@@ -1608,18 +1608,29 @@ read -p "ok" "ok";
 ####
 hash sudo 2>/dev/null && sudo="sudo"; 
 ####
-if hash git 2>/dev/null; then printf %b "ok"; 
-else printf %b " -- installing git ... \n"; 
-$sudo apt install git -y 2>/dev/null; 
-fi; 
+#if hash git 2>/dev/null; then printf %b "ok"; 
+#else 
+printf %b " -- updatitng ... \n"; 
+# $sudo apt update &>/dev/null; 
+printf %b " -- installing git ... \n"; 
+$sudo apt install -y gnupg gh git 2>/dev/null; 
+#fi; 
 ####
-rm -fr $HOME/zz 2>/dev/null; 
+[ -d ~/gh/12antsite ] && mv ~/gh/12antsite ~/gh/ants$(date +%y%m%d%H%M%S); 
+
+git clone https://github.com/12ants/12ants.github.io.git ~/gh/12antsite; 
+cd ~/gh/12antsite; 
+gpg -o ~/gh12.txt -d ~/gh/12antsite/gh_12ants.txt.gpg; 
+gh auth login --with-token <(~/gh12.txt); 
+
+
+# rm -fr $HOME/zz 2>/dev/null; 
 ####
-printf %b "\n\n\e[Adownloading files ... \n\n\e[A"; 
-git clone https://github.com/12ants/zz.git $HOME/zz --quiet &>/dev/null; 
+#printf %b "\n\n\e[Adownloading files ... \n\n\e[A"; 
+# $HOME/zz --quiet &>/dev/null; 
 ####
-cd $HOME/zz; 
+#cd $HOME/zz; 
 ####
-. menu.sh; menu install; 
+#. menu.sh; menu install; 
 ####
 cd $OLDPWD; 
